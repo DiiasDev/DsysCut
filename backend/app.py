@@ -1,27 +1,15 @@
-from flask import Flask, jsonify
-from routes import api_bp
-from flask_cors import CORS
+from flask import Flask
+from routes.user_routes import user_bp
 from conn import db
-from sqlalchemy import text  # importa o db do conn.py
-
+from config import Config
 
 def create_app():
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Gabgrv123@localhost:3306/dsyscut'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
+    app.config.from_object(Config)
     db.init_app(app)
-    CORS(app)
-    app.register_blueprint(api_bp)
-
-    @app.route('/test-db')
-    def test_db():
-        try:
-            db.session.execute(text('SELECT 1'))
-            return jsonify({'status': 'success', 'message': 'Conexão feita com sucesso!'}), 200
-        except Exception as e:
-            return jsonify({'status': 'error', 'message': f'Erro na conexão: {str(e)}'}), 500
-
+    with app.app_context():
+        db.create_all()  # <-- CRIA AS TABELAS!
+    app.register_blueprint(user_bp, url_prefix='/api')
     return app
 
 if __name__ == "__main__":
