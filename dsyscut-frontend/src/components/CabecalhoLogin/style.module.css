@@ -1,0 +1,325 @@
+@import "../../styles/theme.css";
+
+/* Container principal do login */
+.loginContainer {
+  min-height: 100vh;
+  display: flex;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Decoração de fundo */
+.loginContainer::before {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  top: 10%;
+  left: 5%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.loginContainer::after {
+  content: '';
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  bottom: 20%;
+  right: 10%;
+  animation: float 4s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+/* Lado esquerdo - Apresentação */
+.leftSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  color: white;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Lado direito - Formulário */
+.rightSection {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background: var(--color-background-paper);
+  position: relative;
+}
+
+/* Header box reformulado para o lado esquerdo */
+.headerBox {
+  max-width: 400px;
+  width: 100%;
+}
+
+/* Logo avatar maior e mais destacado */
+.logoAvatar {
+  width: 120px !important;
+  height: 120px !important;
+  border: 4px solid rgba(255, 255, 255, 0.3) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
+  transition: transform 0.3s ease !important;
+  margin-bottom: 2rem !important;
+}
+
+.logoAvatar:hover {
+  transform: scale(1.05) rotate(5deg);
+}
+
+/* Título principal */
+.title {
+  font-family: 'Montserrat', 'Roboto', sans-serif !important;
+  font-size: 3rem !important;
+  font-weight: 800 !important;
+  color: white !important;
+  margin-bottom: 1rem !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  letter-spacing: 2px !important;
+}
+
+/* Subtítulo */
+.subtitle {
+  font-size: 1.2rem !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  margin-bottom: 1rem !important;
+  line-height: 1.6;
+}
+
+/* Descrição adicional */
+.description {
+  font-size: 1rem !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  line-height: 1.5;
+  max-width: 350px;
+}
+
+/* Container para o formulário */
+.formContainer {
+  background: var(--color-background-paper);
+  border-radius: 16px;
+  padding: 3rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  border: 1px solid var(--color-border);
+}
+
+.formTitle {
+  font-family: 'Montserrat', 'Roboto', sans-serif !important;
+  font-size: 1.8rem !important;
+  font-weight: 600 !important;
+  color: var(--color-text) !important;
+  text-align: center;
+  margin-bottom: 2rem !important;
+}
+
+/* Estilos do painel esquerdo */
+.leftPanel {
+  flex: 1;
+  background: linear-gradient(135deg, #1a1d36 0%, #2d1b69 100%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 2;
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+}
+
+.brandName {
+  font-weight: 700 !important;
+  color: white !important;
+}
+
+.dashboardPreview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  z-index: 2;
+}
+
+.mockupContainer {
+  position: relative;
+}
+
+.mockupScreen {
+  width: 300px;
+  height: 200px;
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  transform: perspective(500px) rotateY(-5deg) rotateX(5deg);
+}
+
+.mockupHeader {
+  height: 20px;
+  background: #f5f5f5;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.mockupContent {
+  display: flex;
+  gap: 12px;
+  height: calc(100% - 32px);
+}
+
+.mockupSidebar {
+  width: 60px;
+  background: #6366f1;
+  border-radius: 6px;
+}
+
+.mockupMain {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mockupRow {
+  height: 20px;
+  background: #e5e7eb;
+  border-radius: 4px;
+}
+
+.textContent {
+  text-align: center;
+  z-index: 2;
+}
+
+.mainTitle {
+  font-weight: 700 !important;
+  margin-bottom: 16px !important;
+  color: white !important;
+}
+
+.description {
+  color: rgba(255, 255, 255, 0.8) !important;
+  max-width: 400px;
+  margin: 0 auto;
+  line-height: 1.6 !important;
+}
+
+.indicators {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  z-index: 2;
+}
+
+.indicator {
+  width: 32px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
+.indicator:first-child {
+  background: white;
+}
+
+.leftPanel::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: rgba(99, 102, 241, 0.1);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.leftPanel::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -30%;
+  width: 60%;
+  height: 60%;
+  background: rgba(236, 72, 153, 0.1);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* Responsivo */
+@media (max-width: 968px) {
+  .loginContainer {
+    flex-direction: column;
+  }
+  
+  .leftSection {
+    padding: 2rem 1rem;
+    min-height: 40vh;
+  }
+  
+  .rightSection {
+    padding: 1rem;
+  }
+  
+  .title {
+    font-size: 2.5rem !important;
+  }
+  
+  .logoAvatar {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  
+  .formContainer {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .leftSection {
+    padding: 1.5rem 1rem;
+  }
+  
+  .title {
+    font-size: 2rem !important;
+  }
+  
+  .subtitle {
+    font-size: 1rem !important;
+  }
+  
+  .formContainer {
+    padding: 1.5rem;
+  }
+}

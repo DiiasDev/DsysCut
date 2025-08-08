@@ -2,10 +2,12 @@ import React from 'react';
 import logo from './logo.svg';
 import './styles/App.css';
 
+import Login from './pages/login'
+
 function App() {
   return (
     <div className="container">
-      <h1>teste</h1>
+      <Login />
     </div>
   );
 }
