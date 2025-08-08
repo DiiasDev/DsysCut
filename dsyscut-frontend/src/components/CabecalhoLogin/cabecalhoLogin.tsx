@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import dsysImage from "../../assets/dsys.png";
+import barberShopImage from "../../assets/logoLateral.png";
 import style from "./style.module.css"
 
 const LoginHeader: React.FC = () => {
@@ -13,20 +14,13 @@ const LoginHeader: React.FC = () => {
                 </Typography>
             </Box>
 
-            <Box className={style.dashboardPreview}>
-                <Box className={style.mockupContainer}>
-                    <Box className={style.mockupScreen}>
-                        <Box className={style.mockupHeader}></Box>
-                        <Box className={style.mockupContent}>
-                            <Box className={style.mockupSidebar}></Box>
-                            <Box className={style.mockupMain}>
-                                <Box className={style.mockupRow}></Box>
-                                <Box className={style.mockupRow}></Box>
-                                <Box className={style.mockupRow}></Box>
-                            </Box>
-                        </Box>
-                    </Box>
-                </Box>
+            <Box className={style.imagePreview}>
+                <img
+                    src={barberShopImage}
+                    alt="Barber Shop"
+                    className={style.barberShopImg}
+                    style={{ background: "transparent" }} // Garante fundo transparente
+                />
             </Box>
 
             <Box className={style.textContent}>
