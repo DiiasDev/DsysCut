@@ -3,12 +3,19 @@ import logo from './logo.svg';
 import './styles/App.css';
 
 import Login from './pages/login'
+import HomePage from './pages/homePage/homePage';
+import { useAppStore } from './store/store';
 
 function App() {
+  const isLogged = useAppStore(state => state.isLogged)
   return (
     <div className="container">
-      <Login />
+
+      {!isLogged && <Login />}
+      {isLogged && <HomePage />}
+
     </div>
+
   );
 }
 

@@ -5,16 +5,35 @@ from conn import db
 user_bp = Blueprint('user_bp', __name__)
 
 
+@user_bp.route('/login', methods=['POST'])
+def login():
+    try:
+        data = request.get_json()
+        email = data.get("email")
+        password = data.get("password")
+
+        user = User.query.filter_by(email=email).first()
+        if user and user.password == password:
+            return jsonify({"status": "Sucess", "message": "sucesso ao logar"})
+        else:
+            return jsonify({"status": "Error", "message": "Usuário ou senha inválidos"}), 401
+    except Exception as e:
+        return jsonify({"status": "Error", "message": str(e)}), 500
+
+
 @user_bp.route('/users', methods=['GET'])
 def get_users():
-    users = User.query.all()
-    result = [{
-        "id": u.id,
-        "name": u.name,
-        "email": u.email,
-        "telefone": u.telefone
-    } for u in users]
-    return jsonify({"status": "success", "users": result})
+    try:
+        users = User.query.all()
+        result = [{
+            "id": u.id,
+            "name": u.name,
+            "email": u.email,
+            "telefone": u.telefone
+        } for u in users]
+        return jsonify({"status": "success", "users": result})
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)})
 
 
 @user_bp.route("/create-user", methods=["POST"])
