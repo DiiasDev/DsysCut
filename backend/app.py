@@ -7,7 +7,7 @@ from flask_cors import CORS
 
 def create_app():
     app = Flask(__name__)
-    CORS(app)  # <-- Adicione esta linha
+    CORS(app, origins=["http://localhost:3000"])  # <-- Adicione esta linha
     app.config.from_object(Config)
     db.init_app(app)
     with app.app_context():
