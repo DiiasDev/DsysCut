@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import style from "./style.module.css"
 
 interface SidebarProps {
@@ -8,6 +8,18 @@ interface SidebarProps {
 
 const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
     const [activeTab, setActiveTab] = useState('financeiro');
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkIfMobile = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+
+        checkIfMobile();
+        window.addEventListener('resize', checkIfMobile);
+
+        return () => window.removeEventListener('resize', checkIfMobile);
+    }, []);
 
     const navigationItems = [
         {
@@ -88,110 +100,122 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
     ];
 
     return (
-        <aside
-            className={`${style.sidebar} ${isCollapsed ? style.collapsed : ''}`}
-            onMouseEnter={(e) => {
-                const toggleBtn = e.currentTarget.querySelector(`.${style.toggleButton}`) as HTMLElement;
-                if (toggleBtn) toggleBtn.style.opacity = '1';
-            }}
-            onMouseLeave={(e) => {
-                const toggleBtn = e.currentTarget.querySelector(`.${style.toggleButton}`) as HTMLElement;
-                if (toggleBtn) toggleBtn.style.opacity = '0';
-            }}
-        >
-            <div className={style.sidebarHeader}>
-                <div className={style.logo}>
-                    <div className={style.logoIcon}>
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                            <polyline points="9,22 9,12 15,12 15,22" />
-                        </svg>
-                    </div>
-                    {!isCollapsed && <span className={style.logoText}>DSysCut</span>}
-                </div>
-                <button
-                    className={style.toggleButton}
+        <>
+            {/* Mobile backdrop */}
+            {isMobile && !isCollapsed && (
+                <div 
+                    className={style.backdrop}
                     onClick={onToggle}
-                    aria-label={isCollapsed ? 'Expandir sidebar' : 'Recolher sidebar'}
-                    style={{
-                        opacity: 0,
-                        transition: 'opacity 0.3s ease, transform 0.3s ease'
-                    }}
-                >
-                    <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        style={{ transform: isCollapsed ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease' }}
+                />
+            )}
+            
+            <aside
+                className={`${style.sidebar} ${isCollapsed ? style.collapsed : ''}`}
+                onMouseEnter={(e) => {
+                    if (isMobile) return; // Disable hover effects on mobile
+                    const toggleBtn = e.currentTarget.querySelector(`.${style.toggleButton}`) as HTMLElement;
+                    if (toggleBtn) toggleBtn.style.opacity = '1';
+                }}
+                onMouseLeave={(e) => {
+                    if (isMobile) return; // Disable hover effects on mobile
+                    const toggleBtn = e.currentTarget.querySelector(`.${style.toggleButton}`) as HTMLElement;
+                    if (toggleBtn) toggleBtn.style.opacity = '0';
+                }}
+            >
+                <div className={style.sidebarHeader}>
+                    <div className={style.logo}>
+                        <div className={style.logoIcon}>
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                <polyline points="9,22 9,12 15,12 15,22" />
+                            </svg>
+                        </div>
+                        {!isCollapsed && <span className={style.logoText}>DSysCut</span>}
+                    </div>
+                    <button
+                        className={style.toggleButton}
+                        onClick={onToggle}
+                        aria-label={isCollapsed ? 'Expandir sidebar' : 'Recolher sidebar'}
+                        style={{
+                            opacity: 0,
+                            transition: 'opacity 0.3s ease, transform 0.3s ease'
+                        }}
                     >
-                        <polyline points="15,18 9,12 15,6" />
-                    </svg>
-                </button>
-            </div>
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            style={{ transform: isCollapsed ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease' }}
+                        >
+                            <polyline points="15,18 9,12 15,6" />
+                        </svg>
+                    </button>
+                </div>
 
-            <nav className={style.navigation}>
-                <ul className={style.navigationList}>
-                    {navigationItems.map((item) => (
-                        <li key={item.id}>
-                            <button
-                                className={`${style.navigationItem} ${activeTab === item.id ? style.active : ''}`}
-                                onClick={() => setActiveTab(item.id)}
-                                title={isCollapsed ? item.label : undefined}
+                <nav className={style.navigation}>
+                    <ul className={style.navigationList}>
+                        {navigationItems.map((item) => (
+                            <li key={item.id}>
+                                <button
+                                    className={`${style.navigationItem} ${activeTab === item.id ? style.active : ''}`}
+                                    onClick={() => setActiveTab(item.id)}
+                                    title={isCollapsed ? item.label : undefined}
                             >
-                                <span className={style.navigationIcon}>
-                                    {item.icon}
-                                </span>
-                                {!isCollapsed && (
-                                    <span className={style.navigationLabel}>
-                                        {item.label}
+                                    <span className={style.navigationIcon}>
+                                        {item.icon}
                                     </span>
-                                )}
-                                {activeTab === item.id && <div className={style.activeIndicator} />}
-                            </button>
-                        </li>
-                    ))}
-                </ul>
-            </nav>
+                                    {!isCollapsed && (
+                                        <span className={style.navigationLabel}>
+                                            {item.label}
+                                        </span>
+                                    )}
+                                    {activeTab === item.id && <div className={style.activeIndicator} />}
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
 
-            <div className={style.sidebarFooter}>
-                <div
-                    className={`${style.userProfile} ${isCollapsed ? style.userProfileCollapsed : ''}`}
-                    style={isCollapsed ? {
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        width: '100%',
-                        padding: '12px 0'
-                    } : {}}
-                >
+                <div className={style.sidebarFooter}>
                     <div
-                        className={`${style.userAvatar} ${isCollapsed ? style.userAvatarCollapsed : ''}`}
+                        className={`${style.userProfile} ${isCollapsed ? style.userProfileCollapsed : ''}`}
                         style={isCollapsed ? {
                             display: 'flex',
                             justifyContent: 'center',
                             alignItems: 'center',
-                            margin: '0',
-                            width: '40px',
-                            height: '40px'
+                            width: '100%',
+                            padding: '12px 0'
                         } : {}}
                     >
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                            <circle cx="12" cy="7" r="4" />
-                        </svg>
-                    </div>
-                    {!isCollapsed && (
-                        <div className={style.userInfo}>
-                            <span className={style.userName}>Admin</span>
-                            <span className={style.userRole}>Administrador</span>
+                        <div
+                            className={`${style.userAvatar} ${isCollapsed ? style.userAvatarCollapsed : ''}`}
+                            style={isCollapsed ? {
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                margin: '0',
+                                width: '40px',
+                                height: '40px'
+                            } : {}}
+                        >
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                <circle cx="12" cy="7" r="4" />
+                            </svg>
                         </div>
-                    )}
+                        {!isCollapsed && (
+                            <div className={style.userInfo}>
+                                <span className={style.userName}>Admin</span>
+                                <span className={style.userRole}>Administrador</span>
+                            </div>
+                        )}
+                    </div>
                 </div>
-            </div>
-        </aside>
+            </aside>
+        </>
     );
 };
 

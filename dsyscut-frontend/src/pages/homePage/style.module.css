@@ -1,0 +1,99 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+.sidebar {
+  flex: 0 0 250px;
+  background-color: #fff;
+  border-right: 1px solid #eaeaea;
+  transition: flex 0.3s ease;
+}
+
+.sidebarCollapsed {
+  flex: 0 0 80px;
+}
+
+.content {
+  flex: 1;
+  padding: 24px;
+  transition: margin-left 0.3s ease;
+}
+
+.contentExpanded {
+  margin-left: 250px;
+}
+
+.cabecalho {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+/* ...existing styles... */
+
+.mobileMenuButton {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  color: #666;
+  transition: all 0.2s ease;
+}
+
+.mobileMenuButton:hover {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .container {
+    position: relative;
+  }
+
+  .sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: 100vh;
+    z-index: 1000;
+  }
+
+  .content {
+    width: 100%;
+    margin-left: 0 !important;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cabecalho {
+    padding: 16px 20px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .mobileMenuButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Tablet Styles */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .content {
+    transition: margin-left 0.3s ease;
+  }
+
+  .cabecalho {
+    padding: 20px 24px;
+  }
+}

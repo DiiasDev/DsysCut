@@ -238,15 +238,91 @@
   margin-top: 2px;
 }
 
-/* Responsive Design */
+/* Mobile Styles */
 @media (max-width: 768px) {
   .sidebar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1000;
+    width: 280px;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
   }
-  
-  .sidebar.open {
+
+  .sidebar.collapsed {
+    transform: translateX(-100%);
+  }
+
+  .sidebar:not(.collapsed) {
     transform: translateX(0);
+  }
+
+  .toggleButton {
+    opacity: 1 !important;
+  }
+
+  .navigationItem {
+    padding: 16px 20px;
+    font-size: 16px;
+  }
+
+  .navigationIcon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .sidebarHeader {
+    padding: 20px;
+  }
+
+  .logo {
+    gap: 12px;
+  }
+
+  .logoIcon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .logoText {
+    font-size: 20px;
+  }
+
+  .userProfile {
+    padding: 20px;
+  }
+
+  .userAvatar {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  backdrop-filter: blur(2px);
+}
+
+/* Tablet Styles */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .sidebar {
+    width: 240px;
+  }
+
+  .sidebar.collapsed {
+    width: 70px;
+  }
+
+  .navigationItem {
+    padding: 14px 16px;
   }
 }
 
@@ -271,6 +347,10 @@
 /* Focus styles for accessibility */
 .navigationItem:focus,
 .toggleButton:focus,
+.userProfile:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
 .userProfile:focus {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
