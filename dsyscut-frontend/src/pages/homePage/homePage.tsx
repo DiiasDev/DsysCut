@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import Sidebar from "../../components/Sidebar/sidebar"
 import style from "./style.module.css"
+import CabecalhoHome from "../../components/CabecalhoHome/cabecalhoHome";
 
 export default function HomePage() {
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -35,7 +36,13 @@ export default function HomePage() {
                 />
             </div>
 
-            <div className={`${style.content} ${isSidebarCollapsed ? style.contentExpanded : ''}`}>
+            <div
+                className={`${style.content} ${isSidebarCollapsed ? style.contentExpanded : ''}`}
+                style={{
+                    marginLeft: isSidebarCollapsed ? 0 : 72,
+                    transition: "margin-left 0.3s"
+                }}
+            >
                 <div className={style.cabecalho}>
                     {/* Mobile menu button */}
                     {isMobile && (
@@ -51,7 +58,7 @@ export default function HomePage() {
                             </svg>
                         </button>
                     )}
-                    Home
+                    <CabecalhoHome sidebarWidth={isSidebarCollapsed ? 0 : 72} />
                 </div>
             </div>
         </div>
