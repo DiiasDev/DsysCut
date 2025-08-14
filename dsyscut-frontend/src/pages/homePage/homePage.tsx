@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import Sidebar from "../../components/Sidebar/sidebar"
 import style from "./style.module.css"
 import CabecalhoHome from "../../components/CabecalhoHome/cabecalhoHome";
+import UltimosServicos from "../../components/UltimosServicos/ultimosServicos";
 
 export default function HomePage() {
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -59,6 +60,7 @@ export default function HomePage() {
                         </button>
                     )}
                     <CabecalhoHome sidebarWidth={isSidebarCollapsed ? 0 : 72} />
+                    <UltimosServicos/>
                 </div>
             </div>
         </div>
