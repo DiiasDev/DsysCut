@@ -13,7 +13,7 @@ export default function ultimosServicos() {
         },
         {
             id: 2,
-            data: "Corte + Barba + Sombrancelha",
+            data: "Corte + Barba + Sobrancelha",
             date: "15 de janeiro",
             price: "80,00",
         }

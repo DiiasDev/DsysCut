@@ -3,6 +3,7 @@ import Sidebar from "../../components/Sidebar/sidebar"
 import style from "./style.module.css"
 import CabecalhoHome from "../../components/CabecalhoHome/cabecalhoHome";
 import UltimosServicos from "../../components/UltimosServicos/ultimosServicos";
+import CarrosselSistema from "../../components/carrosselSistema/carrosselSistema";
 
 export default function HomePage() {
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -61,6 +62,7 @@ export default function HomePage() {
                     )}
                     <CabecalhoHome sidebarWidth={isSidebarCollapsed ? 0 : 72} />
                     <UltimosServicos/>
+                    <CarrosselSistema/>
                 </div>
             </div>
         </div>
