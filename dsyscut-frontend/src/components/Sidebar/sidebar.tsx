@@ -64,6 +64,17 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
             )
         },
         {
+            id: 'pacotes',
+            label: 'Pacotes',
+            icon: (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73L12 2 4 6.27A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73L12 22l8-4.27A2 2 0 0 0 21 16z" />
+                    <polyline points="3.27,6.96 12,12.01 20.73,6.96" />
+                    <line x1="12" y1="22.08" x2="12" y2="12" />
+                </svg>
+            )
+        },
+        {
             id: 'info',
             label: 'Info',
             icon: (
@@ -74,21 +85,20 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
                 </svg>
             )
         },
-        {
-            id: 'pacotes',
-            label: 'Pacotes',
-            icon: (
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M21 16V8a2 2 0 0 0-1-1.73L12 2 4 6.27A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73L12 22l8-4.27A2 2 0 0 0 21 16z" />
-                    <polyline points="3.27,6.96 12,12.01 20.73,6.96" />
-                    <line x1="12" y1="22.08" x2="12" y2="12" />
-                </svg>
-            )
-        }
     ];
 
     return (
-        <aside className={`${style.sidebar} ${isCollapsed ? style.collapsed : ''}`}>
+        <aside
+            className={`${style.sidebar} ${isCollapsed ? style.collapsed : ''}`}
+            onMouseEnter={(e) => {
+                const toggleBtn = e.currentTarget.querySelector(`.${style.toggleButton}`) as HTMLElement;
+                if (toggleBtn) toggleBtn.style.opacity = '1';
+            }}
+            onMouseLeave={(e) => {
+                const toggleBtn = e.currentTarget.querySelector(`.${style.toggleButton}`) as HTMLElement;
+                if (toggleBtn) toggleBtn.style.opacity = '0';
+            }}
+        >
             <div className={style.sidebarHeader}>
                 <div className={style.logo}>
                     <div className={style.logoIcon}>
@@ -103,13 +113,17 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
                     className={style.toggleButton}
                     onClick={onToggle}
                     aria-label={isCollapsed ? 'Expandir sidebar' : 'Recolher sidebar'}
+                    style={{
+                        opacity: 0,
+                        transition: 'opacity 0.3s ease, transform 0.3s ease'
+                    }}
                 >
-                    <svg 
-                        width="20" 
-                        height="20" 
-                        viewBox="0 0 24 24" 
-                        fill="none" 
-                        stroke="currentColor" 
+                    <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
                         strokeWidth="2"
                         style={{ transform: isCollapsed ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease' }}
                     >
@@ -143,8 +157,27 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
             </nav>
 
             <div className={style.sidebarFooter}>
-                <div className={style.userProfile}>
-                    <div className={style.userAvatar}>
+                <div
+                    className={`${style.userProfile} ${isCollapsed ? style.userProfileCollapsed : ''}`}
+                    style={isCollapsed ? {
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        width: '100%',
+                        padding: '12px 0'
+                    } : {}}
+                >
+                    <div
+                        className={`${style.userAvatar} ${isCollapsed ? style.userAvatarCollapsed : ''}`}
+                        style={isCollapsed ? {
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            margin: '0',
+                            width: '40px',
+                            height: '40px'
+                        } : {}}
+                    >
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                             <circle cx="12" cy="7" r="4" />

@@ -10,19 +10,19 @@ export default function HomePage() {
     };
 
     return (
-        <>
-            <div className="container">
-                <div className="sidebar">
-                    <Sidebar 
-                        isCollapsed={isSidebarCollapsed}
-                        onToggle={handleSidebarToggle}
-                    />
-                </div>
+        <div className={style.container}>
+            <div className={`${style.sidebar} ${isSidebarCollapsed ? style.sidebarCollapsed : ''}`}>
+                <Sidebar 
+                    isCollapsed={isSidebarCollapsed}
+                    onToggle={handleSidebarToggle}
+                />
+            </div>
 
-                <div className="cabecalho">
+            <div className={`${style.content} ${isSidebarCollapsed ? style.contentExpanded : ''}`}>
+                <div className={style.cabecalho}>
                     Home
                 </div>
             </div>
-        </>
+        </div>
     )
 }
