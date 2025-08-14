@@ -4,6 +4,7 @@ import style from "./style.module.css"
 import CabecalhoHome from "../../components/CabecalhoHome/cabecalhoHome";
 import UltimosServicos from "../../components/UltimosServicos/ultimosServicos";
 import CarrosselSistema from "../../components/carrosselSistema/carrosselSistema";
+import AtalhosHome from "../../components/AtalhosHome/atalhosHome";
 
 export default function HomePage() {
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -32,7 +33,7 @@ export default function HomePage() {
     return (
         <div className={style.container}>
             <div className={`${style.sidebar} ${isSidebarCollapsed ? style.sidebarCollapsed : ''}`}>
-                <Sidebar 
+                <Sidebar
                     isCollapsed={isSidebarCollapsed}
                     onToggle={handleSidebarToggle}
                 />
@@ -48,7 +49,7 @@ export default function HomePage() {
                 <div className={style.cabecalho}>
                     {/* Mobile menu button */}
                     {isMobile && (
-                        <button 
+                        <button
                             className={style.mobileMenuButton}
                             onClick={handleSidebarToggle}
                             aria-label="Abrir menu"
@@ -61,8 +62,9 @@ export default function HomePage() {
                         </button>
                     )}
                     <CabecalhoHome sidebarWidth={isSidebarCollapsed ? 0 : 72} />
-                    <UltimosServicos/>
-                    <CarrosselSistema/>
+                    <UltimosServicos />
+                    <CarrosselSistema />
+                    <AtalhosHome />
                 </div>
             </div>
         </div>
