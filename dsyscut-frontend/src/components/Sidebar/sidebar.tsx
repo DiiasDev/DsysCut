@@ -128,6 +128,7 @@ const Sidebar = ({ isCollapsed, onToggle, onNavigate }: SidebarProps) => {
                 <div 
                     className={style.backdrop}
                     onClick={onToggle}
+                    // Nenhuma alteração necessária aqui, pois o controle do scroll está no HomePage
                 />
             )}
             

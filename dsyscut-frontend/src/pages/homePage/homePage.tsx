@@ -28,6 +28,33 @@ export default function HomePage() {
         return () => window.removeEventListener('resize', checkIfMobile);
     }, []);
 
+    // Bloqueia scroll do body quando sidebar está aberto no mobile
+    useEffect(() => {
+        if (isMobile && !isSidebarCollapsed) {
+            document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.width = '100%';
+            // Bloqueia scroll por touch
+            const preventScroll = (e: TouchEvent) => e.preventDefault();
+            document.addEventListener('touchmove', preventScroll, { passive: false });
+            return () => {
+                document.body.style.overflow = '';
+                document.body.style.position = '';
+                document.body.style.width = '';
+                document.removeEventListener('touchmove', preventScroll);
+            };
+        } else {
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.width = '';
+        }
+        return () => {
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.width = '';
+        };
+    }, [isMobile, isSidebarCollapsed]);
+
     const handleSidebarToggle = () => {
         setIsSidebarCollapsed(!isSidebarCollapsed);
     };
