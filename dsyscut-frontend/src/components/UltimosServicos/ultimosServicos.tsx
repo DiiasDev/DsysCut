@@ -53,7 +53,10 @@ export default function UltimosServicos() {
             
             <div className={style.servicesList}>
                 {services.map(service => (
-                    <div key={service.id} className={style.serviceCard}>
+                    <div 
+                        key={service.id} 
+                        className={style.serviceCard}
+                    >
                         <div className={style.serviceIcon}>
                             <ContentCutIcon />
                         </div>
@@ -97,7 +100,10 @@ export default function UltimosServicos() {
                 ))}
             </div>
             
-            <button className={style.viewAllButton}>
+            <button 
+                className={style.viewAllButton}
+                style={{ margin: '0 auto', display: 'block', width: isMobile ? '90%' : '60%' }} // centraliza botão
+            >
                 Ver todos os serviços
             </button>
         </Card>

@@ -57,7 +57,7 @@
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 22px 20px;
+  padding: 22px 32px 22px 20px; /* aumenta o padding direito */
   background: var(--color-background);
   border-radius: 14px;
   border: 1px solid var(--color-border);
@@ -147,6 +147,7 @@
   flex-direction: column;
   align-items: flex-end;
   gap: 10px;
+  padding-right: 8px; /* adiciona espaço extra à direita */
 }
 
 .price {
@@ -201,22 +202,42 @@
 /* Mobile styles */
 @media (max-width: 768px) {
   .container {
-    margin: 15px 0;
+    margin: 15px auto;
     padding: 0 10px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centraliza o container */
   }
-  
+
   .card {
     padding: 24px;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 95vw; /* limita largura máxima para não comer pela direita */
+    box-sizing: border-box;
   }
-  
-  .title {
-    font-size: 1.5rem !important;
-    margin-bottom: 16px !important;
-  }
-  
-  .serviceCard {
-    padding: 16px;
+
+  .servicesList {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centraliza os cards */
     gap: 14px;
+  }
+
+  .serviceCard {
+    padding: 16px 20px 16px 12px;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 95vw; /* limita largura máxima */
+    box-sizing: border-box;
+    /* remove margin-right */
+  }
+
+  .serviceActions {
+    padding-right: 8px;
   }
   
   .serviceIcon {
