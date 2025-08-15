@@ -20,9 +20,14 @@ export default function ultimosServicos() {
     ]
 
     return (
-        <Grid container justifyContent="center" className={style.container}>
+        <Grid container justifyContent="center" className={style.container} sx={{ mt: { xs: 2, md: 3 } }}>
             <Card className={style.card} elevation={6}>
-                <Typography variant="h4" className={style.title} gutterBottom>
+                <Typography 
+                    variant="h4" 
+                    className={style.title} 
+                    gutterBottom
+                    sx={{ fontSize: { xs: "1.5rem", md: "2rem" } }}
+                >
                     Últimos Serviços
                 </Typography>
                 <Divider className={style.headerDivider} />

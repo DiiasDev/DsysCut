@@ -30,6 +30,8 @@ export default function HomePage() {
         setIsSidebarCollapsed(!isSidebarCollapsed);
     };
 
+    const sidebarWidth = isSidebarCollapsed ? 72 : 240;
+
     return (
         <div className={style.container}>
             <div className={`${style.sidebar} ${isSidebarCollapsed ? style.sidebarCollapsed : ''}`}>
@@ -42,26 +44,28 @@ export default function HomePage() {
             <div
                 className={`${style.content} ${isSidebarCollapsed ? style.contentExpanded : ''}`}
                 style={{
-                    marginLeft: isSidebarCollapsed ? 0 : 72,
+                    marginLeft: sidebarWidth,
                     transition: "margin-left 0.3s"
                 }}
             >
+                {/* Mobile menu button */}
+                {isMobile && (
+                    <button
+                        className={style.mobileMenuButton}
+                        onClick={handleSidebarToggle}
+                        aria-label="Abrir menu"
+                    >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                )}
+                
+                <CabecalhoHome sidebarWidth={isMobile ? 0 : sidebarWidth} />
+                
                 <div className={style.cabecalho}>
-                    {/* Mobile menu button */}
-                    {isMobile && (
-                        <button
-                            className={style.mobileMenuButton}
-                            onClick={handleSidebarToggle}
-                            aria-label="Abrir menu"
-                        >
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <line x1="3" y1="6" x2="21" y2="6"></line>
-                                <line x1="3" y1="12" x2="21" y2="12"></line>
-                                <line x1="3" y1="18" x2="21" y2="18"></line>
-                            </svg>
-                        </button>
-                    )}
-                    <CabecalhoHome sidebarWidth={isSidebarCollapsed ? 0 : 72} />
                     <UltimosServicos />
                     <CarrosselSistema />
                     <AtalhosHome />

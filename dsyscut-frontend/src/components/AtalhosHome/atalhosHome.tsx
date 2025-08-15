@@ -55,7 +55,7 @@ export default function AtalhosHome() {
                     {atalhos.map(atalho => (
                         <Grid 
                             key={atalho.id} 
-                          
+                           
                             style={{ display: "flex", justifyContent: "center" }}
                         >
                             <a href={atalho.atalho} className={style.link}>
