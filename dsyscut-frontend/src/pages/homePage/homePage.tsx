@@ -76,7 +76,8 @@ export default function HomePage() {
                             margin: '0 auto',
                             display: 'flex',
                             flexDirection: 'column',
-                            gap: isMobile ? '1.5rem' : '2rem'
+                            gap: isMobile ? '1.5rem' : '2rem',
+                            alignItems: 'center',
                         }}
                     >
                         {/* Carrossel */}
@@ -85,17 +86,24 @@ export default function HomePage() {
                         </div>
 
                         {/* Stats */}
-                        <div style={{ width: '100%' }}>
+                        <div style={{ width: '100%', maxWidth: isMobile ? '100%' : '1100px', margin: '0 auto' }}>
                             <DashboardStats />
                         </div>
 
                         {/* Serviços */}
-                        <div style={{ width: '100%' }}>
+                        <div style={{ width: '100%', maxWidth: isMobile ? '100%' : '700px', margin: '0 auto' }}>
                             <UltimosServicos />
                         </div>
 
                         {/* Atalhos */}
-                        <div style={{ width: '100%' }}>
+                        <div 
+                            style={{ 
+                                width: '100%', 
+                                maxWidth: isMobile ? '100%' : '1200px', 
+                                margin: '0 auto',
+                                marginTop: isMobile ? '0' : '2.5rem' // espaçamento extra só no desktop
+                            }}
+                        >
                             <AtalhosHome />
                         </div>
                     </div>
