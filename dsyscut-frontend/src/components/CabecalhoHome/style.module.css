@@ -67,40 +67,39 @@
 /* Mobile responsive */
 @media (max-width: 768px) {
     .cabecalhoContainer {
-        padding: 8px 16px;
-        height: 60px;
+        width: calc(100% - 32px);
+        margin-left: 16px;
+        margin-right: 16px;
+        padding: 12px 20px;
+        height: 64px;
         margin-bottom: 16px;
     }
     
     .userName {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
     }
     
     .userDate {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
     }
     
     .notificationButton {
-        width: 36px;
-        height: 36px;
-        min-width: 36px;
-        min-height: 36px;
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
     }
     
     .notificationIcon {
-        font-size: 22px;
+        font-size: 24px;
     }
     
     .userInfo {
         min-width: unset;
+        gap: 2px;
+        flex: 1;
+        margin-right: 12px;
     }
 }
-    .userInfo {
-        min-width: unset;
-    }
-    
-    
-    .userInfo {
-        min-width: unset;
-    }
+      
 
