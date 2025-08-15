@@ -7,16 +7,37 @@
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
-  border-radius: 12px;
-  background: #fff;
+  padding: 32px 28px;
+  border-radius: 16px !important;
+  border: 1px solid var(--color-border);
+  background: var(--color-background-paper) !important;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12) !important;
+  transform: translateY(-2px);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--color-border);
 }
 
 .title {
   text-align: center;
   font-weight: 700 !important;
-  color: #333;
+  color: var(--color-text) !important;
   margin-bottom: 20px !important;
+  font-size: 1.25rem !important;
 }
 
 .headerDivider {
@@ -25,24 +46,46 @@
 }
 
 .servicesList {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
+  margin-bottom: 24px;
 }
 
 .serviceCard {
   display: flex;
   align-items: center;
-  padding: 16px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  background: #fafafa;
+  gap: 20px;
+  padding: 22px 20px;
+  background: var(--color-background);
+  border-radius: 14px;
+  border: 1px solid var(--color-border);
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.serviceCard::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .serviceCard:hover {
-  background: #f0f0f0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+.serviceCard:hover::before {
+  opacity: 1;
 }
 
 .iconBox {
@@ -51,59 +94,108 @@
   justify-content: center;
   width: 48px;
   height: 48px;
-  border-radius: 50%;
-  background: #e3f2fd;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   margin-right: 16px;
   flex-shrink: 0;
 }
 
 .serviceIcon {
-  color: #1976d2;
-  font-size: 24px !important;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.serviceIcon svg {
+  font-size: 26px;
 }
 
 .infoBox {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .serviceName {
-  font-weight: 600 !important;
-  color: #333;
+  color: var(--color-text) !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
   line-height: 1.3;
 }
 
-.serviceDate {
-  color: #666;
-  font-size: 0.875rem;
+.clientName {
+  color: var(--color-text-secondary) !important;
+  font-weight: 600 !important;
+  font-size: 0.8rem !important;
 }
 
-.priceRow {
-  margin-top: 4px;
+.serviceDate {
+  color: var(--color-text-secondary) !important;
+  font-size: 0.75rem !important;
+}
+
+.serviceActions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
 }
 
 .price {
-  color: #4caf50 !important;
-  font-weight: 700 !important;
-  font-size: 1.25rem !important;
+  color: var(--color-primary) !important;
+  font-weight: 800 !important;
+  font-size: 1.2rem !important;
 }
 
-.actionsBox {
+.statusContainer {
   display: flex;
   align-items: center;
-  flex-shrink: 0;
+  gap: 6px;
+  background: rgba(40, 167, 69, 0.1);
+  padding: 4px 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(40, 167, 69, 0.2);
 }
 
-.detailsBtn {
-  color: #1976d2 !important;
-  background: rgba(25, 118, 210, 0.04) !important;
-  border: 1px solid rgba(25, 118, 210, 0.2) !important;
+.statusIcon {
+  color: var(--color-success) !important;
+  font-size: 16px !important;
 }
 
-.detailsBtn:hover {
-  background: rgba(25, 118, 210, 0.08) !important;
+.statusText {
+  color: var(--color-success) !important;
+  font-weight: 700 !important;
+  font-size: 0.7rem !important;
+}
+
+.viewAllButton {
+  width: 100%;
+  padding: 14px 20px;
+  background: transparent;
+  border: 2px solid var(--color-primary);
+  border-radius: 12px;
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.viewAllButton:hover {
+  background: var(--color-primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
 }
 
 /* Mobile styles */
@@ -114,8 +206,7 @@
   }
   
   .card {
-    padding: 16px;
-    margin: 0;
+    padding: 24px;
   }
   
   .title {
@@ -124,22 +215,17 @@
   }
   
   .serviceCard {
-    padding: 12px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  
-  .iconBox {
-    width: 40px;
-    height: 40px;
-    margin-right: 0;
-    margin-bottom: 8px;
-    align-self: center;
+    padding: 16px;
+    gap: 14px;
   }
   
   .serviceIcon {
-    font-size: 20px !important;
+    width: 44px;
+    height: 44px;
+  }
+  
+  .serviceIcon svg {
+    font-size: 20px;
   }
   
   .infoBox {
@@ -148,37 +234,41 @@
   }
   
   .serviceName {
-    font-size: 0.9rem !important;
-  }
-  
-  .serviceDate {
-    font-size: 0.8rem;
+    font-size: 0.85rem !important;
   }
   
   .price {
     font-size: 1.1rem !important;
   }
-  
-  .actionsBox {
-    align-self: center;
-    margin-top: 8px;
-  }
 }
 
 @media (max-width: 480px) {
-  .card {
-    padding: 12px;
+  .cardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
   }
   
   .serviceCard {
-    padding: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    padding: 16px;
   }
   
-  .serviceName {
-    font-size: 0.85rem !important;
+  .serviceActions {
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
   }
   
-  .price {
-    font-size: 1rem !important;
+  .serviceIcon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .serviceIcon svg {
+    font-size: 18px;
   }
 }

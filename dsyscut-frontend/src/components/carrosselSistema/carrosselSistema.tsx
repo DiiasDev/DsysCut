@@ -1,5 +1,5 @@
 import style from "./style.module.css"
-import { Grid, Typography, IconButton } from "@mui/material"
+import {  Typography, IconButton } from "@mui/material"
 import { ChevronLeft, ChevronRight } from "@mui/icons-material"
 import { useState, useEffect } from "react"
 import imagem1 from "../../assets/barbearia1.jpg"

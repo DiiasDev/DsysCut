@@ -1,7 +1,7 @@
 import style from "./style.module.css"
-import { Grid, Card, Typography, Divider, Box, IconButton, Tooltip } from "@mui/material"
+import { Card, Typography, Chip } from "@mui/material"
 import ContentCutIcon from '@mui/icons-material/ContentCut'
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
+import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 
 export default function ultimosServicos() {
     const services = [
@@ -10,61 +10,69 @@ export default function ultimosServicos() {
             data: "Corte + Barba",
             date: "11 de agosto",
             price: "60,00",
+            status: "Concluído",
+            client: "João Silva"
         },
         {
             id: 2,
             data: "Corte + Barba + Sobrancelha",
             date: "15 de janeiro",
             price: "80,00",
+            status: "Concluído",
+            client: "Pedro Santos"
         }
     ]
 
     return (
-        <Grid container justifyContent="center" className={style.container} sx={{ mt: { xs: 2, md: 3 } }}>
-            <Card className={style.card} elevation={6}>
-                <Typography 
-                    variant="h4" 
-                    className={style.title} 
-                    gutterBottom
-                    sx={{ fontSize: { xs: "1.5rem", md: "2rem" } }}
-                >
+        <Card className={style.card} elevation={0}>
+            <div className={style.cardHeader}>
+                <Typography variant="h6" className={style.title}>
                     Últimos Serviços
                 </Typography>
-                <Divider className={style.headerDivider} />
-                <Box className={style.servicesList}>
-                    {services.map(service => (
-                        <Box key={service.id} className={style.serviceCard}>
-                            <Box className={style.iconBox}>
-                                <ContentCutIcon className={style.serviceIcon} />
-                            </Box>
-                            <Box className={style.infoBox}>
-                                <Typography variant="subtitle2" className={style.serviceName}>
-                                    {service.data}
+                <Chip 
+                    label="Em Progresso" 
+                    size="small" 
+                    className={style.statusChip}
+                />
+            </div>
+            
+            <div className={style.servicesList}>
+                {services.map(service => (
+                    <div key={service.id} className={style.serviceCard}>
+                        <div className={style.serviceIcon}>
+                            <ContentCutIcon />
+                        </div>
+                        
+                        <div className={style.serviceInfo}>
+                            <Typography variant="subtitle2" className={style.serviceName}>
+                                {service.data}
+                            </Typography>
+                            <Typography variant="caption" className={style.clientName}>
+                                {service.client}
+                            </Typography>
+                            <Typography variant="caption" className={style.serviceDate}>
+                                {service.date}
+                            </Typography>
+                        </div>
+                        
+                        <div className={style.serviceActions}>
+                            <Typography variant="h6" className={style.price}>
+                                R$ {service.price}
+                            </Typography>
+                            <div className={style.statusContainer}>
+                                <CheckCircleIcon className={style.statusIcon} />
+                                <Typography variant="caption" className={style.statusText}>
+                                    {service.status}
                                 </Typography>
-                                <Typography variant="body2" className={style.serviceDate}>
-                                    {service.date}
-                                </Typography>
-                                <Box className={style.priceRow}>
-                                    <Typography variant="h5" className={style.price}>
-                                        R$ {service.price}
-                                    </Typography>
-                                </Box>
-                            </Box>
-                            <Box className={style.actionsBox}>
-                                <Tooltip title="Ver detalhes">
-                                    <IconButton
-                                        className={style.detailsBtn}
-                                        color="primary"
-                                        size="small"
-                                    >
-                                        <InfoOutlinedIcon fontSize="small" />
-                                    </IconButton>
-                                </Tooltip>
-                            </Box>
-                        </Box>
-                    ))}
-                </Box>
-            </Card>
-        </Grid>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+            
+            <button className={style.viewAllButton}>
+                Ver todos os serviços
+            </button>
+        </Card>
     )
 }

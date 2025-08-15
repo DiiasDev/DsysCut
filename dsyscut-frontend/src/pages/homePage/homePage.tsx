@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import Sidebar from "../../components/Sidebar/sidebar";
+import Header from "../../components/Header/Header";
 import style from "./style.module.css";
-import CabecalhoHome from "../../components/CabecalhoHome/cabecalhoHome";
 import UltimosServicos from "../../components/UltimosServicos/ultimosServicos";
 import CarrosselSistema from "../../components/carrosselSistema/carrosselSistema";
 import AtalhosHome from "../../components/AtalhosHome/atalhosHome";
+import DashboardStats from "../../components/DashboardStats/dashboardStats";
 
 export default function HomePage() {
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -41,10 +42,30 @@ export default function HomePage() {
         switch (currentPage) {
             case 'home':
                 return (
-                    <div className={style.cabecalho}>
-                        <UltimosServicos />
-                        <CarrosselSistema />
-                        <AtalhosHome />
+                    <div className={style.dashboardContainer}>
+                        <div className={style.dashboardGrid}>
+                            {/* Hero Section */}
+                            <div className={style.heroSection}>
+                                <CarrosselSistema />
+                            </div>
+
+                            {/* Stats Section */}
+                            <div className={style.statsSection}>
+                                <DashboardStats />
+                            </div>
+
+                            {/* Main Content */}
+                            <div className={style.mainContent}>
+                                <div className={style.servicesSection}>
+                                    <UltimosServicos />
+                                </div>
+                            </div>
+
+                            {/* Quick Actions */}
+                            <div className={style.quickActions}>
+                                <AtalhosHome />
+                            </div>
+                        </div>
                     </div>
                 );
             case 'financeiro':
@@ -67,10 +88,23 @@ export default function HomePage() {
                 // return <InfoPage />;
             default:
                 return (
-                    <div className={style.cabecalho}>
-                        <UltimosServicos />
-                        <CarrosselSistema />
-                        <AtalhosHome />
+                    <div className={style.dashboardContainer}>
+                        <div className={style.dashboardGrid}>
+                            <div className={style.heroSection}>
+                                <CarrosselSistema />
+                            </div>
+                            <div className={style.statsSection}>
+                                <DashboardStats />
+                            </div>
+                            <div className={style.mainContent}>
+                                <div className={style.servicesSection}>
+                                    <UltimosServicos />
+                                </div>
+                            </div>
+                            <div className={style.quickActions}>
+                                <AtalhosHome />
+                            </div>
+                        </div>
                     </div>
                 );
         }
@@ -86,11 +120,19 @@ export default function HomePage() {
                 />
             </div>
 
+            <Header 
+                userName="Usuario" 
+                isSidebarCollapsed={isSidebarCollapsed}
+                sidebarWidth={sidebarWidth}
+                isMobile={isMobile}
+            />
+
             <div
                 className={`${style.content} ${isSidebarCollapsed ? style.contentExpanded : ''}`}
                 style={{
-                    marginLeft: sidebarWidth,
-                    transition: "margin-left 0.3s"
+                    marginLeft: isMobile ? 0 : sidebarWidth,
+                    marginTop: '70px', // Account for fixed header height
+                    transition: "margin-left 0.3s ease"
                 }}
             >
                 {/* Mobile menu button */}
@@ -107,9 +149,6 @@ export default function HomePage() {
                         </svg>
                     </button>
                 )}
-                
-                <CabecalhoHome sidebarWidth={isMobile ? 0 : sidebarWidth} />
-                
                 {renderCurrentPage()}
             </div>
         </div>
