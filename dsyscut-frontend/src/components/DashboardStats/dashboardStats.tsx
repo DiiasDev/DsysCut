@@ -64,7 +64,11 @@ export default function DashboardStats() {
                 gridTemplateRows: isMobile ? '1fr 1fr' : 'none',
                 gap: isMobile ? '0.75rem' : '1rem',
                 width: '100%',
-                padding: isMobile ? '0 0.5rem' : '0'
+                boxSizing: 'border-box',
+                paddingLeft: isMobile ? '0.5rem' : '1.5rem',
+                paddingRight: isMobile ? '0.5rem' : '1.5rem',
+                paddingTop: 0,
+                paddingBottom: 0
             }}
         >
             {stats.map(stat => (

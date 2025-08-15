@@ -71,7 +71,7 @@ export default function HomePage() {
                 return (
                     <div 
                         style={{
-                            padding: isMobile ? '1rem 0.5rem' : '1rem',
+                            padding: isMobile ? '1rem 0' : '1rem 0',
                             maxWidth: '100%',
                             margin: '0 auto',
                             display: 'flex',
