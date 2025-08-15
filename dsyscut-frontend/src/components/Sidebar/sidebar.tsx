@@ -4,10 +4,11 @@ import style from "./style.module.css"
 interface SidebarProps {
     isCollapsed: boolean;
     onToggle: () => void;
+    onNavigate?: (page: string) => void;
 }
 
-const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
-    const [activeTab, setActiveTab] = useState('financeiro');
+const Sidebar = ({ isCollapsed, onToggle, onNavigate }: SidebarProps) => {
+    const [activeTab, setActiveTab] = useState('home');
     const [isMobile, setIsMobile] = useState(false);
     const [isDarkTheme, setIsDarkTheme] = useState(false);
 
@@ -26,6 +27,7 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
         {
             id: 'home',
             label: 'Home',
+            page: 'home',
             icon: (
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
@@ -36,6 +38,7 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
         {
             id: 'financeiro',
             label: 'Financeiro',
+            page: 'financeiro',
             icon: (
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
@@ -45,6 +48,7 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
         {
             id: 'agendamentos',
             label: 'Agendamentos',
+            page: 'agendamentos',
             icon: (
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
@@ -57,6 +61,7 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
         {
             id: 'clientes',
             label: 'Clientes',
+            page: 'clientes',
             icon: (
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -69,6 +74,7 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
         {
             id: 'relatorios',
             label: 'Relatórios',
+            page: 'relatorios',
             icon: (
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M3 3v18h18" />
@@ -79,6 +85,7 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
         {
             id: 'pacotes',
             label: 'Pacotes',
+            page: 'pacotes',
             icon: (
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M21 16V8a2 2 0 0 0-1-1.73L12 2 4 6.27A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73L12 22l8-4.27A2 2 0 0 0 21 16z" />
@@ -90,6 +97,7 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
         {
             id: 'info',
             label: 'Info',
+            page: 'info',
             icon: (
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <circle cx="12" cy="12" r="10" />
@@ -104,6 +112,13 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
         setIsDarkTheme(!isDarkTheme);
         // Here you can add logic to apply the theme to your app
         // For example: document.documentElement.setAttribute('data-theme', !isDarkTheme ? 'dark' : 'light');
+    };
+
+    const handleNavigation = (item: typeof navigationItems[0]) => {
+        setActiveTab(item.id);
+        if (onNavigate) {
+            onNavigate(item.page);
+        }
     };
 
     return (
@@ -168,9 +183,9 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
                             <li key={item.id}>
                                 <button
                                     className={`${style.navigationItem} ${activeTab === item.id ? style.active : ''}`}
-                                    onClick={() => setActiveTab(item.id)}
+                                    onClick={() => handleNavigation(item)}
                                     title={isCollapsed ? item.label : undefined}
-                            >
+                                >
                                     <span className={style.navigationIcon}>
                                         {item.icon}
                                     </span>

@@ -1,5 +1,5 @@
 .atalhosCardPai {
-    background: var(--color-background-paper);
+     background: transparent;
     border-radius: 24px;
     box-shadow: 0 4px 24px rgba(0,0,0,0.10);
     padding: 32px 24px;
@@ -20,7 +20,7 @@
     align-items: center;
     justify-content: center;
     padding: 32px 20px;
-    background: linear-gradient(135deg, #f8f9fa 80%, #e3eafc 100%);
+    background: transparent;
     border-radius: 18px;
     transition: box-shadow 0.25s, transform 0.18s, border-color 0.18s, background 0.18s;
     cursor: pointer;

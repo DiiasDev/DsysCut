@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react"
-import Sidebar from "../../components/Sidebar/sidebar"
-import style from "./style.module.css"
+import { useState, useEffect } from "react";
+import Sidebar from "../../components/Sidebar/sidebar";
+import style from "./style.module.css";
 import CabecalhoHome from "../../components/CabecalhoHome/cabecalhoHome";
 import UltimosServicos from "../../components/UltimosServicos/ultimosServicos";
 import CarrosselSistema from "../../components/carrosselSistema/carrosselSistema";
@@ -9,6 +9,7 @@ import AtalhosHome from "../../components/AtalhosHome/atalhosHome";
 export default function HomePage() {
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+    const [currentPage, setCurrentPage] = useState('home');
 
     useEffect(() => {
         const checkIfMobile = () => {
@@ -30,7 +31,50 @@ export default function HomePage() {
         setIsSidebarCollapsed(!isSidebarCollapsed);
     };
 
+    const handleNavigation = (page: string) => {
+        setCurrentPage(page);
+    };
+
     const sidebarWidth = isSidebarCollapsed ? 72 : 240;
+
+    const renderCurrentPage = () => {
+        switch (currentPage) {
+            case 'home':
+                return (
+                    <div className={style.cabecalho}>
+                        <UltimosServicos />
+                        <CarrosselSistema />
+                        <AtalhosHome />
+                    </div>
+                );
+            case 'financeiro':
+                return <div>Financeiro Page Content</div>;
+                // return <FinanceiroPage />;
+            case 'agendamentos':
+                return <div>Agendamentos Page Content</div>;
+                // return <AgendamentosPage />;
+            case 'clientes':
+                return <div>Clientes Page Content</div>;
+                // return <ClientesPage />;
+            case 'relatorios':
+                return <div>Relatórios Page Content</div>;
+                // return <RelatoriosPage />;
+            case 'pacotes':
+                return <div>Pacotes Page Content</div>;
+                // return <PacotesPage />;
+            case 'info':
+                return <div>Info Page Content</div>;
+                // return <InfoPage />;
+            default:
+                return (
+                    <div className={style.cabecalho}>
+                        <UltimosServicos />
+                        <CarrosselSistema />
+                        <AtalhosHome />
+                    </div>
+                );
+        }
+    };
 
     return (
         <div className={style.container}>
@@ -38,6 +82,7 @@ export default function HomePage() {
                 <Sidebar
                     isCollapsed={isSidebarCollapsed}
                     onToggle={handleSidebarToggle}
+                    onNavigate={handleNavigation}
                 />
             </div>
 
@@ -65,11 +110,7 @@ export default function HomePage() {
                 
                 <CabecalhoHome sidebarWidth={isMobile ? 0 : sidebarWidth} />
                 
-                <div className={style.cabecalho}>
-                    <UltimosServicos />
-                    <CarrosselSistema />
-                    <AtalhosHome />
-                </div>
+                {renderCurrentPage()}
             </div>
         </div>
     )

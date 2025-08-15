@@ -13,43 +13,43 @@ export default function AtalhosHome() {
         {
             id: 1,
             title: "Financeiro",
-            atalho: "../../pages/FinanceiroPage/financeiroPage",
+            atalho: "/financeiro",
             icon: <AttachMoneyIcon className={style.icon} color="primary" fontSize="large" />
         },
         {
             id: 2,
             title: "Agendamento",
-            atalho: "../../pages/AgendamentoPage/agendamentoPage",
+            atalho: "/agendamentos",
             icon: <EventIcon className={style.icon} color="primary" fontSize="large" />
         },
         {
             id: 3,
             title: "Cliente",
-            atalho: "../../pages/ClientePage/clientePage",
+            atalho: "/clientes",
             icon: <PersonIcon className={style.icon} color="primary" fontSize="large" />
         },
         {
             id: 4,
             title: "Relatório",
-            atalho: "../../pages/RelatorioPage/relatorioPage",
+            atalho: "/relatorios",
             icon: <BarChartIcon className={style.icon} color="primary" fontSize="large" />
         },
         {
             id: 5,
             title: "Pacotes",
-            atalho: "../../pages/PacotePage/pacotePage",
+            atalho: "/pacotes",
             icon: <InventoryIcon className={style.icon} color="primary" fontSize="large" />
         },
         {
             id: 6,
             title: "Informações",
-            atalho: "../../pages/InfoPage/infoPage",
+            atalho: "/info",
             icon: <InfoIcon className={style.icon} color="primary" fontSize="large" />
         },
     ]
 
     return (
-        <Card className={style.atalhosCardPai} elevation={4}>
+        <Card className={style.atalhosCardPai} elevation={4} style={{ backgroundColor: 'transparent' }}>
             <CardContent>
                 <Grid container spacing={2} className={style.atalhosContainer} justifyContent="center">
                     {atalhos.map(atalho => (
