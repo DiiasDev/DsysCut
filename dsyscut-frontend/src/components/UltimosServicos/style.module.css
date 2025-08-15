@@ -143,3 +143,47 @@
   background: var(--color-border);
   opacity: 0.5;
 }
+
+@media (max-width: 600px) {
+  .container {
+    padding: 8px !important;
+  }
+  .card {
+    width: 100% !important;
+    min-width: unset !important;
+    padding: 12px !important;
+  }
+  .title {
+    font-size: 1.3rem !important;
+    text-align: center;
+  }
+  .servicesList {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  .serviceCard {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 10px !important;
+    gap: 8px !important;
+  }
+  .iconBox {
+    margin-bottom: 6px !important;
+  }
+  .serviceName {
+    font-size: 1rem !important;
+  }
+  .serviceDate {
+    font-size: 0.85rem !important;
+  }
+  .priceRow {
+    margin-top: 4px !important;
+  }
+  .price {
+    font-size: 1.1rem !important;
+  }
+  .actionsBox {
+    align-self: flex-end !important;
+    margin-top: 6px !important;
+  }
+}

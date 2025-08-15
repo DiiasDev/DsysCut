@@ -5,11 +5,13 @@
     padding: 32px 24px;
     margin-top: 32px;
     margin-bottom: 32px;
+    width: 100%;
 }
 
 .atalhosContainer {
     margin-top: 0;
     justify-content: center;
+    width: 100%;
 }
 
 .atalhoCard {
@@ -91,6 +93,8 @@
     min-width: 140px;
     max-width: 200px;
     margin: auto;
+    width: 120px;
+    height: 120px;
 }
 
 .atalhoCardSmall:hover {
@@ -121,4 +125,65 @@
     color: #fff !important;
     font-size: 1.5rem !important;
     transition: color 0.18s;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .atalhosCardPai {
+    margin: 15px 0;
+    padding: 8px !important;
+  }
+
+  .atalhosContainer {
+    gap: 8px !important;
+    margin: 0 !important;
+  }
+
+  .atalhoCardSmall {
+    width: 100px;
+    height: 100px;
+    margin: 4px;
+    padding: 8px !important;
+  }
+
+  .iconWrapperSmall {
+    margin-bottom: 4px !important;
+  }
+
+  .icon {
+    font-size: 2rem !important;
+  }
+
+  .atalhoTitle {
+    font-size: 0.8rem !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+  }
+
+  .link {
+    text-decoration: none !important;
+    display: block !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .atalhosCardPai {
+    margin: 4px !important;
+    padding: 4px !important;
+  }
+
+  .atalhoCardSmall {
+    width: 90px;
+    height: 90px;
+    margin: 2px;
+    padding: 4px !important;
+  }
+
+  .icon {
+    font-size: 1.8rem !important;
+  }
+
+  .atalhoTitle {
+    font-size: 0.75rem !important;
+  }
 }

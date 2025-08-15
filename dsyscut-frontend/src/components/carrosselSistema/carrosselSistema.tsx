@@ -6,9 +6,22 @@ import imagem1 from "../../assets/barbearia1.jpg"
 import imagem2 from "../../assets/barbearia2.jpg"
 import imagem3 from "../../assets/barbearia3.jpg"
 
+// Hook para detectar mobile
+function useIsMobile() {
+    const [isMobile, setIsMobile] = useState(false)
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth <= 768)
+        checkMobile()
+        window.addEventListener("resize", checkMobile)
+        return () => window.removeEventListener("resize", checkMobile)
+    }, [])
+    return isMobile
+}
+
 export default function CarrosselSistema() {
     const [currentSlide, setCurrentSlide] = useState(0)
     const [isPlaying, setIsPlaying] = useState(true)
+    const isMobile = useIsMobile()
 
     const images = [
         {
@@ -72,7 +85,10 @@ export default function CarrosselSistema() {
                                 className={style.slideImage}
                             />
                             <div className={style.slideContent}>
-                                <Typography variant="h5" className={style.slideText}>
+                                <Typography 
+                                    variant={isMobile ? "body1" : "h5"} 
+                                    className={style.slideText}
+                                >
                                     {image.text}
                                 </Typography>
                             </div>
@@ -81,18 +97,22 @@ export default function CarrosselSistema() {
                 </div>
 
                 {/* Navigation Arrows */}
-                <IconButton 
-                    className={`${style.navButton} ${style.prevButton}`}
-                    onClick={goToPrevious}
-                >
-                    <ChevronLeft />
-                </IconButton>
-                <IconButton 
-                    className={`${style.navButton} ${style.nextButton}`}
-                    onClick={goToNext}
-                >
-                    <ChevronRight />
-                </IconButton>
+                {!isMobile && (
+                    <>
+                        <IconButton 
+                            className={`${style.navButton} ${style.prevButton}`}
+                            onClick={goToPrevious}
+                        >
+                            <ChevronLeft />
+                        </IconButton>
+                        <IconButton 
+                            className={`${style.navButton} ${style.nextButton}`}
+                            onClick={goToNext}
+                        >
+                            <ChevronRight />
+                        </IconButton>
+                    </>
+                )}
 
                 {/* Dots Indicator */}
                 <div className={style.dotsContainer}>

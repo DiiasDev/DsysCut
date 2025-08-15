@@ -1,99 +1,136 @@
 .container {
   display: flex;
-  flex-direction: row;
   height: 100vh;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .sidebar {
-  flex: 0 0 250px;
-  background-color: #fff;
-  border-right: 1px solid #eaeaea;
-  transition: flex 0.3s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 1000;
+  transition: transform 0.3s ease;
 }
 
 .sidebarCollapsed {
-  flex: 0 0 80px;
+  transform: translateX(-100%);
 }
 
 .content {
   flex: 1;
-  padding: 24px;
+  overflow-y: auto;
   transition: margin-left 0.3s ease;
+  background-color: #f5f5f5;
 }
 
 .contentExpanded {
-  margin-left: 250px;
+  margin-left: 0 !important;
 }
 
 .cabecalho {
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 24px;
+  padding: 20px;
+  position: relative;
 }
 
 /* ...existing styles... */
 
 .mobileMenuButton {
   display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1001;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
   padding: 8px;
-  border-radius: 6px;
-  color: #666;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
 }
 
 .mobileMenuButton:hover {
-  background-color: #f5f5f5;
-  color: #333;
+  background: #f0f0f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Mobile Styles */
+/* Mobile styles */
 @media (max-width: 768px) {
   .container {
-    position: relative;
+    flex-direction: column;
   }
 
   .sidebar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: auto;
-    height: 100vh;
-    z-index: 1000;
+    width: 280px;
+    transform: translateX(-100%);
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    border-right: 1px solid #e0e0e0;
+  }
+
+  .sidebar:not(.sidebarCollapsed) {
+    transform: translateX(0);
   }
 
   .content {
-    width: 100%;
     margin-left: 0 !important;
-    position: relative;
-    z-index: 1;
+    width: 100%;
+    padding-top: 60px; /* Space for mobile menu button */
   }
 
   .cabecalho {
-    padding: 16px 20px;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    padding: 10px 15px;
   }
 
   .mobileMenuButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
+  }
+
+  /* Add overlay when sidebar is open on mobile */
+  .sidebar:not(.sidebarCollapsed)::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
   }
 }
 
-/* Tablet Styles */
-@media (max-width: 1024px) and (min-width: 769px) {
-  .content {
-    transition: margin-left 0.3s ease;
-  }
-
+/* Tablet styles */
+@media (min-width: 769px) and (max-width: 1024px) {
   .cabecalho {
-    padding: 20px 24px;
+    padding: 15px;
+  }
+  
+  .content {
+    margin-left: 72px;
+  }
+}
+
+/* Large screen styles */
+@media (min-width: 1025px) {
+  .content {
+    margin-left: 72px;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+  .cabecalho {
+    padding: 8px 12px;
+  }
+  
+  .mobileMenuButton {
+    top: 15px;
+    left: 15px;
+    padding: 6px;
+  }
+  
+  .content {
+    padding-top: 55px;
   }
 }

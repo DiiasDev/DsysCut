@@ -51,25 +51,13 @@ export default function AtalhosHome() {
     return (
         <Card className={style.atalhosCardPai} elevation={4}>
             <CardContent>
-                <Grid container spacing={3} className={style.atalhosContainer} justifyContent="center">
-                    {/* Primeira linha: 3 atalhos */}
-                    {atalhos.slice(0, 3).map(atalho => (
-                        <Grid key={atalho.id} style={{ display: "flex", justifyContent: "center" }}>
-                            <a href={atalho.atalho} className={style.link}>
-                                <Card className={style.atalhoCardSmall} elevation={2}>
-                                    <div className={style.iconWrapperSmall}>
-                                        {atalho.icon}
-                                    </div>
-                                    <Typography variant="h6" className={style.atalhoTitle}>{atalho.title}</Typography>
-                                </Card>
-                            </a>
-                        </Grid>
-                    ))}
-                </Grid>
-                <Grid container spacing={3} className={style.atalhosContainer} justifyContent="center" style={{ marginTop: 16 }}>
-                    {/* Segunda linha: 3 atalhos (os 2 últimos centralizados) */}
-                    {atalhos.slice(3).map(atalho => (
-                        <Grid key={atalho.id} style={{ display: "flex", justifyContent: "center" }}>
+                <Grid container spacing={2} className={style.atalhosContainer} justifyContent="center">
+                    {atalhos.map(atalho => (
+                        <Grid 
+                            key={atalho.id} 
+                          
+                            style={{ display: "flex", justifyContent: "center" }}
+                        >
                             <a href={atalho.atalho} className={style.link}>
                                 <Card className={style.atalhoCardSmall} elevation={2}>
                                     <div className={style.iconWrapperSmall}>

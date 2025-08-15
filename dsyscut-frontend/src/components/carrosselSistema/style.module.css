@@ -1,32 +1,28 @@
 .carousel {
-    position: relative;
     width: 100%;
     max-width: 1200px;
-    margin: 0 auto;
-    border-radius: 16px;
+    margin: 20px auto;
+    position: relative;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    background: var(--color-background-paper);
-}
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 
 .carouselContainer {
     position: relative;
     width: 100%;
-    height: 500px;
+    height: 400px;
     overflow: hidden;
 }
 
 .carouselTrack {
     display: flex;
-    width: 100%;
+    transition: transform 0.5s ease-in-out;
     height: 100%;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .slide {
-    position: relative;
     min-width: 100%;
-    height: 100%;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,12 +32,6 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
-    transition: transform 0.3s ease;
-}
-
-.slide:hover .slideImage {
-    transform: scale(1.05);
 }
 
 .slideContent {
@@ -49,48 +39,33 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9));
-    padding: 60px 30px 30px;
-    transform: translateY(0);
-    transition: transform 0.3s ease;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    padding: 40px 20px 20px;
+    color: white;
 }
 
 .slideText {
-    color: white !important;
     font-weight: 600 !important;
-    text-align: center;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-    margin: 0 !important;
-    font-size: 1.8rem !important;
-    line-height: 1.3;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .navButton {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
     background: rgba(255, 255, 255, 0.9) !important;
-    color: var(--color-primary) !important;
+    color: #333 !important;
+    z-index: 10;
     width: 50px !important;
     height: 50px !important;
-    z-index: 10;
-    transition: all 0.3s ease !important;
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.3) !important;
-}
-
-.navButton:hover {
-    background: white !important;
-    transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .prevButton {
-    left: 20px;
+    left: 20px !important;
 }
 
 .nextButton {
-    right: 20px;
+    right: 20px !important;
 }
 
 .dotsContainer {
@@ -99,7 +74,7 @@
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 10px;
+    gap: 8px;
     z-index: 10;
 }
 
@@ -107,42 +82,146 @@
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid white;
+    background: transparent;
     cursor: pointer;
     transition: all 0.3s ease;
-    backdrop-filter: blur(5px);
-}
-
-.dot:hover {
-    background: rgba(255, 255, 255, 0.6);
-    transform: scale(1.2);
 }
 
 .activeDot {
     background: white;
-    border-color: white;
-    transform: scale(1.3);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
-/* Responsive Design */
+/* Mobile styles */
 @media (max-width: 768px) {
-    .carouselContainer {
-        height: 350px;
+    .carousel {
+        margin: 10px 0;
+        border-radius: 8px;
     }
     
-    .slideText {
-        font-size: 1.4rem !important;
+    .carouselContainer {
+        height: 250px;
     }
     
     .slideContent {
-        padding: 40px 20px 20px;
+        padding: 20px 15px 15px;
+    }
+    
+    .slideText {
+        font-size: 16px !important;
+    }
+    
+    .dotsContainer {
+        bottom: 15px;
+        gap: 6px;
+    }
+    
+    .dot {
+        width: 8px;
+        height: 8px;
+        border: 1px solid white;
+    }
+}
+
+@media (max-width: 480px) {
+    .carouselContainer {
+        height: 200px;
+    }
+    
+    .slideText {
+        font-size: 14px !important;
+    }
+    
+    .slideContent {
+        padding: 15px 12px 12px;
+    }
+}
+
+/* Animation for smooth entrance */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.carousel {
+    animation: fadeInUp 0.8s ease-out;
+}
+}
+
+.slideImageMobile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slideContentMobile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    padding: 20px 15px 15px;
+    color: white;
+}
+
+.slideTextMobile {
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 14px !important;
+}
+
+.dotsContainerMobile {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 10;
+}
+
+.dotMobile {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid white;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.activeDotMobile {
+    background: white;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+    .carousel {
+        margin: 10px 0;
+        border-radius: 8px;
+    }
+    
+    .carouselContainer {
+        height: 250px;
+    }
+    
+    .slideContent {
+        padding: 20px 15px 15px;
+    }
+    
+    .slideText {
+        font-size: 16px !important;
     }
     
     .navButton {
-        width: 40px !important;
-        height: 40px !important;
+        width: 40px;
+        height: 40px;
     }
     
     .prevButton {
@@ -152,24 +231,15 @@
     .nextButton {
         right: 10px;
     }
-    
-    .dot {
-        width: 10px;
-        height: 10px;
-    }
 }
 
 @media (max-width: 480px) {
     .carouselContainer {
-        height: 280px;
+        height: 200px;
     }
     
     .slideText {
-        font-size: 1.2rem !important;
-    }
-    
-    .slideContent {
-        padding: 30px 15px 15px;
+        font-size: 14px !important;
     }
 }
 

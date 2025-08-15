@@ -25,7 +25,7 @@ export default function cabecalhoHome({ sidebarWidth = 72 }: CabecalhoHomeProps)
                     position: "sticky",
                     top: 0,
                     zIndex: 1000,
-                    px: { xs: 2, md: 4 },
+                    px: { xs: 1, md: 4 },
                     py: { xs: 1, md: 2 },
                     background: isSidebarOpen
                         ? "var(--color-background-paper)"
@@ -41,14 +41,20 @@ export default function cabecalhoHome({ sidebarWidth = 72 }: CabecalhoHomeProps)
                 }}
             >
                 {/* Esquerda: Nome e Data */}
-                <Grid sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
+                <Grid sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 0.5,
+                    minWidth: { xs: "unset", md: 180 }
+                }}>
                     <Typography
                         variant="h5"
                         sx={{
                             fontWeight: 700,
                             color: "var(--color-primary)",
                             letterSpacing: 0.5,
-                            lineHeight: 1.2
+                            lineHeight: 1.2,
+                            fontSize: { xs: "1.1rem", md: "1.5rem" }
                         }}
                     >
                         Gabriel Dias
@@ -57,7 +63,8 @@ export default function cabecalhoHome({ sidebarWidth = 72 }: CabecalhoHomeProps)
                         variant="body2"
                         sx={{
                             color: "var(--color-text-secondary)",
-                            fontWeight: 500
+                            fontWeight: 500,
+                            fontSize: { xs: "0.85rem", md: "1rem" }
                         }}
                     >
                         {dateFormatted}
@@ -69,10 +76,10 @@ export default function cabecalhoHome({ sidebarWidth = 72 }: CabecalhoHomeProps)
                         color="primary"
                         aria-label="notificações"
                         sx={{
-                            width: 44,
-                            height: 44,
-                            minWidth: 44,
-                            minHeight: 44,
+                            width: { xs: 36, md: 44 },
+                            height: { xs: 36, md: 44 },
+                            minWidth: { xs: 36, md: 44 },
+                            minHeight: { xs: 36, md: 44 },
                             background: "var(--color-background)",
                             border: "1px solid #e0e4ea",
                             boxShadow: "0 1px 4px 0 rgba(0,0,0,0.06)",
@@ -87,7 +94,7 @@ export default function cabecalhoHome({ sidebarWidth = 72 }: CabecalhoHomeProps)
                             }
                         }}
                     >
-                        <NotificationsNoneIcon sx={{ fontSize: 28 }} />
+                        <NotificationsNoneIcon sx={{ fontSize: { xs: 22, md: 28 } }} />
                     </IconButton>
                 </Grid>
             </Grid>
