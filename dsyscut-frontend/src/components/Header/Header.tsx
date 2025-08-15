@@ -38,6 +38,7 @@ export default function Header({
       style={{
         marginLeft: isMobile ? '0' : `${sidebarWidth + 16}px`,
         width: isMobile ? '100%' : `calc(100% - ${sidebarWidth + 32}px)`,
+        padding: isMobile ? '0 1rem' : undefined,
         transition: "margin-left 0.3s ease, width 0.3s ease"
       }}
     >
@@ -50,6 +51,7 @@ export default function Header({
               className={style.mobileMenuButton}
               onClick={onSidebarToggle}
               aria-label="Abrir menu"
+              style={{ marginLeft: 0 }}
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -65,7 +67,14 @@ export default function Header({
           </div>
           
           {/* Perfil e notificações à direita */}
-          <div className={style.headerRight}>
+          <div
+            className={style.headerRight}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem'
+            }}
+          >
             <button className={style.notificationButton}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
@@ -79,6 +88,13 @@ export default function Header({
                 src={userAvatar || "/default-avatar.png"} 
                 alt={userName}
                 className={style.profileAvatar}
+                style={{
+                  width: '28px',
+                  height: '28px',
+                  minWidth: '28px',
+                  minHeight: '28px',
+                  objectFit: 'cover'
+                }}
               />
             </div>
           </div>
@@ -126,3 +142,4 @@ export default function Header({
     </header>
   );
 }
+
