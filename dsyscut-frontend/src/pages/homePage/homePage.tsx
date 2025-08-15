@@ -42,29 +42,34 @@ export default function HomePage() {
         switch (currentPage) {
             case 'home':
                 return (
-                    <div className={style.dashboardContainer}>
-                        <div className={style.dashboardGrid}>
-                            {/* Hero Section */}
-                            <div className={style.heroSection}>
-                                <CarrosselSistema />
-                            </div>
+                    <div 
+                        style={{
+                            padding: isMobile ? '1rem 0.5rem' : '1rem',
+                            maxWidth: '100%',
+                            margin: '0 auto',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: isMobile ? '1.5rem' : '2rem'
+                        }}
+                    >
+                        {/* Carrossel */}
+                        <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                            <CarrosselSistema />
+                        </div>
 
-                            {/* Stats Section */}
-                            <div className={style.statsSection}>
-                                <DashboardStats />
-                            </div>
+                        {/* Stats */}
+                        <div style={{ width: '100%' }}>
+                            <DashboardStats />
+                        </div>
 
-                            {/* Main Content */}
-                            <div className={style.mainContent}>
-                                <div className={style.servicesSection}>
-                                    <UltimosServicos />
-                                </div>
-                            </div>
+                        {/* Serviços */}
+                        <div style={{ width: '100%' }}>
+                            <UltimosServicos />
+                        </div>
 
-                            {/* Quick Actions */}
-                            <div className={style.quickActions}>
-                                <AtalhosHome />
-                            </div>
+                        {/* Atalhos */}
+                        <div style={{ width: '100%' }}>
+                            <AtalhosHome />
                         </div>
                     </div>
                 );
@@ -125,30 +130,19 @@ export default function HomePage() {
                 isSidebarCollapsed={isSidebarCollapsed}
                 sidebarWidth={sidebarWidth}
                 isMobile={isMobile}
+                onSidebarToggle={handleSidebarToggle}
             />
 
             <div
                 className={`${style.content} ${isSidebarCollapsed ? style.contentExpanded : ''}`}
                 style={{
                     marginLeft: isMobile ? 0 : sidebarWidth,
-                    marginTop: '70px', // Account for fixed header height
-                    transition: "margin-left 0.3s ease"
+                    marginTop: isMobile ? '75px' : '70px',
+                    padding: 0,
+                    transition: "margin-left 0.3s ease",
+                    width: isMobile ? '100%' : `calc(100% - ${sidebarWidth}px)`
                 }}
             >
-                {/* Mobile menu button */}
-                {isMobile && (
-                    <button
-                        className={style.mobileMenuButton}
-                        onClick={handleSidebarToggle}
-                        aria-label="Abrir menu"
-                    >
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <line x1="3" y1="6" x2="21" y2="6"></line>
-                            <line x1="3" y1="12" x2="21" y2="12"></line>
-                            <line x1="3" y1="18" x2="21" y2="18"></line>
-                        </svg>
-                    </button>
-                )}
                 {renderCurrentPage()}
             </div>
         </div>

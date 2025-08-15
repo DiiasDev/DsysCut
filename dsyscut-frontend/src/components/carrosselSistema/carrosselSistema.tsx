@@ -21,6 +21,8 @@ function useIsMobile() {
 export default function CarrosselSistema() {
     const [currentSlide, setCurrentSlide] = useState(0)
     const [isPlaying, setIsPlaying] = useState(true)
+    const [touchStart, setTouchStart] = useState(0)
+    const [touchEnd, setTouchEnd] = useState(0)
     const isMobile = useIsMobile()
 
     const images = [
@@ -49,10 +51,38 @@ export default function CarrosselSistema() {
         if (isPlaying) {
             const interval = setInterval(() => {
                 setCurrentSlide((prev) => (prev + 1) % images.length)
-            }, 4000)
+            }, 5000) // Slower on mobile
             return () => clearInterval(interval)
         }
     }, [isPlaying, images.length])
+
+    // Touch handlers for mobile swipe
+    const handleTouchStart = (e: React.TouchEvent) => {
+        setTouchEnd(0) // Clear previous touch end
+        setTouchStart(e.targetTouches[0].clientX)
+        setIsPlaying(false) // Pause auto-play on touch
+    }
+
+    const handleTouchMove = (e: React.TouchEvent) => {
+        setTouchEnd(e.targetTouches[0].clientX)
+    }
+
+    const handleTouchEnd = () => {
+        if (!touchStart || !touchEnd) return
+        
+        const distance = touchStart - touchEnd
+        const isLeftSwipe = distance > 50
+        const isRightSwipe = distance < -50
+
+        if (isLeftSwipe) {
+            goToNext()
+        } else if (isRightSwipe) {
+            goToPrevious()
+        }
+        
+        // Resume auto-play after a delay
+        setTimeout(() => setIsPlaying(true), 3000)
+    }
 
     const goToSlide = (index: number) => {
         setCurrentSlide(index)
@@ -69,8 +99,17 @@ export default function CarrosselSistema() {
     return (
         <div 
             className={style.carousel}
-            onMouseEnter={() => setIsPlaying(false)}
-            onMouseLeave={() => setIsPlaying(true)}
+            onMouseEnter={() => !isMobile && setIsPlaying(false)}
+            onMouseLeave={() => !isMobile && setIsPlaying(true)}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            style={{
+                width: isMobile ? '90%' : '100%',
+                maxWidth: isMobile ? '90%' : 'none',
+                margin: '0 auto',
+                borderRadius: isMobile ? '16px' : '12px'
+            }}
         >
             <div className={style.carouselContainer}>
                 <div 
@@ -83,11 +122,21 @@ export default function CarrosselSistema() {
                                 src={image.img} 
                                 alt={image.alt}
                                 className={style.slideImage}
+                                style={{
+                                    height: isMobile ? '220px' : 'auto',
+                                    width: '100%',
+                                    objectFit: 'cover'
+                                }}
                             />
                             <div className={style.slideContent}>
                                 <Typography 
-                                    variant={isMobile ? "body1" : "h5"} 
+                                    variant={isMobile ? "h6" : "h5"} 
                                     className={style.slideText}
+                                    style={{
+                                        fontSize: isMobile ? '1.1rem' : '1.5rem',
+                                        textAlign: 'center',
+                                        fontWeight: 600
+                                    }}
                                 >
                                     {image.text}
                                 </Typography>
@@ -115,12 +164,28 @@ export default function CarrosselSistema() {
                 )}
 
                 {/* Dots Indicator */}
-                <div className={style.dotsContainer}>
+                <div 
+                    className={style.dotsContainer}
+                    style={{
+                        bottom: isMobile ? '10px' : '20px',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        gap: isMobile ? '6px' : '8px'
+                    }}
+                >
                     {images.map((_, index) => (
                         <button
                             key={index}
                             className={`${style.dot} ${index === currentSlide ? style.activeDot : ''}`}
                             onClick={() => goToSlide(index)}
+                            style={{
+                                width: isMobile ? '8px' : '10px',
+                                height: isMobile ? '8px' : '10px',
+                                borderRadius: '50%',
+                                border: 'none',
+                                backgroundColor: index === currentSlide ? '#667eea' : 'rgba(255,255,255,0.5)',
+                                cursor: 'pointer'
+                            }}
                         />
                     ))}
                 </div>

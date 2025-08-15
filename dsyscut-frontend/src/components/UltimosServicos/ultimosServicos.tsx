@@ -2,8 +2,23 @@ import style from "./style.module.css"
 import { Card, Typography, Chip } from "@mui/material"
 import ContentCutIcon from '@mui/icons-material/ContentCut'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
+import { useState, useEffect } from "react"
 
-export default function ultimosServicos() {
+// Hook para detectar mobile
+function useIsMobile() {
+    const [isMobile, setIsMobile] = useState(false)
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth <= 768)
+        checkMobile()
+        window.addEventListener("resize", checkMobile)
+        return () => window.removeEventListener("resize", checkMobile)
+    }, [])
+    return isMobile
+}
+
+export default function UltimosServicos() {
+    const isMobile = useIsMobile()
+    
     const services = [
         {
             id: 1,
@@ -26,12 +41,12 @@ export default function ultimosServicos() {
     return (
         <Card className={style.card} elevation={0}>
             <div className={style.cardHeader}>
-                <Typography variant="h6" className={style.title}>
+                <Typography variant={isMobile ? "subtitle1" : "h6"} className={style.title}>
                     Últimos Serviços
                 </Typography>
                 <Chip 
                     label="Em Progresso" 
-                    size="small" 
+                    size={isMobile ? "medium" : "small"}
                     className={style.statusChip}
                 />
             </div>
@@ -44,19 +59,31 @@ export default function ultimosServicos() {
                         </div>
                         
                         <div className={style.serviceInfo}>
-                            <Typography variant="subtitle2" className={style.serviceName}>
+                            <Typography 
+                                variant={isMobile ? "body2" : "subtitle2"} 
+                                className={style.serviceName}
+                            >
                                 {service.data}
                             </Typography>
-                            <Typography variant="caption" className={style.clientName}>
+                            <Typography 
+                                variant="caption" 
+                                className={style.clientName}
+                            >
                                 {service.client}
                             </Typography>
-                            <Typography variant="caption" className={style.serviceDate}>
+                            <Typography 
+                                variant="caption" 
+                                className={style.serviceDate}
+                            >
                                 {service.date}
                             </Typography>
                         </div>
                         
                         <div className={style.serviceActions}>
-                            <Typography variant="h6" className={style.price}>
+                            <Typography 
+                                variant={isMobile ? "subtitle1" : "h6"} 
+                                className={style.price}
+                            >
                                 R$ {service.price}
                             </Typography>
                             <div className={style.statusContainer}>
