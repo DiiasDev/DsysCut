@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './styles/App.css';
 
 import Login from './pages/login'
@@ -10,13 +9,15 @@ function App() {
   const isLogged = useAppStore(state => state.isLogged)
   return (
     <div className="container">
-
       {!isLogged && <Login />}
-      {isLogged && <HomePage />}
-
+      {isLogged && (
+        <>
+          <HomePage />
+        </>
+      )}
     </div>
-
   );
 }
 
 export default App;
+

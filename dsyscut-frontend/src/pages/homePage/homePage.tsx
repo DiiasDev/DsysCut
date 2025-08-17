@@ -38,18 +38,8 @@ export default function HomePage() {
 
     return (
         <div className={style.wrapper}>
-            {/* Sidebar desktop */}
-            {!isMobile && (
-                <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
-            )}
-            {/* Sidebar mobile overlay */}
-            {isMobile && sidebarOpen && (
-                <div className={style.sidebarMobileOverlay} onClick={() => setSidebarOpen(false)}>
-                    <div className={style.sidebarMobile} onClick={e => e.stopPropagation()}>
-                        <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
-                    </div>
-                </div>
-            )}
+            {/* Sidebar sempre presente, controlado por props */}
+            <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
             <div
                 className={style.mainContent}
                 style={{
