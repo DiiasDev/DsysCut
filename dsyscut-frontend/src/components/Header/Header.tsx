@@ -1,7 +1,12 @@
 import style from './header.module.css';
 import { useState } from 'react';
 
-export default function Header() {
+interface HeaderProps {
+    sidebarOpen: boolean;
+    toggleSidebar: () => void;
+}
+
+export default function Header({ sidebarOpen, toggleSidebar }: HeaderProps) {
     const [search, setSearch] = useState('');
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 600;
 
@@ -17,16 +22,47 @@ export default function Header() {
                     padding: isMobile ? '8px 8px' : '16px 32px',
                 }}
             >
-                <div
-                    className={style.logo}
-                    style={{
-                        fontWeight: 600,
-                        fontSize: isMobile ? 20 : 28,
-                        minWidth: isMobile ? 80 : 120,
-                    }}
-                >
-                    DSysCut
-                </div>
+                {/* Mobile: botão de menu. Desktop: nome do sistema */}
+                {isMobile ? (
+                    <button
+                        className={style.menuButton}
+                        aria-label={sidebarOpen ? "Fechar menu" : "Abrir menu"}
+                        onClick={toggleSidebar}
+                        style={{
+                            background: 'none',
+                            border: 'none',
+                            padding: 0,
+                            marginRight: 8,
+                            cursor: 'pointer',
+                        }}
+                    >
+                        <svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
+                            {sidebarOpen ? (
+                                // ícone de fechar (X)
+                                <>
+                                    <line x1="6" y1="6" x2="18" y2="18" />
+                                    <line x1="6" y1="18" x2="18" y2="6" />
+                                </>
+                            ) : (
+                                // ícone de hambúrguer
+                                <>
+                                    <line x1="4" y1="7" x2="20" y2="7" />
+                                    <line x1="4" y1="12" x2="20" y2="12" />
+                                    <line x1="4" y1="17" x2="20" y2="17" />
+                                </>
+                            )}
+                        </svg>
+                    </button>
+                ) : (
+                    <span style={{
+                        color: '#fff',
+                        fontWeight: 700,
+                        fontSize: 22,
+                        letterSpacing: 1,
+                    }}>
+                        DsysCut
+                    </span>
+                )}
                 <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
                     <div
                         className={style.searchContainer}
