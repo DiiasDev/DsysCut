@@ -5,6 +5,7 @@ import HomeHeader from "../../components/HomeHeader/HomeHeader";
 import HeroSection from "../../components/HeroSection/HeroSection";
 import StatsSection from "../../components/StatsSection/StatsSection";
 import DashboardSection from "../../components/DashboardSection/DashboardSection";
+import FinanceiroPage from "../FinanceiroPage/financeiroPage";
 
 // Mock de agendamentos futuros
 const upcomingAppointments = [
@@ -21,7 +22,8 @@ const stats = [
 ];
 
 export default function HomePage() {
-    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [selectedTab, setSelectedTab] = useState("Home");
     const [isMobile, setIsMobile] = useState(
         typeof window !== "undefined" ? window.innerWidth < 900 : false
     );
@@ -36,10 +38,34 @@ export default function HomePage() {
 
     const sidebarWidth = sidebarOpen ? 280 : 64;
 
+    // Função para renderizar o componente conforme a tab
+    function renderTabComponent() {
+        switch (selectedTab) {
+            case "Home":
+                return (
+                    <div className={style.homeContainer}>
+                        <HeroSection />
+                        <StatsSection stats={stats} />
+                        <DashboardSection upcomingAppointments={upcomingAppointments} />
+                    </div>
+                );
+            case "Financeiro":
+                return <FinanceiroPage />;
+            // Adicione outros cases conforme necessário
+            default:
+                return <div>{selectedTab}</div>;
+        }
+    }
+
     return (
         <div className={style.wrapper}>
             {/* Sidebar sempre presente, controlado por props */}
-            <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
+            <Sidebar
+                open={sidebarOpen}
+                setOpen={setSidebarOpen}
+                selectedTab={selectedTab}
+                setSelectedTab={setSelectedTab}
+            />
             <div
                 className={style.mainContent}
                 style={{
@@ -49,11 +75,7 @@ export default function HomePage() {
                 }}
             >
                 <HomeHeader />
-                <div className={style.homeContainer}>
-                    <HeroSection />
-                    <StatsSection stats={stats} />
-                    <DashboardSection upcomingAppointments={upcomingAppointments} />
-                </div>
+                {renderTabComponent()}
             </div>
         </div>
     );

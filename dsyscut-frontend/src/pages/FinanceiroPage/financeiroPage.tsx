@@ -5,7 +5,7 @@ export default function FinanceiroPage(){
     return (
         <>
         <Grid className='container'>
-            
+            <span>financeiroPage</span>
         </Grid>
         
         </>

@@ -42,9 +42,17 @@ const accountTabs = [
     { text: 'Log out', icon: <LogoutIcon /> },
 ];
 
-export default function Sidebar({ open, setOpen }: { open: boolean, setOpen: (open: boolean) => void }) {
-    const [selectedTab, setSelectedTab] = useState('Home');
-
+export default function Sidebar({
+    open,
+    setOpen,
+    selectedTab,
+    setSelectedTab
+}: {
+    open: boolean,
+    setOpen: (open: boolean) => void,
+    selectedTab: string,
+    setSelectedTab: (tab: string) => void
+}) {
     // Responsividade: Drawer para mobile, mini-sidebar para desktop
     // Mini sidebar: apenas ícones, largura reduzida
     return (
