@@ -8,12 +8,29 @@ import AtalhosHome from "../../components/AtalhosHome/atalhosHome";
 import DashboardStats from "../../components/DashboardStats/dashboardStats";
 
 export default function HomePage() {
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 900);
+
+    // Atualiza responsividade ao redimensionar
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth < 900);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     return (
        <>
-       <div className="container">
-        <div className="sidebar">
-            <Sidebar/>
-        </div>
+       <div className={style.container} style={{ display: 'flex', minHeight: '100vh' }}>
+            <Sidebar />
+            <div
+                className={style.content}
+                style={{
+                    flex: 1,
+                    paddingLeft: isMobile ? 0 : 240,
+                    transition: 'padding-left 0.3s'
+                }}
+            >
+                <span>teste</span>
+            </div>
        </div>
        </>
     )
