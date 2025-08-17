@@ -1,145 +1,121 @@
 import style from './header.module.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-interface HeaderProps {
-  userName?: string;
-  userAvatar?: string;
-  isSidebarCollapsed?: boolean;
-  sidebarWidth?: number;
-  isMobile?: boolean;
-  onSidebarToggle?: () => void;
-}
+export default function Header() {
+    const [search, setSearch] = useState('');
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 600;
 
-// Hook para detectar mobile
-function useIsMobile() {
-    const [isMobile, setIsMobile] = useState(false)
-    useEffect(() => {
-        const checkMobile = () => setIsMobile(window.innerWidth <= 768)
-        checkMobile()
-        window.addEventListener("resize", checkMobile)
-        return () => window.removeEventListener("resize", checkMobile)
-    }, [])
-    return isMobile
-}
-
-export default function Header({ 
-  userName = "Usuario", 
-  userAvatar, 
-  isSidebarCollapsed = false, 
-  sidebarWidth = 240,
-  isMobile = false,
-  onSidebarToggle
-}: HeaderProps) {
-  const isActuallyMobile = useIsMobile();
-
-  return (
-    <header 
-      className={style.header}
-      style={{
-        marginLeft: isMobile ? '0' : `${sidebarWidth + 16}px`,
-        width: isMobile ? '100%' : `calc(100% - ${sidebarWidth + 32}px)`,
-        padding: isMobile ? '0 1rem' : undefined,
-        transition: "margin-left 0.3s ease, width 0.3s ease"
-      }}
-    >
-      {/* Layout para mobile */}
-      {isActuallyMobile ? (
-        <>
-          {/* Menu button à esquerda */}
-          {onSidebarToggle && (
-            <button
-              className={style.mobileMenuButton}
-              onClick={onSidebarToggle}
-              aria-label="Abrir menu"
-              style={{ marginLeft: 0 }}
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-              </svg>
-            </button>
-          )}
-          
-          {/* Sistema nome centralizado */}
-          <div className={`${style.headerLeft} ${style.mobileHeaderLeft}`}>
-            <h1 className={`${style.systemName} ${style.mobileSystemName}`}>DSysCut</h1>
-          </div>
-          
-          {/* Perfil e notificações à direita */}
-          <div
-            className={style.headerRight}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem'
-            }}
-          >
-            <button className={style.notificationButton}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
-                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
-              </svg>
-              <span className={style.notificationBadge}></span>
-            </button>
-            
-            <div className={style.profileContainer}>
-              <img 
-                src={userAvatar || "/default-avatar.png"} 
-                alt={userName}
-                className={style.profileAvatar}
+    return (
+        <header className={style.header}>
+            <div
+                className={style.headerInner}
                 style={{
-                  width: '28px',
-                  height: '28px',
-                  minWidth: '28px',
-                  minHeight: '28px',
-                  objectFit: 'cover'
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    width: '100%',
+                    padding: isMobile ? '8px 8px' : '16px 32px',
                 }}
-              />
+            >
+                <div
+                    className={style.logo}
+                    style={{
+                        fontWeight: 600,
+                        fontSize: isMobile ? 20 : 28,
+                        minWidth: isMobile ? 80 : 120,
+                    }}
+                >
+                    DSysCut
+                </div>
+                <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+                    <div
+                        className={style.searchContainer}
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            width: isMobile ? 180 : 400,
+                            maxWidth: '100%',
+                            background: '#232335',
+                            borderRadius: 10,
+                            boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+                            padding: isMobile ? '2px 8px' : '4px 16px',
+                        }}
+                    >
+                        <span className={style.searchIcon} style={{ marginRight: isMobile ? 4 : 8 }}>
+                            {/* ícone de lupa */}
+                            <svg width={isMobile ? 16 : 20} height={isMobile ? 16 : 20} fill="none" stroke="#B3B3C5" strokeWidth="2" viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8" />
+                                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                            </svg>
+                        </span>
+                        <input
+                            className={style.searchInput}
+                            type="text"
+                            placeholder="Search..."
+                            value={search}
+                            onChange={e => setSearch(e.target.value)}
+                            style={{
+                                width: '100%',
+                                padding: isMobile ? '6px 6px' : '8px 12px',
+                                borderRadius: 8,
+                                border: 'none',
+                                background: 'transparent',
+                                color: '#fff',
+                                fontSize: isMobile ? 13 : 16,
+                                outline: 'none',
+                                transition: 'background 0.2s',
+                            }}
+                        />
+                    </div>
+                </div>
+                <div
+                    className={style.rightSection}
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: isMobile ? 10 : 20,
+                        padding: isMobile ? '0 2px' : '0 8px',
+                    }}
+                >
+                    <div className={style.notification} style={{ position: 'relative' }}>
+                        {/* ícone de sino */}
+                        <svg width={isMobile ? 18 : 22} height={isMobile ? 18 : 22} fill="none" stroke="#B3B3C5" strokeWidth="2" viewBox="0 0 24 24">
+                            <path d="M18 17v-5a6 6 0 10-12 0v5" />
+                            <path d="M13.73 21a2 2 0 01-3.46 0" />
+                        </svg>
+                        <span className={style.badge}></span>
+                    </div>
+                    <div
+                        className={style.avatar}
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: isMobile ? 4 : 8,
+                            background: 'rgba(35,35,53,0.85)',
+                            borderRadius: 20,
+                            padding: isMobile ? '2px 6px' : '4px 14px',
+                            boxShadow: '0 1px 4px rgba(0,0,0,0.07)',
+                        }}
+                    >
+                        {/* Avatar do usuário */}
+                        <img
+                            src="https://i.pravatar.cc/32?img=1"
+                            alt="Usuário"
+                            style={{
+                                borderRadius: '50%',
+                                width: isMobile ? 24 : 32,
+                                height: isMobile ? 24 : 32,
+                                border: '2px solid #2e2e4d',
+                            }}
+                        />
+                        {!isMobile && (
+                            <span className={style.username} style={{ color: '#fff', fontWeight: 500, fontSize: 15 }}>
+                                Usuário
+                            </span>
+                        )}
+                    </div>
+                </div>
             </div>
-          </div>
-        </>
-      ) : (
-        /* Layout para desktop */
-        <>
-          <div className={style.headerLeft}>
-            <h1 className={style.systemName}>DSysCut</h1>
-          </div>
-          
-          <div className={style.headerCenter}>
-            <div className={style.searchContainer}>
-              <svg className={style.searchIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.35-4.35"></path>
-              </svg>
-              <input 
-                type="text" 
-                placeholder="Search..." 
-                className={style.searchInput}
-              />
-            </div>
-          </div>
-          
-          <div className={style.headerRight}>
-            <button className={style.notificationButton}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
-                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
-              </svg>
-              <span className={style.notificationBadge}></span>
-            </button>
-            
-            <div className={style.profileContainer}>
-              <img 
-                src={userAvatar || "/default-avatar.png"} 
-                alt={userName}
-                className={style.profileAvatar}
-              />
-            </div>
-          </div>
-        </>
-      )}
-    </header>
-  );
+        </header>
+    );
 }
-

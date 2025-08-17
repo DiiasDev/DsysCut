@@ -1,0 +1,32 @@
+.wrapper {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    position: relative;
+    background: #fff;
+    overflow-x: hidden; /* Adicionado para evitar overflow horizontal */
+    overflow-y: auto;
+}
+
+.mainContent {
+    flex: 1;
+    min-height: 100vh;
+    overflow-y: auto;
+    /* Remova qualquer overflow-x para evitar barra lateral */
+    transition: margin-left 0.3s;
+    padding: 32px;
+    width: 100%;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    .wrapper {
+        flex-direction: column;
+        width: 100vw;
+    }
+    .mainContent {
+        margin-left: 0 !important;
+        width: 100vw;
+        padding: 0;
+    }
+}

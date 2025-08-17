@@ -1,37 +1,27 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Sidebar from "../../components/Sidebar/sidebar";
-import Header from "../../components/Header/Header";
 import style from "./style.module.css";
-import UltimosServicos from "../../components/UltimosServicos/ultimosServicos";
-import CarrosselSistema from "../../components/carrosselSistema/carrosselSistema";
-import AtalhosHome from "../../components/AtalhosHome/atalhosHome";
-import DashboardStats from "../../components/DashboardStats/dashboardStats";
+import Header from "../../components/Header/Header";
 
 export default function HomePage() {
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 900);
+    const [sidebarOpen, setSidebarOpen] = useState(true);
 
-    // Atualiza responsividade ao redimensionar
-    useEffect(() => {
-        const handleResize = () => setIsMobile(window.innerWidth < 900);
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    // Define a largura do sidebar para desktop
+    const sidebarWidth = sidebarOpen ? 280 : 64;
 
     return (
-       <>
-       <div className={style.container} style={{ display: 'flex', minHeight: '100vh' }}>
-            <Sidebar />
+        <div className={style.wrapper}>
+            <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
             <div
-                className={style.content}
+                className={style.mainContent}
                 style={{
-                    flex: 1,
-                    paddingLeft: isMobile ? 0 : 240,
-                    transition: 'padding-left 0.3s'
+                    marginLeft: sidebarOpen ? 280 : 64,
+                    transition: "margin-left 0.3s",
+                    width: '100%',
                 }}
             >
-                <span>teste</span>
+                <Header/>
             </div>
-       </div>
-       </>
-    )
+        </div>
+    );
 }

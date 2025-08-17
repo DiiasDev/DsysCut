@@ -1,242 +1,116 @@
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 2rem;
-  margin: 0 1rem 0 0;
-  /* only right margin, left is handled inline */
-  background: #1a1a2e;
-  /* Solid dark background instead of gradient */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  backdrop-filter: blur(10px);
-  height: 70px;
-  box-sizing: border-box;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    background: #18182c;
+    border-radius: 0 0 12px 12px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
-.headerLeft .systemName {
-  color: #ffffff;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin: 0;
-  background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.headerInner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px 32px;
 }
 
-.headerCenter {
-  flex: 1;
-  max-width: 500px;
-  margin: 0 2rem;
+.logo {
+    color: #8B6EF6;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-right: 32px;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    font-size: 28px;
+    min-width: 120px;
+    color: #fff;
+}
+
+.searchWrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
 }
 
 .searchContainer {
-  position: relative;
-  width: 100%;
+    display: flex;
+    align-items: center;
+    width: 400px;
+    max-width: 100%;
+    background: #232335;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 4px 16px;
 }
 
 .searchIcon {
-  position: absolute;
-  left: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #94a3b8;
-  z-index: 1;
+    margin-right: 8px;
 }
 
 .searchInput {
-  width: 100%;
-  padding: 0.75rem 1rem 0.75rem 3rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 25px;
-  color: #ffffff;
-  font-size: 0.9rem;
-  outline: none;
-  transition: all 0.3s ease;
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+    transition: background 0.2s;
 }
 
-.searchInput::placeholder {
-  color: #94a3b8;
-}
-
-.searchInput:focus {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-.headerRight {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.notificationButton {
-  position: relative;
-  background: none;
-  border: none;
-  color: #ffffff;
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 50%;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.notificationButton:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-1px);
-}
-
-.notificationBadge {
-  position: absolute;
-  top: 0.25rem;
-  right: 0.25rem;
-  width: 8px;
-  height: 8px;
-  background: #ef4444;
-  border-radius: 50%;
-  border: 2px solid #1a1a2e;
-}
-
-.profileContainer {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-.profileAvatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
-}
-
-.profileAvatar:hover {
-  border-color: #667eea;
-  transform: scale(1.05);
-}
-
-.mobileMenuButton {
-  background: none;
-  border: none;
-  color: #ffffff;
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.mobileMenuButton:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-  .header {
-    padding: 0.75rem 1rem;
-    margin: 0 0.5rem !important;
-    position: fixed;
-    height: 65px;
-    border-radius: 0 0 16px 16px;
-    background: #1a1a2e;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
-    width: calc(100% - 1rem) !important;
-    left: 0.5rem !important;
-    right: 0.5rem !important;
+.rightSection {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-  }
+    gap: 20px;
+    padding: 0 8px;
+}
 
-  .mobileHeaderLeft {
+.notification {
+    position: relative;
+}
+
+.badge {
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    flex: none;
-  }
-
-  .mobileSystemName {
-    font-size: 1.2rem !important;
-    font-weight: 700 !important;
-    text-align: center;
-    margin: 0;
-  }
-
-  .headerLeft {
-    min-width: auto;
-  }
-
-  .headerCenter {
-    display: none !important;
-  }
-
-  .systemName {
-    font-size: 1.1rem !important;
-    font-weight: 700 !important;
-  }
-
-  .notificationButton {
-    padding: 0.6rem;
-    border-radius: 12px;
-    min-width: 44px;
-    min-height: 44px;
-  }
-
-  .profileAvatar {
-    width: 38px;
-    height: 38px;
-    border: 2px solid rgba(255, 255, 255, 0.15);
-  }
-
-  .headerRight {
-    gap: 0.5rem;
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-  }
+    top: 2px;
+    right: 2px;
+    width: 8px;
+    height: 8px;
+    background: #FF4D4F;
+    border-radius: 50%;
+    border: 2px solid #19192B;
 }
 
-@media (max-width: 480px) {
-  .header {
-    padding: 0.75rem 0.75rem;
-    height: 60px;
-    margin: 0 0.25rem !important;
-    width: 93% !important;
-    left: 0.35rem !important;
-    right: 0.25rem !important;
-  }
+.avatar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(35,35,53,0.85);
+    border-radius: 20px;
+    padding: 4px 14px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+}
 
-  .mobileSystemName {
-    font-size: 1.1rem !important;
-  }
+.avatar img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #19192B;
+    border: 2px solid #2e2e4d;
+}
 
-  .profileAvatar {
-    width: 36px;
-    height: 36px;
-  }
+.username {
+    color: #fff;
+    font-weight: 500;
+    font-size: 15px;
+    margin-left: 4px;
+}
 
-  .notificationButton {
-    padding: 0.5rem;
-    min-width: 40px;
-    min-height: 40px;
-  }
-
-  .headerRight {
-    gap: 0.4rem;
-  }
+/* MOBILE */
+@media (max-width: 600px) {
 }
