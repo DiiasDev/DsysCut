@@ -134,6 +134,15 @@ const Sidebar = ({ isCollapsed, onToggle, onNavigate }: SidebarProps) => {
             
             <aside
                 className={`${style.sidebar} ${isCollapsed ? style.collapsed : ''}`}
+                style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    height: '100vh',
+                    zIndex: 100,
+                    width: isCollapsed ? 72 : 240,
+                    transition: 'width 0.3s ease'
+                }}
                 onMouseEnter={(e) => {
                     if (isMobile) return; // Disable hover effects on mobile
                     const toggleBtn = e.currentTarget.querySelector(`.${style.toggleButton}`) as HTMLElement;

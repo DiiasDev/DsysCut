@@ -1,8 +1,9 @@
 .container {
-  display: flex;
-  min-height: 100vh;
-  background: transparent; /* Remove any purple/lilac background */
   position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  background: #f5f6fa;
+  /* Remova display: flex se existir */
 }
 
 .sidebar {
@@ -18,14 +19,20 @@
   transform: translateX(-100%);
 }
 
-.content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+.mainWrapper {
   min-height: 100vh;
-  background: var(--color-background);
+  width: 100%;
+  /* Não use display: flex aqui */
+}
+
+.content {
+  width: 100%;
+  min-height: calc(100vh - 70px); /* Ajuste conforme altura do header */
+  background: #f5f6fa;
   transition: margin-left 0.3s ease;
   position: relative;
+  padding-left: 24px; /* Espaço extra à esquerda */
+  padding-right: 24px;
 }
 
 .contentExpanded {

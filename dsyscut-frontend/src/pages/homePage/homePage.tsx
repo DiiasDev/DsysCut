@@ -152,33 +152,37 @@ export default function HomePage() {
 
     return (
         <div className={style.container}>
-            <div className={`${style.sidebar} ${isSidebarCollapsed ? style.sidebarCollapsed : ''}`}>
-                <Sidebar
-                    isCollapsed={isSidebarCollapsed}
-                    onToggle={handleSidebarToggle}
-                    onNavigate={handleNavigation}
-                />
-            </div>
-
-            <Header 
-                userName="Usuario" 
-                isSidebarCollapsed={isSidebarCollapsed}
-                sidebarWidth={sidebarWidth}
-                isMobile={isMobile}
-                onSidebarToggle={handleSidebarToggle}
+            <Sidebar
+                isCollapsed={isSidebarCollapsed}
+                onToggle={handleSidebarToggle}
+                onNavigate={handleNavigation}
             />
 
             <div
-                className={`${style.content} ${isSidebarCollapsed ? style.contentExpanded : ''}`}
+                className={style.mainWrapper}
                 style={{
-                    marginLeft: isMobile ? 0 : sidebarWidth,
-                    marginTop: isMobile ? '75px' : '70px',
-                    padding: 0,
+                    marginLeft: isMobile ? 0 : sidebarWidth + 24, // 24px de espaço extra
                     transition: "margin-left 0.3s ease",
-                    width: isMobile ? '100%' : `calc(100% - ${sidebarWidth}px)`
                 }}
             >
-                {renderCurrentPage()}
+                <Header 
+                    userName="Usuario" 
+                    isSidebarCollapsed={isSidebarCollapsed}
+                    sidebarWidth={sidebarWidth}
+                    isMobile={isMobile}
+                    onSidebarToggle={handleSidebarToggle}
+                />
+
+                <div
+                    className={`${style.content} ${isSidebarCollapsed ? style.contentExpanded : ''}`}
+                    style={{
+                        marginTop: isMobile ? '75px' : '70px',
+                        padding: '0 24px', // padding lateral para o conteúdo
+                        width: '100%',
+                    }}
+                >
+                    {renderCurrentPage()}
+                </div>
             </div>
         </div>
     )
