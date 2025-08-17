@@ -1,29 +1,18 @@
 import style from "./style.module.css"
-import {  Typography, IconButton } from "@mui/material"
+import { Typography, IconButton } from "@mui/material"
 import { ChevronLeft, ChevronRight } from "@mui/icons-material"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import imagem1 from "../../assets/barbearia1.jpg"
 import imagem2 from "../../assets/barbearia2.jpg"
 import imagem3 from "../../assets/barbearia3.jpg"
 
-// Hook para detectar mobile
-function useIsMobile() {
-    const [isMobile, setIsMobile] = useState(false)
-    useEffect(() => {
-        const checkMobile = () => setIsMobile(window.innerWidth <= 768)
-        checkMobile()
-        window.addEventListener("resize", checkMobile)
-        return () => window.removeEventListener("resize", checkMobile)
-    }, [])
-    return isMobile
-}
 
 export default function CarrosselSistema() {
     const [currentSlide, setCurrentSlide] = useState(0)
     const [isPlaying, setIsPlaying] = useState(true)
-    const [touchStart, setTouchStart] = useState(0)
-    const [touchEnd, setTouchEnd] = useState(0)
-    const isMobile = useIsMobile()
+    const [touchStart, setTouchStart] = useState<number | null>(null)
+    const [touchEnd, setTouchEnd] = useState<number | null>(null)
+    const slideInterval = useRef<NodeJS.Timeout | null>(null)
 
     const images = [
         {
@@ -46,149 +35,93 @@ export default function CarrosselSistema() {
         },
     ]
 
-    // Auto-play functionality
+    // Autoplay
     useEffect(() => {
         if (isPlaying) {
-            const interval = setInterval(() => {
+            slideInterval.current = setInterval(() => {
                 setCurrentSlide((prev) => (prev + 1) % images.length)
-            }, 5000) // Slower on mobile
-            return () => clearInterval(interval)
+            }, 3500)
+        }
+        return () => {
+            if (slideInterval.current) clearInterval(slideInterval.current)
         }
     }, [isPlaying, images.length])
 
-    // Touch handlers for mobile swipe
+    // Swipe touch
     const handleTouchStart = (e: React.TouchEvent) => {
-        setTouchEnd(0) // Clear previous touch end
-        setTouchStart(e.targetTouches[0].clientX)
-        setIsPlaying(false) // Pause auto-play on touch
+        setTouchStart(e.touches[0].clientX)
     }
-
     const handleTouchMove = (e: React.TouchEvent) => {
-        setTouchEnd(e.targetTouches[0].clientX)
+        setTouchEnd(e.touches[0].clientX)
     }
-
     const handleTouchEnd = () => {
-        if (!touchStart || !touchEnd) return
-        
-        const distance = touchStart - touchEnd
-        const isLeftSwipe = distance > 50
-        const isRightSwipe = distance < -50
-
-        if (isLeftSwipe) {
-            goToNext()
-        } else if (isRightSwipe) {
-            goToPrevious()
+        if (touchStart !== null && touchEnd !== null) {
+            const distance = touchStart - touchEnd
+            if (distance > 50) nextSlide()
+            else if (distance < -50) prevSlide()
         }
-        
-        // Resume auto-play after a delay
-        setTimeout(() => setIsPlaying(true), 3000)
+        setTouchStart(null)
+        setTouchEnd(null)
     }
 
-    const goToSlide = (index: number) => {
-        setCurrentSlide(index)
+    const prevSlide = () => {
+        setCurrentSlide((prev) => (prev === 0 ? images.length - 1 : prev - 1))
+        setIsPlaying(false)
     }
-
-    const goToPrevious = () => {
-        setCurrentSlide((prev) => (prev - 1 + images.length) % images.length)
-    }
-
-    const goToNext = () => {
+    const nextSlide = () => {
         setCurrentSlide((prev) => (prev + 1) % images.length)
+        setIsPlaying(false)
     }
 
     return (
-        <div 
-            className={style.carousel}
-            onMouseEnter={() => !isMobile && setIsPlaying(false)}
-            onMouseLeave={() => !isMobile && setIsPlaying(true)}
+        <div
+            className={style.carrosselContainer}
+            onMouseEnter={() => setIsPlaying(false)}
+            onMouseLeave={() => setIsPlaying(true)}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
-            style={{
-                width: isMobile ? '90%' : '100%',
-                maxWidth: isMobile ? '90%' : 'none',
-                margin: '0 auto',
-                borderRadius: isMobile ? '16px' : '12px'
-            }}
         >
-            <div className={style.carouselContainer}>
-                <div 
-                    className={style.carouselTrack}
-                    style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-                >
-                    {images.map((image, index) => (
-                        <div key={image.id} className={style.slide}>
-                            <img 
-                                src={image.img} 
-                                alt={image.alt}
-                                className={style.slideImage}
-                                style={{
-                                    height: isMobile ? '220px' : 'auto',
-                                    width: '100%',
-                                    objectFit: 'cover'
-                                }}
-                            />
-                            <div className={style.slideContent}>
-                                <Typography 
-                                    variant={isMobile ? "h6" : "h5"} 
-                                    className={style.slideText}
-                                    style={{
-                                        fontSize: isMobile ? '1.1rem' : '1.5rem',
-                                        textAlign: 'center',
-                                        fontWeight: 600
-                                    }}
-                                >
-                                    {image.text}
-                                </Typography>
-                            </div>
+            <div className={style.slideWrapper}>
+                {images.map((item, idx) => (
+                    <div
+                        key={item.id}
+                        className={`${style.slide} ${idx === currentSlide ? style.active : ""}`}
+                        style={{ display: idx === currentSlide ? "flex" : "none" }}
+                    >
+                        <img src={item.img} alt={item.alt} className={style.image} />
+                        <div className={style.textOverlay}>
+                            <Typography variant="h4" className={style.slideText}>
+                                {item.text}
+                            </Typography>
                         </div>
-                    ))}
-                </div>
-
-                {/* Navigation Arrows */}
-                {!isMobile && (
-                    <>
-                        <IconButton 
-                            className={`${style.navButton} ${style.prevButton}`}
-                            onClick={goToPrevious}
-                        >
-                            <ChevronLeft />
-                        </IconButton>
-                        <IconButton 
-                            className={`${style.navButton} ${style.nextButton}`}
-                            onClick={goToNext}
-                        >
-                            <ChevronRight />
-                        </IconButton>
-                    </>
-                )}
-
-                {/* Dots Indicator */}
-                <div 
-                    className={style.dotsContainer}
-                    style={{
-                        bottom: isMobile ? '10px' : '20px',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        gap: isMobile ? '6px' : '8px'
-                    }}
+                    </div>
+                ))}
+                <IconButton
+                    className={style.arrowLeft}
+                    onClick={prevSlide}
+                    aria-label="Anterior"
+                    size="large"
                 >
-                    {images.map((_, index) => (
-                        <button
-                            key={index}
-                            className={`${style.dot} ${index === currentSlide ? style.activeDot : ''}`}
-                            onClick={() => goToSlide(index)}
-                            style={{
-                                width: isMobile ? '8px' : '10px',
-                                height: isMobile ? '8px' : '10px',
-                                borderRadius: '50%',
-                                border: 'none',
-                                backgroundColor: index === currentSlide ? '#667eea' : 'rgba(255,255,255,0.5)',
-                                cursor: 'pointer'
-                            }}
-                        />
-                    ))}
-                </div>
+                    <ChevronLeft />
+                </IconButton>
+                <IconButton
+                    className={style.arrowRight}
+                    onClick={nextSlide}
+                    aria-label="Próximo"
+                    size="large"
+                >
+                    <ChevronRight />
+                </IconButton>
+            </div>
+            <div className={style.dots}>
+                {images.map((_, idx) => (
+                    <span
+                        key={idx}
+                        className={`${style.dot} ${idx === currentSlide ? style.activeDot : ""}`}
+                        onClick={() => { setCurrentSlide(idx); setIsPlaying(false); }}
+                    />
+                ))}
             </div>
         </div>
     )
