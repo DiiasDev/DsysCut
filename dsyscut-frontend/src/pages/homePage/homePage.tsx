@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import style from "./style.module.css";
 import Sidebar from "../../components/Sidebar/sidebar";
+import HomeHeader from "../../components/HomeHeader/HomeHeader";
+import HeroSection from "../../components/HeroSection/HeroSection";
+import StatsSection from "../../components/StatsSection/StatsSection";
+import DashboardSection from "../../components/DashboardSection/DashboardSection";
 
 // Mock de agendamentos futuros
 const upcomingAppointments = [
@@ -34,8 +38,17 @@ export default function HomePage() {
 
     return (
         <div className={style.wrapper}>
-            {(!isMobile || sidebarOpen) && (
+            {/* Sidebar desktop */}
+            {!isMobile && (
                 <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
+            )}
+            {/* Sidebar mobile overlay */}
+            {isMobile && sidebarOpen && (
+                <div className={style.sidebarMobileOverlay} onClick={() => setSidebarOpen(false)}>
+                    <div className={style.sidebarMobile} onClick={e => e.stopPropagation()}>
+                        <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
+                    </div>
+                </div>
             )}
             <div
                 className={style.mainContent}
@@ -45,70 +58,11 @@ export default function HomePage() {
                     width: '100%',
                 }}
             >
-                <header className={style.header}>
-                    <div className={style.logo}>DsysCut</div>
-                    <div className={style.profile}>
-                        <img
-                            src="https://i.pravatar.cc/40?img=3"
-                            alt="Perfil"
-                            className={style.avatar}
-                        />
-                        <span className={style.username}>Gabriel</span>
-                    </div>
-                </header>
+                <HomeHeader />
                 <div className={style.homeContainer}>
-                    {/* Hero Section */}
-                    <section className={style.heroSection}>
-                        <div className={style.heroText}>
-                            <span className={style.heroTag}>Barbearia</span>
-                            <h1>Seu negócio, sua agenda, seu sucesso.</h1>
-                            <p>
-                                Controle total dos seus horários, clientes e serviços em um painel moderno e fácil de usar.
-                            </p>
-                            <button className={style.scheduleButton}>
-                                + Agendar novo horário
-                            </button>
-                        </div>
-                        <div className={style.heroImage}>
-                            {/* Imagem ilustrativa, pode ser trocada por uma imagem real */}
-                            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="Barbearia" />
-                        </div>
-                    </section>
-                    {/* Estatísticas rápidas */}
-                    <section className={style.statsSection}>
-                        {stats.map((stat, idx) => (
-                            <div key={idx} className={style.statCard}>
-                                <span className={style.statValue}>{stat.value}</span>
-                                <span className={style.statLabel}>{stat.label}</span>
-                            </div>
-                        ))}
-                    </section>
-                    {/* Cards de agendamentos */}
-                    <section className={style.dashboardSection}>
-                        <div className={style.appointmentsPanel}>
-                            <h2>Próximos agendamentos</h2>
-                            <div className={style.appointmentsList}>
-                                {upcomingAppointments.map((appt) => (
-                                    <div key={appt.id} className={style.appointmentCard}>
-                                        <div>
-                                            <strong>{appt.cliente}</strong>
-                                            <span className={style.service}>{appt.servico}</span>
-                                        </div>
-                                        <span className={style.time}>{appt.horario}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                        <div className={style.highlightPanel}>
-                            <h2>Promoção do mês</h2>
-                            <p>
-                                Corte + Barba por <strong>R$39,90</strong> toda terça-feira!
-                            </p>
-                            <span className={style.highlightInfo}>
-                                Aproveite e aumente o movimento do seu salão.
-                            </span>
-                        </div>
-                    </section>
+                    <HeroSection />
+                    <StatsSection stats={stats} />
+                    <DashboardSection upcomingAppointments={upcomingAppointments} />
                 </div>
             </div>
         </div>
