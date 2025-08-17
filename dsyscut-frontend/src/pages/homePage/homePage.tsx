@@ -6,6 +6,11 @@ import HeroSection from "../../components/HeroSection/HeroSection";
 import StatsSection from "../../components/StatsSection/StatsSection";
 import DashboardSection from "../../components/DashboardSection/DashboardSection";
 import FinanceiroPage from "../FinanceiroPage/financeiroPage";
+import AgendamentoPage from "../AgendamentoPage/agendamentoPage";
+import ClientePage from "../ClientePage/clientePage";
+import RelatorioPage from "../RelatorioPage/relatorioPage";
+import PacotePage from "../PacotePage/pacotePage";
+import InfoPage from "../InfoPage/infoPage";
 
 // Mock de agendamentos futuros
 const upcomingAppointments = [
@@ -51,7 +56,17 @@ export default function HomePage() {
                 );
             case "Financeiro":
                 return <FinanceiroPage />;
-            // Adicione outros cases conforme necessário
+            case "Agendamento":
+                return <AgendamentoPage />;
+            case "Clientes":
+                return <ClientePage />;
+            case "Relatórios":
+                return <RelatorioPage />;
+            case "Pacotes":
+                return <PacotePage />;
+            case "Info":
+                return <InfoPage />;
+            // Adicione outros cases conforme necessário PacotePage
             default:
                 return <div>{selectedTab}</div>;
         }
