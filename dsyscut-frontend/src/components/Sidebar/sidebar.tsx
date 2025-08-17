@@ -1,16 +1,24 @@
 import { useState, useEffect } from 'react';
 import style from "./style.module.css"
 
+// Remova as props relacionadas ao controle externo
+// interface SidebarProps {
+//     isCollapsed: boolean;
+//     onToggle: () => void;
+//     onNavigate?: (page: string) => void;
+// }
+
+// Atualize para aceitar apenas onNavigate como prop
 interface SidebarProps {
-    isCollapsed: boolean;
-    onToggle: () => void;
     onNavigate?: (page: string) => void;
 }
 
-const Sidebar = ({ isCollapsed, onToggle, onNavigate }: SidebarProps) => {
+const Sidebar = ({ onNavigate }: SidebarProps) => {
     const [activeTab, setActiveTab] = useState('home');
     const [isMobile, setIsMobile] = useState(false);
     const [isDarkTheme, setIsDarkTheme] = useState(false);
+    // Estado local para abrir/fechar
+    const [isCollapsed, setIsCollapsed] = useState(false);
 
     useEffect(() => {
         const checkIfMobile = () => {
@@ -121,17 +129,19 @@ const Sidebar = ({ isCollapsed, onToggle, onNavigate }: SidebarProps) => {
         }
     };
 
+    // Função para abrir/fechar sidebar
+    const toggleSidebar = () => setIsCollapsed(prev => !prev);
+
     return (
         <>
+            {/* Removido o botão flutuante de abrir o sidebar */}
             {/* Mobile backdrop */}
             {isMobile && !isCollapsed && (
                 <div 
                     className={style.backdrop}
-                    onClick={onToggle}
-                    // Nenhuma alteração necessária aqui, pois o controle do scroll está no HomePage
+                    onClick={toggleSidebar}
                 />
             )}
-            
             <aside
                 className={`${style.sidebar} ${isCollapsed ? style.collapsed : ''}`}
                 style={{
@@ -144,12 +154,12 @@ const Sidebar = ({ isCollapsed, onToggle, onNavigate }: SidebarProps) => {
                     transition: 'width 0.3s ease'
                 }}
                 onMouseEnter={(e) => {
-                    if (isMobile) return; // Disable hover effects on mobile
+                    if (isMobile) return;
                     const toggleBtn = e.currentTarget.querySelector(`.${style.toggleButton}`) as HTMLElement;
                     if (toggleBtn) toggleBtn.style.opacity = '1';
                 }}
                 onMouseLeave={(e) => {
-                    if (isMobile) return; // Disable hover effects on mobile
+                    if (isMobile) return;
                     const toggleBtn = e.currentTarget.querySelector(`.${style.toggleButton}`) as HTMLElement;
                     if (toggleBtn) toggleBtn.style.opacity = '0';
                 }}
@@ -166,7 +176,7 @@ const Sidebar = ({ isCollapsed, onToggle, onNavigate }: SidebarProps) => {
                     </div>
                     <button
                         className={style.toggleButton}
-                        onClick={onToggle}
+                        onClick={toggleSidebar}
                         aria-label={isCollapsed ? 'Expandir sidebar' : 'Recolher sidebar'}
                         style={{
                             opacity: 0,
