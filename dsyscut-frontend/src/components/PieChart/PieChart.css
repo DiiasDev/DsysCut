@@ -1,0 +1,23 @@
+.piechart-container {
+  width: 100%;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.chart-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.piechart-graph {
+  width: 100%;
+  max-width: 380px;
+  height: 260px;
+  min-height: 220px;
+}
