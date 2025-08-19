@@ -2,7 +2,11 @@ import style from './style.module.css'
 import logoLateral from '../../assets/logoLateral.png'
 import LogoApple from '../../assets/apple-logo-svgrepo-com.svg'
 
-export default function LoginForm() {
+interface LoginFormProps {
+  onShowCadastro: () => void;
+}
+
+export default function LoginForm({ onShowCadastro }: LoginFormProps) {
   return (
     <>
       <div className="w-screen h-screen flex items-center justify-center bg-black">
@@ -26,7 +30,7 @@ export default function LoginForm() {
                 Bem-vindo ao DsysCut
               </h2>
               <p className="text-sm text-gray-400 text-center">
-                Ainda não tem uma conta? <a href="#" className="text-blue-400 hover:underline">Cadastre-se</a>
+                Ainda não tem uma conta? <button type="button" className="text-blue-400 hover:underline" onClick={onShowCadastro}>Cadastre-se</button>
               </p>
             </div>
             <form className="w-full max-w-md flex flex-col gap-4">

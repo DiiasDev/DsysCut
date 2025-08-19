@@ -1,5 +1,7 @@
+import { useState } from "react";
 import style from './style.module.css'
 import LoginForm from '../../components/LoginForm/LoginForm'
+import CadastroForm from '../../components/CadastroForm/CadastroForm'
 
 const illustrations = [
     "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80",
@@ -11,10 +13,15 @@ const randomImg = illustrations[Math.floor(Math.random() * illustrations.length)
 const isMobile = typeof window !== "undefined" && window.innerWidth <= 700;
 
 export default function LoginPage() {
+    const [showCadastro, setShowCadastro] = useState(false);
+
     return (
         <div className={style.loginBg}>
-            
-                        <LoginForm />
+            {showCadastro ? (
+                <CadastroForm onShowLogin={() => setShowCadastro(false)} />
+            ) : (
+                <LoginForm onShowCadastro={() => setShowCadastro(true)} />
+            )}
         </div>
     );
 }
