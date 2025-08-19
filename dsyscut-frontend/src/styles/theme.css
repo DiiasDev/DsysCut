@@ -1,232 +1,25 @@
-/* Arquivo: theme.css
-   Tema moderno e responsivo para dashboard de barbearia
-   Use este arquivo no frontend junto com Bootstrap React
-*/
-
-/* Paleta de cores principal */
 :root {
-    --primary: #23263a;
-    --secondary: #4F5D75;
-    --accent: #EF8354;
-    --background: #FFD6C2;
-    --surface: #FFFFFF;
-    --success: #43AA8B;
-    --danger: #EF476F;
-    --warning: #FFD166;
-    --info: #118AB2;
-    --text-main: #232323;
-    --text-muted: #6c757d;
-    --border-radius: 0.75rem;
-    --transition: 0.2s cubic-bezier(0.4,0,0.2,1);
-
-    /* Novas cores para mais contraste */
-    --primary-dark: #23263a;
-    --primary-light: #4F5D75;
-    --accent-light: #FFD6C2;
-    --accent-dark: #C75C2E;
-    --background-alt: #f3f4fa;
-    --surface-alt: #f3f4fa;
-    --gradient-main: linear-gradient(120deg, #EF8354 0%, #FFD6C2 60%, #23263a 100%);
-    --gradient-card: linear-gradient(120deg, #FFD6C2 0%, #EF8354 100%);
+    --color-bg: #F4F6F8;
+    --color-bg-card: #FFFFFF;
+    --color-text: #222B45;
+    --color-text-secondary: #6B7280;
+    --color-primary: #2D6A4F;
+    --color-secondary: #F4A259;
+    --color-accent: #4F8CFF;
+    --color-success: #43A047;
+    --color-error: #E53935;
+    --color-border: #E5E7EB;
 }
 
-/* Background geral */
-body {
-    background-color: var(--background);
-    color: var(--text-main);
-    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-    font-size: 16px;
-    margin: 0;
-    padding: 0;
-    transition: background var(--transition);
-}
-
-/* Cores dos títulos e textos */
-h1, h2, h3, h4, h5, h6 {
-    color: var(--primary);
-    font-weight: 700;
-}
-
-a {
-    color: var(--accent);
-    text-decoration: none;
-    transition: color var(--transition);
-}
-
-a:hover {
-    color: var(--primary);
-    text-decoration: underline;
-}
-
-/* Card padrão para dashboard */
-.card {
-    background: var(--surface);
-    border-radius: var(--border-radius);
-    box-shadow: 0 2px 12px rgba(44, 62, 80, 0.08);
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    border: none;
-    transition: box-shadow var(--transition);
-}
-
-.card:hover {
-    box-shadow: 0 4px 24px rgba(44, 62, 80, 0.13);
-}
-
-/* Botões customizados */
-.btn-primary {
-    background-color: var(--accent);
-    color: #fff;
-    border: none;
-    border-radius: var(--border-radius);
-    font-weight: 600;
-    transition: background var(--transition), color var(--transition);
-}
-
-.btn-primary:hover, .btn-primary:focus {
-    background-color: var(--primary);
-    color: #fff;
-}
-
-/* Sidebar / Navbar */
-.navbar, .sidebar {
-    background: var(--primary);
-    color: #fff;
-}
-
-.navbar-brand, .sidebar .nav-link {
-    color: #fff;
-    font-weight: 600;
-}
-
-.sidebar .nav-link.active, .navbar .nav-link.active {
-    background: var(--accent);
-    color: #fff;
-    border-radius: var(--border-radius);
-}
-
-.sidebar {
-    min-width: 220px;
-    height: 100vh;
-    padding: 2rem 1rem;
-    box-shadow: 0 0 8px rgba(44, 62, 80, 0.08);
-}
-
-/* Inputs e formulários */
-.form-control {
-    border-radius: var(--border-radius);
-    border: 1px solid var(--secondary);
-    padding: 0.75rem 1rem;
-    transition: border var(--transition);
-}
-
-.form-control:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 2px rgba(239, 131, 84, 0.1);
-}
-
-/* Tabelas e listas responsivas */
-.table {
-    background: var(--surface);
-    border-radius: var(--border-radius);
-    overflow: hidden;
-}
-
-/* Responsividade */
-@media (max-width: 991px) {
-    .sidebar {
-        min-width: 60px;
-        padding: 1rem 0.5rem;
-    }
-    .card {
-        padding: 1rem;
-    }
-    h1 {
-        font-size: 2rem;
-    }
-}
-
-@media (max-width: 600px) {
-    body {
-        font-size: 15px;
-    }
-    .card {
-        padding: 0.75rem;
-    }
-    .sidebar {
-        min-width: 0;
-        padding: 0.5rem 0.25rem;
-    }
-}
-
-/* Suavização de scroll */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Elementos utilitários */
-.text-accent {
-    color: var(--accent) !important;
-}
-.text-muted {
-    color: var(--text-muted) !important;
-}
-.bg-accent {
-    background: var(--accent) !important;
-    color: #fff;
-}
-.bg-primary {
-    background: var(--primary) !important;
-    color: #fff;
-}
-.bg-surface {
-    background: var(--surface) !important;
-}
-.bg-background {
-    background: var(--background) !important;
-}
-
-/* Loader/Spinner customizado */
-.loader {
-    border: 4px solid var(--surface);
-    border-top: 4px solid var(--accent);
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    animation: spin 0.8s linear infinite;
-    margin: auto;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg);}
-    100% {transform: rotate(360deg);}
-}
-
-/* Alertas customizados */
-.alert-success {
-    background: var(--success);
-    color: #fff;
-    border: none;
-    border-radius: var(--border-radius);
-}
-
-.alert-danger {
-    background: var(--danger);
-    color: #fff;
-    border: none;
-    border-radius: var(--border-radius);
-}
-
-.alert-warning {
-    background: var(--warning);
-    color: #232323;
-    border: none;
-    border-radius: var(--border-radius);
-}
-
-.alert-info {
-    background: var(--info);
-    color: #fff;
-    border: none;
-    border-radius: var(--border-radius);
+[data-theme="dark"] {
+    --color-bg: #181A20;
+    --color-bg-card: #23272F;
+    --color-text: #F4F6F8;
+    --color-text-secondary: #A3A9B7;
+    --color-primary: #58B37A;
+    --color-secondary: #F4A259;
+    --color-accent: #4F8CFF;
+    --color-success: #43A047;
+    --color-error: #E53935;
+    --color-border: #34384A;
 }
