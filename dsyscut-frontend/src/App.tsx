@@ -1,7 +1,8 @@
 import React from 'react';
 import './styles/App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Login from './pages/login'
+import Login from './pages/LoginPage/login'
 import HomePage from './pages/homePage/homePage';
 import { useAppStore } from './store/store';
 

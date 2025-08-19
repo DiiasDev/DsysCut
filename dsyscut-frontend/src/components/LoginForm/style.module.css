@@ -1,0 +1,224 @@
+/* Card de login aprimorado */
+.loginCard {
+    max-width: 400px;
+    width: 100%;
+    border-radius: 1.2rem;
+    background: #fff;
+    border: none;
+    box-shadow: 0 4px 24px rgba(44,49,66,0.10);
+    position: relative;
+    overflow: hidden;
+    padding: 2.2rem 1.8rem 1.2rem 1.8rem;
+}
+
+/* Faixa decorativa superior */
+.loginCard::before {
+    display: none;
+}
+
+/* Logo e título continuam destacados */
+.logoArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    z-index: 1;
+}
+
+.logoImg {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 0.7rem;
+    background: linear-gradient(135deg, var(--accent) 60%, var(--primary-light) 100%);
+    border: 2px solid var(--primary);
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(239,131,84,0.13);
+}
+
+.logoSubtitle {
+    font-size: 1.4rem;
+    margin-bottom: 0.3rem;
+    color: var(--primary);
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 8px rgba(239,131,84,0.09);
+}
+
+input.form-control {
+    border-radius: 0.7rem;
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
+    background-color: #f7f8fa;
+    border: 2px solid var(--accent-light);
+    color: var(--primary-dark);
+    box-shadow: 0 2px 12px rgba(44,49,66,0.10);
+    font-weight: 500;
+    transition: border var(--transition), background var(--transition), box-shadow 0.2s;
+}
+
+input.form-control:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(239,131,84,0.22);
+    background-color: #fff;
+    color: var(--primary-dark);
+}
+
+.input-group-text {
+    background: linear-gradient(90deg, var(--accent) 80%, var(--primary-light) 100%);
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: 0.7rem 0 0 0.7rem;
+    font-size: 1rem;
+    padding: 0.6rem 0.8rem;
+}
+
+.loginBtn {
+    width: 100%;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 0.9rem;
+    background: linear-gradient(90deg, #7f5af0 80%, #ef8354 100%);
+    color: #fff;
+    border: none;
+    box-shadow: 0 4px 16px rgba(44,49,66,0.10);
+    margin-top: 16px;
+    padding: 0.7rem 0;
+    letter-spacing: 0.8px;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+
+.loginBtn:hover {
+    background: linear-gradient(90deg, #6246ea 80%, #ef8354 100%);
+    box-shadow: 0 8px 24px rgba(44,49,66,0.22);
+    transform: translateY(-2px) scale(1.04);
+}
+
+.linkBtn {
+    color: #7f5af0 !important;
+    font-weight: 600;
+    text-decoration: underline;
+    padding: 0 0.2rem;
+    border-radius: 0.5rem;
+    transition: color 0.2s, background 0.2s;
+    font-size: 1.09rem;
+}
+
+.linkBtn:hover {
+    color: #ef8354 !important;
+    text-decoration: underline;
+    background: rgba(239,131,84,0.08);
+}
+
+.eyeBtn {
+    border: none !important;
+    background: none !important;
+    box-shadow: none !important;
+    color: var(--accent-dark);
+    font-size: 1.28rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.8rem;
+    padding: 0.3rem 0.7rem;
+    transition: background 0.2s, color 0.2s;
+}
+
+.eyeBtn:hover {
+    background: rgba(239,131,84,0.09);
+    color: var(--primary);
+}
+
+.cardFooter {
+    background: none;
+    border-top: none;
+    text-align: center;
+    font-size: 1rem;
+    color: #7f5af0;
+    font-weight: 500;
+    padding-top: 0.7rem;
+    border-radius: 0 0 1.2rem 1.2rem;
+    box-shadow: none;
+}
+
+.formOptions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.4rem;
+}
+
+.mobileCard {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0.5rem !important;
+}
+
+@media (max-width: 700px) {
+    .loginCard {
+        background: #fff !important;
+        border-radius: 1.5rem !important;
+        box-shadow: 0 8px 32px rgba(44,49,66,0.18) !important;
+        width: 94vw !important;
+        max-width: 400px !important;
+        margin: 3rem auto 0 auto !important;
+        padding: 2rem 1.5rem !important;
+        border: none !important;
+        position: relative !important;
+        z-index: 2 !important;
+    }
+    .logoArea {
+        text-align: left !important;
+        margin-bottom: 1.5rem !important;
+    }
+    .logoImg {
+        width: 48px !important;
+        height: 48px !important;
+        margin-bottom: 0.5rem !important;
+    }
+    .logoSubtitle {
+        font-size: 1.5rem !important;
+        font-weight: 700 !important;
+        color: #181a20 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    .formOptions {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        margin-bottom: 1rem !important;
+    }
+    .loginBtn {
+        width: 100% !important;
+        border-radius: 1rem !important;
+        font-size: 1.1rem !important;
+        padding: 0.75rem 0 !important;
+        margin-bottom: 1rem !important;
+        background: #4f46e5 !important;
+        border: none !important;
+        box-shadow: 0 2px 8px rgba(44,49,66,0.10) !important;
+    }
+    .cardFooter {
+        text-align: center !important;
+        background: none !important;
+        border: none !important;
+        padding: 0.5rem 0 0 0 !important;
+        font-size: 1rem !important;
+    }
+    .linkBtn {
+        color: #4f46e5 !important;
+        font-weight: 500 !important;
+        text-decoration: underline !important;
+        padding: 0 !important;
+        margin-left: 0.5rem !important;
+    }
+    .eyeBtn {
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 0.5rem !important;
+    }
+}

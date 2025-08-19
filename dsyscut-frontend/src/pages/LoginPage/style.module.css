@@ -1,0 +1,295 @@
+.loginBg {
+    position: fixed;
+    inset: 0;
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ededed;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.splitContainer {
+    display: flex;
+    padding: 0;
+    min-height: 520px;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 2rem;
+    box-shadow: 0 12px 48px rgba(44,49,66,0.18);
+    background: none;
+    max-width: 960px;
+    width: 100%;
+}
+
+.leftPanel {
+    flex: 1;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3.5rem 3rem;
+    box-shadow: 0 2px 24px rgba(44,49,66,0.08);
+    border-right: 1px solid #ececec;
+    min-width: 0;
+    min-height: 520px;
+}
+
+.rightPanel {
+    flex: 1;
+    background: linear-gradient(120deg, #7f5af0 0%, #6246ea 60%, #ef8354 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    min-width: 0;
+    min-height: 520px;
+}
+.rightPanel::after {
+    content: "";
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, rgba(127,90,240,0.08) 100%);
+    z-index: 0;
+    pointer-events: none;
+    border-radius: 2rem;
+}
+
+.illustration {
+    width: 320px;
+    max-width: 90%;
+    height: auto;
+    z-index: 1;
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 32px rgba(127,90,240,0.18);
+    object-fit: cover;
+    background: #fff;
+    border: 6px solid #fff;
+    padding: 0;
+}
+
+@media (max-width: 1000px) {
+    .splitContainer {
+        width: 98vw;
+        min-height: 400px;
+        height: auto;
+        border-radius: 1rem;
+    }
+    .leftPanel, .rightPanel {
+        padding: 1.5rem 0.5rem;
+        min-width: 0;
+        min-height: 320px;
+    }
+}
+
+@media (max-width: 700px) {
+    .loginBg {
+        position: static !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        width: 100vw !important;
+        min-height: 100vh !important;
+        background: #181a20 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+    }
+    .splitContainer {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        background: none !important;
+    }
+    .leftPanel {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: transparent !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        border-right: none !important;
+    }
+    .rightPanel,
+    .illustration {
+        display: none !important;
+    }
+    /* Card centralizado e destacado */
+    .loginCard {
+        background: #fff !important;
+        border-radius: 2rem !important;
+        box-shadow: 0 8px 32px rgba(44,49,66,0.12) !important;
+        width: 95vw !important;
+        max-width: 420px !important;
+        margin: 4rem auto 2rem auto !important;
+        padding: 2.5rem 1.5rem 2rem 1.5rem !important;
+        border: none !important;
+        position: relative !important;
+        z-index: 2 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+    }
+    .logoArea {
+        text-align: left !important;
+        margin-bottom: 2rem !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+    }
+    .logoImg {
+        width: 52px !important;
+        height: 52px !important;
+        margin-bottom: 0.5rem !important;
+        border-radius: 50% !important;
+        background: #f3f4f6 !important;
+        box-shadow: 0 2px 8px rgba(44,49,66,0.08) !important;
+        object-fit: contain !important;
+    }
+    .logoSubtitle {
+        font-size: 1.7rem !important;
+        font-weight: 700 !important;
+        color: #181a20 !important;
+        margin-bottom: 0.5rem !important;
+        letter-spacing: -1px !important;
+    }
+    /* Abas de login/register */
+    .tabArea {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        background: #f3f4f6 !important;
+        border-radius: 1.2rem !important;
+        margin-bottom: 2rem !important;
+        overflow: hidden !important;
+        box-shadow: 0 2px 8px rgba(44,49,66,0.05) !important;
+    }
+    .tabBtn {
+        flex: 1 1 0 !important;
+        padding: 0.9rem 0 !important;
+        font-size: 1.15rem !important;
+        font-weight: 600 !important;
+        background: none !important;
+        border: none !important;
+        color: #181a20 !important;
+        border-radius: 1.2rem !important;
+        transition: background 0.2s, color 0.2s;
+    }
+    .tabBtn.active {
+        background: #fff !important;
+        color: #3cb371 !important;
+        box-shadow: 0 2px 8px rgba(44,49,66,0.08) !important;
+    }
+    /* Inputs grandes e arredondados */
+    .form-control {
+        background: #f3f4f6 !important;
+        border-radius: 1.2rem !important;
+        border: 1px solid #e5e7eb !important;
+        font-size: 1.15rem !important;
+        padding: 1rem 1.2rem !important;
+        color: #181a20 !important;
+        margin-bottom: 0.75rem !important;
+        box-shadow: none !important;
+        font-weight: 500 !important;
+    }
+    .form-label {
+        font-size: 1.05rem !important;
+        font-weight: 600 !important;
+        color: #181a20 !important;
+        margin-bottom: 0.25rem !important;
+    }
+    .input-group-text {
+        background: #f3f4f6 !important;
+        border: none !important;
+        color: #3cb371 !important;
+        font-size: 1.3rem !important;
+        padding-right: 0.5rem !important;
+        border-radius: 1.2rem 0 0 1.2rem !important;
+    }
+    /* Checkbox */
+    .form-check-input {
+        accent-color: #3cb371 !important;
+        width: 1.2rem !important;
+        height: 1.2rem !important;
+        margin-right: 0.5rem !important;
+    }
+    .form-check-label {
+        color: #181a20 !important;
+        font-size: 1rem !important;
+        font-weight: 500 !important;
+    }
+    .formOptions {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        margin-bottom: 1.5rem !important;
+        font-size: 1rem !important;
+    }
+    /* Botão verde arredondado */
+    .loginBtn {
+        width: 100% !important;
+        border-radius: 1.2rem !important;
+        font-size: 1.15rem !important;
+        padding: 0.95rem 0 !important;
+        margin-bottom: 1.5rem !important;
+        background: #3cb371 !important;
+        border: none !important;
+        box-shadow: 0 2px 8px rgba(44,49,66,0.10) !important;
+        font-weight: 600 !important;
+        color: #fff !important;
+        transition: background 0.2s;
+    }
+    .loginBtn:hover, .loginBtn:focus {
+        background: #2e8b57 !important;
+        color: #fff !important;
+    }
+    .cardFooter {
+        text-align: center !important;
+        background: none !important;
+        border: none !important;
+        padding: 0.5rem 0 0 0 !important;
+        font-size: 1rem !important;
+        color: #181a20 !important;
+    }
+    .linkBtn {
+        color: #3cb371 !important;
+        font-weight: 500 !important;
+        text-decoration: underline !important;
+        padding: 0 !important;
+        margin-left: 0.5rem !important;
+        font-size: 1rem !important;
+    }
+    .eyeBtn {
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 0.5rem !important;
+        color: #181a20 !important;
+    }
+}
+
+/* Ajuste para desktop */
+@media (min-width: 701px) {
+    .loginCard {
+        /* ...existing code or desktop styles... */
+    }
+}
