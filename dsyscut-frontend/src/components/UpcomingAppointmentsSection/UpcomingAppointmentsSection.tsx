@@ -8,12 +8,12 @@ const upcomingAppointments = [
 ];
 
 const UpcomingAppointmentsSection: React.FC = () => (
-  <section className="w-screen mb-8 px-4 md:px-8">
+  <section className="w-full mb-8 px-2 md:px-4">
     <h2 className="text-xl font-semibold text-[var(--color-text)] mb-3 flex items-center gap-2">
       <i className="fas fa-clock text-[var(--color-primary)]" /> Próximos agendamentos
     </h2>
-    <div className="bg-[var(--color-bg-card)] rounded-xl shadow p-4 overflow-x-auto">
-      <table className="w-full text-sm border-separate border-spacing-y-2">
+    <div className="overflow-x-auto w-full">
+      <table className="min-w-full bg-[var(--color-bg-card)] rounded-xl shadow-lg">
         <thead>
           <tr className="text-left text-[var(--color-text-secondary)] bg-[var(--color-bg)] rounded-lg">
             <th className="py-3 px-4 rounded-tl-lg">Cliente</th>

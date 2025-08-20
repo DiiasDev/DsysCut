@@ -12,13 +12,11 @@ export default function HomePage() {
   return (
     <>
       <Header userName={userName} />
-      {/* Use w-full para ocupar toda a largura disponível e evitar overflow-x */}
-      <main className="min-h-screen w-full bg-gradient-to-br from-blue-50 via-white to-blue-100 flex-1 overflow-x-hidden">
-        <div className="w-full flex flex-col">
+      <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 flex-1">
+        <div className="flex flex-col w-full mx-auto px-4">
           <WelcomeSection />
           <MainShortcuts />
-          {/* Separador visual */}
-          <div className="w-full border-b border-[var(--color-border)] mb-8 px-4 md:px-8"></div>
+          <div className="border-b border-[var(--color-border)] mb-8"></div>
           <QuickStats />
           <UpcomingAppointmentsSection />
           <Footer />

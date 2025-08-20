@@ -33,22 +33,25 @@ const shortcuts = [
 ];
 
 const MainShortcuts: React.FC = () => (
-  <section className="w-screen grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-8 px-4 md:px-8">
-    {shortcuts.map((s, idx) => (
-      <a
-        key={idx}
-        href="#"
-        className={`bg-[var(--color-bg-card)] rounded-xl shadow-lg p-6 flex flex-col items-center hover:scale-105 transition duration-200 border border-transparent ${s.hover}`}
-      >
-        <span className={`${s.color} text-5xl mb-2 drop-shadow`}>
-          <i className={`fas ${s.icon}`} />
-        </span>
-        <span className="font-bold text-lg text-[var(--color-text)]">{s.title}</span>
-        <span className="text-[var(--color-text-secondary)] text-sm text-center mt-2">
-          {s.desc}
-        </span>
-      </a>
-    ))}
+  <section className="w-full mb-8 px-2 md:px-4">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
+      {shortcuts.map((s, idx) => (
+        <a
+          key={idx}
+          href="#"
+          className={`bg-[var(--color-bg-card)] rounded-xl shadow-lg p-4 flex flex-col items-center hover:scale-105 transition duration-200 border border-transparent ${s.hover} min-w-0`}
+          style={{ minWidth: 0 }}
+        >
+          <span className={`${s.color} text-4xl mb-2 drop-shadow`}>
+            <i className={`fas ${s.icon}`} />
+          </span>
+          <span className="font-bold text-base text-[var(--color-text)]">{s.title}</span>
+          <span className="text-[var(--color-text-secondary)] text-xs text-center mt-2">
+            {s.desc}
+          </span>
+        </a>
+      ))}
+    </div>
   </section>
 );
 
