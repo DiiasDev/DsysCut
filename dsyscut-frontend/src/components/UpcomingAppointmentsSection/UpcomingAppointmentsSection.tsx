@@ -2,9 +2,9 @@ import React from "react";
 import "./UpcomingAppointmentsSection.css";
 
 const upcomingAppointments = [
-  { cliente: "Carlos Silva", horario: "11:30", servico: "Corte Masculino" },
-  { cliente: "Ana Souza", horario: "12:00", servico: "Barba" },
-  { cliente: "Pedro Lima", horario: "13:15", servico: "Corte + Barba" },
+  { cliente: "Carlos Silva", horario: "11:30", servico: "Corte Masculino", valor: "R$ 40,00" },
+  { cliente: "Ana Souza", horario: "12:00", servico: "Barba", valor: "R$ 25,00" },
+  { cliente: "Pedro Lima", horario: "13:15", servico: "Corte + Barba", valor: "R$ 60,00" },
 ];
 
 const UpcomingAppointmentsSection: React.FC = () => (
@@ -13,20 +13,30 @@ const UpcomingAppointmentsSection: React.FC = () => (
       <i className="fas fa-clock text-[var(--color-primary)]" /> Próximos agendamentos
     </h2>
     <div className="bg-[var(--color-bg-card)] rounded-xl shadow p-4 overflow-x-auto">
-      <table className="w-full text-sm">
+      <table className="w-full text-sm border-separate border-spacing-y-2">
         <thead>
-          <tr className="text-left text-[var(--color-text-secondary)] border-b border-[var(--color-border)]">
-            <th className="py-2">Cliente</th>
-            <th className="py-2">Horário</th>
-            <th className="py-2">Serviço</th>
+          <tr className="text-left text-[var(--color-text-secondary)] bg-[var(--color-bg)] rounded-lg">
+            <th className="py-3 px-4 rounded-tl-lg">Cliente</th>
+            <th className="py-3 px-4">Horário</th>
+            <th className="py-3 px-4">Serviço</th>
+            <th className="py-3 px-4 rounded-tr-lg">Valor</th>
           </tr>
         </thead>
         <tbody>
           {upcomingAppointments.map((a, idx) => (
-            <tr key={idx} className="hover:bg-[var(--color-bg)] transition">
-              <td className="py-2">{a.cliente}</td>
-              <td className="py-2">{a.horario}</td>
-              <td className="py-2">{a.servico}</td>
+            <tr
+              key={idx}
+              className={`transition ${
+                idx % 2 === 0
+                  ? "bg-[var(--color-bg-table-row)]"
+                  : "bg-[var(--color-bg-card)]"
+              } hover:bg-[var(--color-bg)]`}
+              style={{ borderRadius: 8 }}
+            >
+              <td className="py-3 px-4 rounded-l-lg">{a.cliente}</td>
+              <td className="py-3 px-4">{a.horario}</td>
+              <td className="py-3 px-4">{a.servico}</td>
+              <td className="py-3 px-4 rounded-r-lg font-semibold text-[var(--color-primary)]">{a.valor}</td>
             </tr>
           ))}
         </tbody>
