@@ -43,7 +43,10 @@ export default function GridAgendamentos() {
                 </thead>
                 <tbody>
                     {agendamentos.map(a => (
-                        <tr key={a.id} className="border-t">
+                        <tr
+                            key={a.id}
+                            className="border-t hover:bg-gray-100"
+                        >
                             <td className="py-2">
                                 <img src={a.foto} alt={a.cliente} className="w-10 h-10 rounded-full object-cover" />
                             </td>
