@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css';
 import "./styles/theme.css"
+import { useTheme } from "./ThemeContext";
 
 import Login from './pages/LoginPage/login'
 import FinanceiroPage from "./pages/FinanceiroPage/financeiroPage";
@@ -16,12 +17,23 @@ function App() {
   const isLogged = useAppStore(state => state.isLogged)
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [selectedTab, setSelectedTab] = useState<SidebarTab>("home");
+  const { theme } = useTheme();
+
+  // Adiciona efeito para atualizar o tema globalmente
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   const sidebarWidth = sidebarOpen ? 256 : 80; // px
 
   return (
     <BrowserRouter>
-      <div style={{ minHeight: "100vh", background: "#f6f9ff" }}>
+      <div
+        style={{
+          minHeight: "100vh",
+          background: "var(--color-bg)",
+        }}
+      >
         {!isLogged && <Login />}
         {isLogged && (
           <>
