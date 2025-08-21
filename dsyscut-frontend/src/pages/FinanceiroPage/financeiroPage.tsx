@@ -1,4 +1,3 @@
-import ResumoFinanceiro from '../../components/Financeiro/ResumoFinanceiro';
 import TabelaTransacoes from '../../components/Financeiro/TabelaTransacoes';
 import SecaoGraficos from '../../components/Financeiro/SecaoGraficos';
 import AcoesRapidas from '../../components/Financeiro/AcoesRapidas';
@@ -42,7 +41,6 @@ export default function FinanceiroPage() {
     <div className="min-h-screen bg-[var(--color-bg)] p-6">
       <h1 className="text-3xl font-bold text-[var(--color-primary)] mb-6">Financeiro</h1>
       <AcoesRapidas />
-      <ResumoFinanceiro resumo={resumo} />
       <ResumoMensal resumoMensal={resumoMensal} />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         <div className="flex flex-col gap-6">

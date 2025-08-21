@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { FiHome, FiDollarSign, FiCalendar, FiUsers, FiBarChart2, FiSettings } from "react-icons/fi";
-import type { IconType } from "react-icons"; // Adicionado
+import { FiHome, FiDollarSign, FiCalendar, FiUsers, FiBarChart2, FiSettings, FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import type { IconType } from "react-icons";
 import { useNavigate } from "react-router-dom";
 
 export type SidebarTab = "home" | "financeiro" | "agendamentos" | "clientes" | "relatorios" | "configuracoes";
@@ -23,6 +23,9 @@ export default function Sidebar({
     const [selectedTabState, setSelectedTabState] = useState<SidebarTab>("home");
     const selectedTab = controlledTab !== undefined ? controlledTab : selectedTabState;
     const navigate = useNavigate();
+
+    // Estado para hover do sidebar
+    const [hovered, setHovered] = useState(false);
 
     // Tab config com rotas
     const tabs: { key: SidebarTab; label: string; icon: IconType; route: string }[] = [
@@ -48,25 +51,32 @@ export default function Sidebar({
 
     return (
         <>
-            {/* Toggle sidebar button */}
-            <button
-                className={`fixed top-4 left-0 z-50 flex items-center justify-center w-10 h-10 rounded-r-lg bg-blue-600 text-white shadow-lg transition-all duration-300
-                    ${open ? "ml-64" : "ml-20"}`}
-                style={{ transition: "margin-left 0.3s" }}
-                onClick={handleToggle}
-                aria-label={open ? "Fechar sidebar" : "Abrir sidebar"}
-            >
-                <span className="text-xl">{open ? "⏴" : "⏵"}</span>
-            </button>
             {/* Sidebar */}
-            <aside className={`${open ? "w-64" : "w-20"} h-screen fixed left-0 top-0 z-40 transition-all duration-300 bg-white text-gray-900 flex flex-col justify-between shadow-lg`}
+            <aside
+                className={`${open ? "w-64" : "w-20"} h-screen fixed left-0 top-0 z-40 transition-all duration-300 bg-white text-gray-900 flex flex-col justify-between shadow-lg`}
                 style={{ transition: "width 0.3s" }}
+                onMouseEnter={() => setHovered(true)}
+                onMouseLeave={() => setHovered(false)}
             >
                 <div>
-                    {/* Logo & Title */}
-                    <div className="flex items-center gap-3 px-6 py-6">
-                        <div className="w-10 h-10 bg-gradient-to-tr from-blue-400 to-purple-400 rounded-lg flex items-center justify-center font-bold text-white text-lg">D</div>
-                        {open && <span className="font-semibold text-xl">DsysCut</span>}
+                    {/* Toggle sidebar button - aparece só no hover */}
+                    <div className="relative">
+                        <button
+                            className={`absolute -right-4 top-6 z-50 flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white shadow transition-opacity duration-200
+                                ${hovered ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+                            style={{ transition: "opacity 0.2s" }}
+                            onClick={handleToggle}
+                            aria-label={open ? "Fechar sidebar" : "Abrir sidebar"}
+                        >
+                            {open
+                                ? React.createElement(FiChevronLeft as any, { size: 20 })
+                                : React.createElement(FiChevronRight as any, { size: 20 })}
+                        </button>
+                        {/* Logo & Title */}
+                        <div className="flex items-center gap-3 px-6 py-6">
+                            <div className="w-10 h-10 bg-gradient-to-tr from-blue-400 to-purple-400 rounded-lg flex items-center justify-center font-bold text-white text-lg">D</div>
+                            {open && <span className="font-semibold text-xl">DsysCut</span>}
+                        </div>
                     </div>
                     {/* Navigation */}
                     <nav className="px-2">
