@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FiHome, FiDollarSign, FiCalendar, FiUsers, FiBarChart2, FiSettings, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import type { IconType } from "react-icons";
 import { useNavigate } from "react-router-dom";
+import ConfiguracoesModal from "../Configuracoes/ConfiguracoesModal";
 
 export type SidebarTab = "home" | "financeiro" | "agendamentos" | "clientes" | "relatorios" | "configuracoes";
 
@@ -26,6 +27,8 @@ export default function Sidebar({
 
     // Estado para hover do sidebar
     const [hovered, setHovered] = useState(false);
+    // Estado para modal de configurações
+    const [configModalOpen, setConfigModalOpen] = useState(false);
 
     // Tab config com rotas
     const tabs: { key: SidebarTab; label: string; icon: IconType; route: string }[] = [
@@ -107,7 +110,7 @@ export default function Sidebar({
                         className={`flex items-center gap-3 w-full py-3 px-3 rounded-lg transition mb-4
                             ${selectedTab === "configuracoes" ? "bg-blue-100 text-blue-700 font-semibold border-l-4 border-blue-600" : "bg-gray-100 hover:bg-blue-100"}
                         `}
-                        onClick={() => handleTabClick("configuracoes", "/configuracoes")}
+                        onClick={() => setConfigModalOpen(true)}
                     >
                         {React.createElement(FiSettings as React.FC<{ size?: number }>, { size: 22 })}
                         {open && <span>Configurações</span>}
@@ -124,6 +127,8 @@ export default function Sidebar({
                     </div>
                 </div>
             </aside>
+            {/* Modal de Configurações */}
+            <ConfiguracoesModal open={configModalOpen} onClose={() => setConfigModalOpen(false)} />
         </>
     );
 }
