@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import ClienteStats from '../../components/ClienteStats'
-import ClienteList from '../../components/ClienteList'
-import AddClienteButton from '../../components/AddClienteButton'
+import ClienteStats from '../../components/Clientes/ClienteStats'
+import ClienteList from '../../components/Clientes/ClienteList'
+import AddClienteButton from '../../components/Clientes/AddClienteButton'
 
 interface ClienteMensal {
     id: number
