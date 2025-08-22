@@ -13,19 +13,41 @@ export default function ConfiguracoesModal({ open, onClose }: ConfiguracoesModal
     const { theme } = useTheme();
     if (!open) return null;
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+        <div
+            className="fixed inset-0 z-50 flex items-center justify-center"
+            style={{
+                background: "rgba(0,0,0,0.4)"
+            }}
+        >
             <div
-                className={`rounded-xl shadow-2xl w-full max-w-md p-8 relative flex flex-col gap-6
-                    ${theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-gray-900"}`}
+                className="rounded-xl w-full max-w-md p-8 relative flex flex-col gap-6"
+                style={{
+                    background: "var(--color-bg-card)",
+                    color: "var(--color-text)",
+                    boxShadow: "0 8px 32px 0 var(--color-border)",
+                    border: `1px solid var(--color-border)`
+                }}
             >
                 <button
-                    className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-xl"
+                    className="absolute top-4 right-4 text-xl"
+                    style={{
+                        color: "var(--color-text-secondary)",
+                        background: "transparent",
+                        border: "none"
+                    }}
                     onClick={onClose}
                     aria-label="Fechar"
                 >
                     ×
                 </button>
-                <h2 className={`text-2xl font-bold mb-2 ${theme === "dark" ? "text-blue-300" : "text-blue-700"}`}>Configurações</h2>
+                <h2
+                    className="text-2xl font-bold mb-2"
+                    style={{
+                        color: "var(--color-accent)"
+                    }}
+                >
+                    Configurações
+                </h2>
                 <div className="flex flex-col gap-4">
                     <ThemeToggleButton />
                     <UsuarioButton />

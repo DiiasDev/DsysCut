@@ -12,11 +12,22 @@ export default function HomePage() {
   return (
     <>
       <Header userName={userName} />
-      <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 flex-1">
+      <main
+        className="min-h-screen flex-1"
+        style={{
+          background: "linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-card) 50%, var(--color-bg) 100%)"
+        }}
+      >
         <div className="flex flex-col w-full mx-auto px-4">
           <WelcomeSection />
           <MainShortcuts />
-          <div className="border-b border-[var(--color-border)] mb-8"></div>
+          <div
+            className={style.borderBottom}
+            style={{
+              borderBottom: "1px solid var(--color-border)",
+              marginBottom: "2rem"
+            }}
+          ></div>
           <QuickStats />
           <UpcomingAppointmentsSection />
           <Footer />

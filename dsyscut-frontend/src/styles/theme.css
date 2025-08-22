@@ -10,6 +10,7 @@
     --color-error: #E53935;
     --color-border: #E5E7EB;
     --color-hover-row: #F4F6F8;
+    --calendar-invert: 0;
 }
 
 [data-theme="dark"] {
@@ -24,4 +25,5 @@
     --color-error: #E53935;
     --color-border: #34384A;
     --color-hover-row: #34384A;
+    --calendar-invert: 1;
 }
