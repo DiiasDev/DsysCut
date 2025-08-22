@@ -13,11 +13,23 @@ import RelatoriosPage from "./pages/RelatorioPage/relatorioPage";
 import Sidebar, { SidebarTab } from './components/Sidebar/Sidebar';
 import { useAppStore } from './store/store';
 
+function useMediaQuery(query: string) {
+  const [matches, setMatches] = useState(() => window.matchMedia(query).matches);
+  useEffect(() => {
+    const media = window.matchMedia(query);
+    const listener = () => setMatches(media.matches);
+    media.addEventListener("change", listener);
+    return () => media.removeEventListener("change", listener);
+  }, [query]);
+  return matches;
+}
+
 function App() {
   const isLogged = useAppStore(state => state.isLogged)
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [selectedTab, setSelectedTab] = useState<SidebarTab>("home");
   const { theme } = useTheme();
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   // Adiciona efeito para atualizar o tema globalmente
   useEffect(() => {
@@ -46,7 +58,7 @@ function App() {
             <div
               className="transition-all duration-300"
               style={{
-                marginLeft: `${sidebarWidth}px`,
+                marginLeft: isMobile ? 0 : `${sidebarWidth}px`,
                 minHeight: "100vh",
                 width: "auto",
                 overflowX: "hidden"
