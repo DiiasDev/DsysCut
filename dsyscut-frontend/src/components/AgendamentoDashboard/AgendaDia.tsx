@@ -10,18 +10,40 @@ const agenda = [
 
 export default function AgendaDia() {
     return (
-        <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-xl font-semibold text-gray-700 mb-4">Agenda do Dia</h2>
+        <div
+            className="rounded-lg shadow p-6"
+            style={{ background: 'var(--color-bg-card)' }}
+        >
+            <h2
+                className="text-xl font-semibold mb-4"
+                style={{ color: 'var(--color-text-secondary)' }}
+            >
+                Agenda do Dia
+            </h2>
             <ul>
                 {agenda.map((item, idx) => (
-                    <li key={idx} className="flex items-center justify-between py-2 border-b last:border-none">
+                    <li
+                        key={idx}
+                        className="flex items-center justify-between py-2 border-b last:border-none"
+                        style={{ borderColor: 'var(--color-border)' }}
+                    >
                         <div>
-                            <span className="font-medium text-gray-800">{item.horario}</span>
-                            <span className="ml-2 text-gray-600">{item.cliente}</span>
+                            <span className="font-medium" style={{ color: 'var(--color-text)' }}>{item.horario}</span>
+                            <span className="ml-2" style={{ color: 'var(--color-text-secondary)' }}>{item.cliente}</span>
                         </div>
-                        <span className={`px-2 py-1 rounded text-xs ${
-                            item.status === 'Agendado' ? 'bg-blue-100 text-blue-700' : 'bg-yellow-100 text-yellow-700'
-                        }`}>
+                        <span
+                            className="px-3 py-1 rounded text-xs"
+                            style={{
+                                background: item.status === 'Agendado'
+                                    ? 'var(--color-accent)'
+                                    : 'var(--color-secondary)',
+                                color: item.status === 'Agendado'
+                                    ? 'var(--color-bg-card)'
+                                    : 'var(--color-bg-card)',
+                                fontWeight: 600,
+                                border: '1px solid var(--color-border)'
+                            }}
+                        >
                             {item.status}
                         </span>
                     </li>

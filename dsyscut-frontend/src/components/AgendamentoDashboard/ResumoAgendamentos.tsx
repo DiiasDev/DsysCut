@@ -2,24 +2,79 @@ import React from 'react';
 
 export default function ResumoAgendamentos() {
     return (
-        <div className="bg-white rounded-lg shadow p-6 flex flex-col gap-4">
-            <h2 className="text-xl font-semibold text-gray-700 mb-4">Resumo dos Agendamentos</h2>
+        <div
+            className="rounded-lg shadow p-6 flex flex-col gap-4"
+            style={{
+                background: 'var(--color-bg-card)',
+                border: '1px solid var(--color-border)'
+            }}
+        >
+            <h2
+                className="text-xl font-semibold mb-4"
+                style={{ color: 'var(--color-text-secondary)' }}
+            >
+                Resumo dos Agendamentos
+            </h2>
             <div className="grid grid-cols-2 gap-4">
-                <div className="bg-green-100 rounded p-4 flex flex-col items-center">
-                    <span className="text-2xl font-bold text-green-700">12</span>
-                    <span className="text-gray-600">Agendados hoje</span>
+                <div
+                    className="rounded p-4 flex flex-col items-center"
+                    style={{
+                        background: 'var(--color-success)',
+                        border: '1px solid var(--color-border)'
+                    }}
+                >
+                    <span
+                        className="text-2xl font-bold"
+                        style={{ color: 'var(--color-bg-card)' }}
+                    >
+                        12
+                    </span>
+                    <span style={{ color: 'var(--color-bg-card)' }}>Agendados hoje</span>
                 </div>
-                <div className="bg-blue-100 rounded p-4 flex flex-col items-center">
-                    <span className="text-2xl font-bold text-blue-700">5</span>
-                    <span className="text-gray-600">Cortes pendentes</span>
+                <div
+                    className="rounded p-4 flex flex-col items-center"
+                    style={{
+                        background: 'var(--color-accent)',
+                        border: '1px solid var(--color-border)'
+                    }}
+                >
+                    <span
+                        className="text-2xl font-bold"
+                        style={{ color: 'var(--color-bg-card)' }}
+                    >
+                        5
+                    </span>
+                    <span style={{ color: 'var(--color-bg-card)' }}>Cortes pendentes</span>
                 </div>
-                <div className="bg-yellow-100 rounded p-4 flex flex-col items-center">
-                    <span className="text-2xl font-bold text-yellow-700">3</span>
-                    <span className="text-gray-600">Cancelados</span>
+                <div
+                    className="rounded p-4 flex flex-col items-center"
+                    style={{
+                        background: 'var(--color-secondary)',
+                        border: '1px solid var(--color-border)'
+                    }}
+                >
+                    <span
+                        className="text-2xl font-bold"
+                        style={{ color: 'var(--color-bg-card)' }}
+                    >
+                        3
+                    </span>
+                    <span style={{ color: 'var(--color-bg-card)' }}>Cancelados</span>
                 </div>
-                <div className="bg-purple-100 rounded p-4 flex flex-col items-center">
-                    <span className="text-2xl font-bold text-purple-700">8</span>
-                    <span className="text-gray-600">Finalizados</span>
+                <div
+                    className="rounded p-4 flex flex-col items-center"
+                    style={{
+                        background: 'var(--color-primary)',
+                        border: '1px solid var(--color-border)'
+                    }}
+                >
+                    <span
+                        className="text-2xl font-bold"
+                        style={{ color: 'var(--color-bg-card)' }}
+                    >
+                        8
+                    </span>
+                    <span style={{ color: 'var(--color-bg-card)' }}>Finalizados</span>
                 </div>
             </div>
         </div>

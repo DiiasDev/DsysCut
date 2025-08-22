@@ -16,13 +16,26 @@ export default function AgendarCliente() {
     const [horario, setHorario] = useState('');
 
     return (
-        <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-xl font-semibold text-gray-700 mb-4">Agendar Cliente</h2>
+        <div
+            className="rounded-lg shadow p-6"
+            style={{ background: 'var(--color-bg-card)' }}
+        >
+            <h2
+                className="text-xl font-semibold mb-4"
+                style={{ color: 'var(--color-text-secondary)' }}
+            >
+                Agendar Cliente
+            </h2>
             <form className="flex flex-col gap-4">
                 <div>
-                    <label className="block text-gray-600 mb-1">Barbeiro</label>
+                    <label className="block mb-1" style={{ color: 'var(--color-text-secondary)' }}>Barbeiro</label>
                     <select
-                        className="w-full border rounded px-3 py-2"
+                        className="w-full rounded px-3 py-2"
+                        style={{
+                            border: '1px solid var(--color-border)',
+                            color: 'var(--color-text)',
+                            background: 'var(--color-bg-card)'
+                        }}
                         value={barbeiroId}
                         onChange={e => setBarbeiroId(Number(e.target.value))}
                     >
@@ -32,22 +45,32 @@ export default function AgendarCliente() {
                     </select>
                 </div>
                 <div>
-                    <label className="block text-gray-600 mb-1">Data</label>
+                    <label className="block mb-1" style={{ color: 'var(--color-text-secondary)' }}>Data</label>
                     <input
                         type="date"
-                        className="w-full border rounded px-3 py-2"
+                        className="w-full rounded px-3 py-2"
+                        style={{
+                            border: '1px solid var(--color-border)',
+                            color: 'var(--color-text)',
+                            background: 'var(--color-bg-card)'
+                        }}
                         value={data}
                         onChange={e => setData(e.target.value)}
                     />
                 </div>
                 <div>
-                    <label className="block text-gray-600 mb-1">Horário disponível</label>
+                    <label className="block mb-1" style={{ color: 'var(--color-text-secondary)' }}>Horário disponível</label>
                     <div className="flex flex-wrap gap-2">
                         {horariosDisponiveis[String(barbeiroId)].map(h => (
                             <button
                                 type="button"
                                 key={h}
-                                className={`px-3 py-1 rounded border ${horario === h ? 'bg-green-500 text-white' : 'bg-gray-100'}`}
+                                className="px-3 py-1 rounded border"
+                                style={{
+                                    background: horario === h ? 'var(--color-success)' : 'var(--color-bg)',
+                                    color: horario === h ? 'var(--color-bg-card)' : 'var(--color-text-secondary)',
+                                    border: '1px solid var(--color-border)'
+                                }}
                                 onClick={() => setHorario(h)}
                             >
                                 {h}
@@ -57,7 +80,11 @@ export default function AgendarCliente() {
                 </div>
                 <button
                     type="button"
-                    className="bg-primary text-white px-4 py-2 rounded mt-2 hover:bg-green-600 transition"
+                    className="px-4 py-2 rounded mt-2 transition"
+                    style={{
+                        background: 'var(--color-primary)',
+                        color: 'var(--color-bg-card)'
+                    }}
                 >
                     Agendar
                 </button>

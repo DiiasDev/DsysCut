@@ -8,22 +8,30 @@ const planos = [
 
 export default function ControlePlanos() {
     return (
-        <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-xl font-semibold text-gray-700 mb-4">Controle de Planos</h2>
+        <div
+            className="rounded-lg shadow p-6"
+            style={{ background: 'var(--color-bg-card)' }}
+        >
+            <h2
+                className="text-xl font-semibold mb-4"
+                style={{ color: 'var(--color-text-secondary)' }}
+            >
+                Controle de Planos
+            </h2>
             <table className="w-full text-left">
                 <thead>
                     <tr>
-                        <th className="py-2 text-gray-600">Plano</th>
-                        <th className="py-2 text-gray-600">Ativos</th>
-                        <th className="py-2 text-gray-600">Vencidos</th>
+                        <th className="py-2" style={{ color: 'var(--color-text-secondary)' }}>Plano</th>
+                        <th className="py-2" style={{ color: 'var(--color-text-secondary)' }}>Ativos</th>
+                        <th className="py-2" style={{ color: 'var(--color-text-secondary)' }}>Vencidos</th>
                     </tr>
                 </thead>
                 <tbody>
                     {planos.map(plano => (
-                        <tr key={plano.nome} className="border-t">
-                            <td className="py-2">{plano.nome}</td>
-                            <td className="py-2 text-green-700 font-bold">{plano.ativos}</td>
-                            <td className="py-2 text-red-600 font-bold">{plano.vencidos}</td>
+                        <tr key={plano.nome} className="border-t" style={{ borderColor: 'var(--color-border)' }}>
+                            <td className="py-2" style={{ color: 'var(--color-text)' }}>{plano.nome}</td>
+                            <td className="py-2 font-bold" style={{ color: 'var(--color-success)' }}>{plano.ativos}</td>
+                            <td className="py-2 font-bold" style={{ color: 'var(--color-error)' }}>{plano.vencidos}</td>
                         </tr>
                     ))}
                 </tbody>
