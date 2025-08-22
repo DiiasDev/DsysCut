@@ -73,19 +73,40 @@ export default function ClientePage() {
     }
 
     return (
-        <div className="p-6 bg-gray-50 min-h-screen">
-            <h1 className="text-2xl font-bold mb-6">Clientes</h1>
+        <div
+            className="min-h-screen p-6"
+            style={{
+                background: "var(--color-bg)",
+                color: "var(--color-text)"
+            }}
+        >
+            <h1
+                className="text-2xl font-bold mb-6"
+                style={{ color: "var(--color-primary)" }}
+            >
+                Clientes
+            </h1>
             <ClienteStats
                 totalClientes={clientesMensais.length + clientesAvulsos.length}
                 clientesMensais={clientesMensais.length}
                 clientesAvulsos={clientesAvulsos.length}
             />
             <div className="flex justify-between items-center mt-8 mb-4">
-                <h2 className="text-xl font-semibold">Clientes Mensais</h2>
+                <h2
+                    className="text-xl font-semibold"
+                    style={{ color: "var(--color-text)" }}
+                >
+                    Clientes Mensais
+                </h2>
                 <AddClienteButton />
             </div>
             <ClienteList tipo="mensal" clientes={clientesMensais} onToggleMensal={handleToggleMensal} />
-            <h2 className="text-xl font-semibold mt-8 mb-4">Clientes Avulsos</h2>
+            <h2
+                className="text-xl font-semibold mt-8 mb-4"
+                style={{ color: "var(--color-text)" }}
+            >
+                Clientes Avulsos
+            </h2>
             <ClienteList tipo="avulso" clientes={clientesAvulsos} onToggleMensal={handleToggleMensal} />
         </div>
     )

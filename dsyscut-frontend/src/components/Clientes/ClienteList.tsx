@@ -26,7 +26,13 @@ type ClienteListProps =
 
 export default function ClienteList(props: ClienteListProps) {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div
+            className="grid grid-cols-1 md:grid-cols-2 gap-4"
+            style={{
+                background: "var(--color-bg)",
+                color: "var(--color-text)"
+            }}
+        >
             {props.clientes.map((cliente: any) => (
                 <ClienteCard
                     key={cliente.id}

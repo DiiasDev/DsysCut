@@ -7,17 +7,38 @@ type ClienteStatsProps = {
 export default function ClienteStats({ totalClientes, clientesMensais, clientesAvulsos }: ClienteStatsProps) {
     return (
         <div className="grid grid-cols-3 gap-4 mb-8">
-            <div className="bg-white rounded shadow p-4 text-center">
-                <div className="text-lg font-bold">{totalClientes}</div>
-                <div className="text-gray-500">Total de clientes</div>
+            <div
+                className="rounded shadow p-4 text-center"
+                style={{
+                    background: "var(--color-bg-card)",
+                    color: "var(--color-text)",
+                    border: "1px solid var(--color-border)"
+                }}
+            >
+                <div className="text-lg font-bold" style={{ color: "var(--color-primary)" }}>{totalClientes}</div>
+                <div style={{ color: "var(--color-text-secondary)" }}>Total de clientes</div>
             </div>
-            <div className="bg-white rounded shadow p-4 text-center">
-                <div className="text-lg font-bold">{clientesMensais}</div>
-                <div className="text-gray-500">Mensais</div>
+            <div
+                className="rounded shadow p-4 text-center"
+                style={{
+                    background: "var(--color-bg-card)",
+                    color: "var(--color-text)",
+                    border: "1px solid var(--color-border)"
+                }}
+            >
+                <div className="text-lg font-bold" style={{ color: "var(--color-primary)" }}>{clientesMensais}</div>
+                <div style={{ color: "var(--color-text-secondary)" }}>Mensais</div>
             </div>
-            <div className="bg-white rounded shadow p-4 text-center">
-                <div className="text-lg font-bold">{clientesAvulsos}</div>
-                <div className="text-gray-500">Avulsos</div>
+            <div
+                className="rounded shadow p-4 text-center"
+                style={{
+                    background: "var(--color-bg-card)",
+                    color: "var(--color-text)",
+                    border: "1px solid var(--color-border)"
+                }}
+            >
+                <div className="text-lg font-bold" style={{ color: "var(--color-primary)" }}>{clientesAvulsos}</div>
+                <div style={{ color: "var(--color-text-secondary)" }}>Avulsos</div>
             </div>
         </div>
     )
