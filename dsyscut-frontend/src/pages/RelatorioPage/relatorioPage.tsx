@@ -7,11 +7,27 @@ import AvaliacoesClientes from '../../components/Relatorio/AvaliacoesClientes'
 import HorariosPico from '../../components/Relatorio/HorariosPico'
 import ProdutosMaisVendidos from '../../components/Relatorio/ProdutosMaisVendidos'
 import style from './style.module.css'
+import { useTheme } from "../../ThemeContext";
 
 export default function RelatorioPage() {
+    const { theme } = useTheme();
+
     return (
-        <div className="min-h-screen bg-gray-100 p-8">
-            <h1 className="text-3xl font-bold mb-6 text-gray-800">Relatório da Barbearia</h1>
+        <div
+            className="min-h-screen p-8"
+            style={{
+                background: "var(--color-bg)"
+            }}
+            data-theme={theme}
+        >
+            <h1
+                className="text-3xl font-bold mb-6"
+                style={{
+                    color: "var(--color-primary)"
+                }}
+            >
+                Relatório da Barbearia
+            </h1>
             <div className="mb-6">
                 <FiltroPeriodo />
             </div>

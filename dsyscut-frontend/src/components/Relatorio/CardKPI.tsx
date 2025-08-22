@@ -8,12 +8,16 @@ interface CardKPIProps {
 
 export default function CardKPI({ titulo, valor, icone }: CardKPIProps) {
     return (
-        <div className="bg-white rounded-xl shadow-md p-6 flex items-center gap-4">
-            <div className="text-3xl">{icone}</div>
-            <div>
-                <div className="text-sm text-gray-500">{titulo}</div>
-                <div className="text-2xl font-bold text-gray-800">{valor}</div>
-            </div>
+        <div
+            className="rounded-lg shadow p-4 flex flex-col items-start"
+            style={{
+                background: "var(--color-bg-card)",
+                color: "var(--color-text)"
+            }}
+        >
+            <div className="text-2xl mb-2">{icone}</div>
+            <div className="text-sm font-semibold mb-1" style={{ color: "var(--color-text-secondary)" }}>{titulo}</div>
+            <div className="text-xl font-bold">{valor}</div>
         </div>
-    )
+    );
 }
