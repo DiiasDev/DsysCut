@@ -12,15 +12,19 @@ const randomImg = illustrations[Math.floor(Math.random() * illustrations.length)
 
 const isMobile = typeof window !== "undefined" && window.innerWidth <= 700;
 
-export default function LoginPage() {
+interface LoginPageProps {
+    onLogin?: () => void;
+}
+
+export default function LoginPage({ onLogin }: LoginPageProps) {
     const [showCadastro, setShowCadastro] = useState(false);
 
     return (
         <div className={style.loginBg}>
             {showCadastro ? (
-                <CadastroForm onShowLogin={() => setShowCadastro(false)} />
+                <CadastroForm onShowLogin={() => setShowCadastro(false)} onLogin={onLogin} />
             ) : (
-                <LoginForm onShowCadastro={() => setShowCadastro(true)} />
+                <LoginForm onShowCadastro={() => setShowCadastro(true)} onLogin={onLogin} />
             )}
         </div>
     );

@@ -25,16 +25,52 @@ function useMediaQuery(query: string) {
 }
 
 function App() {
-  const isLogged = useAppStore(state => state.isLogged)
+  // Persistência do login
+  const [isLogged, setIsLogged] = useState(() => {
+    const stored = localStorage.getItem("isLogged");
+    return stored === "true";
+  });
+
+  // Persistência da tab selecionada
+  const [selectedTab, setSelectedTab] = useState<SidebarTab>(() => {
+    return (localStorage.getItem("selectedTab") as SidebarTab) || "home";
+  });
+
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [selectedTab, setSelectedTab] = useState<SidebarTab>("home");
   const { theme } = useTheme();
   const isMobile = useMediaQuery("(max-width: 768px)");
 
-  // Adiciona efeito para atualizar o tema globalmente
+  // Atualiza tema globalmente
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
+
+  // Salva tab selecionada no localStorage
+  useEffect(() => {
+    localStorage.setItem("selectedTab", selectedTab);
+  }, [selectedTab]);
+
+  // Salva login no localStorage
+  useEffect(() => {
+    localStorage.setItem("isLogged", String(isLogged));
+  }, [isLogged]);
+
+  // Navega para a rota da tab selecionada ao iniciar
+  const tabRoutes: Record<SidebarTab, string> = {
+    home: "/",
+    financeiro: "/financeiro",
+    agendamentos: "/agendamentos",
+    clientes: "/clientes",
+    relatorios: "/relatorios",
+    configuracoes: "/"
+  };
+
+  // Navega para a rota correta ao iniciar
+  useEffect(() => {
+    if (isLogged) {
+      window.history.replaceState(null, "", tabRoutes[selectedTab] || "/");
+    }
+  }, [isLogged, selectedTab]);
 
   const sidebarWidth = sidebarOpen ? 256 : 80; // px
 
@@ -46,7 +82,7 @@ function App() {
           background: "var(--color-bg)",
         }}
       >
-        {!isLogged && <Login />}
+        {!isLogged && <Login onLogin={() => setIsLogged(true)} />}
         {isLogged && (
           <>
             <Sidebar

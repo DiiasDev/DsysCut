@@ -6,11 +6,12 @@ import { useLogin } from '../../hooks/useLogin';
 import AlertWithProgress from '../AlertWithProgress/AlertWithProgress';
 import { useAppStore } from "../../store/store"
 
-interface LoginFormProps {
+export interface LoginFormProps {
     onShowCadastro: () => void;
+    onLogin?: () => void;
 }
 
-export default function LoginForm({ onShowCadastro }: LoginFormProps) {
+export default function LoginForm({ onShowCadastro, onLogin }: LoginFormProps) {
     const { handleLogin, loading, error } = useLogin();
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -26,6 +27,7 @@ export default function LoginForm({ onShowCadastro }: LoginFormProps) {
             setAlertMsg("Fazendo Login...");
             setShowAlert(true);
             useAppStore.setState({ isLogged: true })
+            if (onLogin) onLogin();
             // Você pode redirecionar aqui após o tempo do alerta, se quiser
         } else {
             setAlertType("error");

@@ -1,10 +1,21 @@
 import style from "./style.module.css"
 
-interface CadastroFormProps {
+export interface CadastroFormProps {
     onShowLogin: () => void;
+    onLogin?: () => void;
 }
 
-export default function CadastroForm({ onShowLogin }: CadastroFormProps) {
+export default function CadastroForm({ onShowLogin, onLogin }: CadastroFormProps) {
+    const handleCadastro = async () => {
+        // ...código de cadastro...
+        // Se cadastro for bem-sucedido:
+        // Exemplo: substitua 'cadastroOk' por sua lógica real de verificação
+        const cadastroOk = true; // Altere para sua condição real
+        if (cadastroOk) {
+            if (onLogin) onLogin();
+        }
+    };
+
     return (
         <>
             <div className="w-screen h-screen flex items-center justify-center bg-black">
