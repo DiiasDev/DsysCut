@@ -11,7 +11,7 @@ export async function login(email: string, password: string) {
 
         const token = response.data.token; 
 
-        localStorage.setItem("tokenLogin", token)
+        localStorage.setItem("token", token)
         return response.data;
     } catch (error) {
         throw error
