@@ -11,6 +11,8 @@ import AgendamentosPage from "../src/pages/AgendamentoPage/agendamentoPage";
 import ClientesPage from "./pages/ClientePage/clientePage";
 import RelatoriosPage from "./pages/RelatorioPage/relatorioPage";
 import Sidebar, { SidebarTab } from './components/Sidebar/Sidebar';
+
+import SessionTimeout from './hooks/SessionTimeout';
 import { useAppStore } from './store/store';
 
 function useMediaQuery(query: string) {
@@ -76,6 +78,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <SessionTimeout />
       <div
         style={{
           minHeight: "100vh",
