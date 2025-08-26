@@ -1,6 +1,31 @@
 import React from 'react';
+import { RegisterFinance } from '../../services/financeService';
+import { useState } from 'react';
 
 export default function FormRegistrarReceitaDespesa({ onClose }: { onClose: () => void }) {
+    const [valor, setValor] = useState('');
+    const [descricao, setDescricao] = useState('');
+    const [tipo, setTipo] = useState<'Receita' | 'Despesa'>('Receita');
+    const [categoria, setCategoria] = useState('')
+
+    async function handleSubmit(e: React.FormEvent) {
+        e.preventDefault()
+        console.log("Entrou no formulário financeiro")
+        try {
+            await RegisterFinance(
+                Number(valor),
+                descricao,
+                [tipo],
+                categoria
+            )
+            alert("Registro cadastrado com sucesso!")
+            setDescricao('')
+            setValor('')
+            setCategoria('')
+        } catch {
+            alert('Erro ao cadastrar registro!')
+        }
+    }
     return (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 transition-opacity duration-300">
             <div className="bg-[var(--color-bg-card)] text-[var(--color-text)] rounded-2xl shadow-2xl p-8 w-full max-w-md relative border border-[var(--color-border)] animate-fade-in">
@@ -15,28 +40,30 @@ export default function FormRegistrarReceitaDespesa({ onClose }: { onClose: () =
                         &times;
                     </button>
                 </div>
-                <form className="flex flex-col gap-5">
+                <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="valor" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">Valor:</label>
-                        <input type="text" id="valor" placeholder="R$"
+                        <input type="text" id="valor" placeholder="R$" value={valor} onChange={e => setValor(e.target.value)}
                             className="w-full border border-[var(--color-border)] bg-transparent text-[var(--color-text)] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] transition"
                         />
                     </div>
                     <div>
                         <label htmlFor="descricao" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">Descrição:</label>
-                        <input type="text" id="descricao" placeholder="Conta de luz..."
+                        <input type="text" id="descricao" placeholder="Conta de luz..." value={descricao} onChange={e => setDescricao(e.target.value)}
                             className="w-full border border-[var(--color-border)] bg-transparent text-[var(--color-text)] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] transition"
                         />
                     </div>
                     <div>
                         <label htmlFor="categoria" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">Categoria:</label>
-                        <input type="text" id="categoria" placeholder="Contas..."
+                        <input type="text" id="categoria" placeholder="Contas..." value={categoria} onChange={e => setCategoria(e.target.value)}
                             className="w-full border border-[var(--color-border)] bg-transparent text-[var(--color-text)] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] transition"
                         />
                     </div>
                     <div>
                         <label htmlFor="tipo" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">Tipo</label>
                         <select
+                            value={tipo}
+                            onChange={e => setTipo(e.target.value as 'Receita'| 'Despesa')}
                             name="tipo"
                             id="tipo"
                             className="w-full border border-[var(--color-border)] bg-[var(--color-bg-card)] text-[var(--color-text)] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] transition"

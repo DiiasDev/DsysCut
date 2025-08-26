@@ -7,7 +7,7 @@ finance_bp = Blueprint('finance_bp', __name__)
 
 
 @finance_bp.route('/registers', methods=["POST"])
-@token_required
+# @token_required
 def register_tipes():
     try:
         # 1. capturando dados do request
@@ -18,9 +18,10 @@ def register_tipes():
             valor=data.get("valor"),
             descricao=data.get("descricao"),
             categoria=data.get("categoria"),
-            tipo=data.get("tipo")
+            tipo=",".join(data.get("tipo")) if isinstance(
+                data.get("tipo"), list) else data.get("tipo")
         )
-        
+
         # 3. Adicionando dados da variavel e salvando no banco.
         db.session.add(registers)
         db.session.commit()
@@ -28,3 +29,19 @@ def register_tipes():
         return jsonify({"status": "Sucess", "message": "Sucesso ao registrar tipos"})
     except Exception as e:
         return jsonify({"status": "Error", "message": f"Erro ao Registrar entrada {e}"})
+
+
+@finance_bp.route('/get_registers', methods=["GET"])
+def get_registers():
+    try:
+        registers = Finance.query.all()
+        result = [{
+            "id": r.id,
+            "valor": r.valor,
+            "descricao": r.descricao,
+            "tipo": r.tipo,
+            "categoria": r.categoria
+        } for r in registers]
+        return jsonify({"status": "Sucess", "message": result, })
+    except Exception as e:
+        return jsonify({"status": "Error", "message": str(e)})
