@@ -25,3 +25,13 @@ export async function getTotalEntrada(){
         console.error("Erro:", error)
     }
 }
+
+export async function getTotalDespesa(){
+    try{
+        const response = await api.get("/total_despesa")
+        console.log("RESPOSTA Get total despesa: ", response)
+        return response.data.total_despesa
+    }catch(error){
+        console.error("Erro", error)
+    }
+}

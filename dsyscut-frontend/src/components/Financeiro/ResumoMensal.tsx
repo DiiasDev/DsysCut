@@ -1,30 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import { getTotalEntrada } from '../../services/financeService';
+import { getTotalEntrada, getTotalDespesa } from '../../services/financeService';
 
-type ResumoMensalProps = {
-  despesaMes: number;
-};
 
-export default function ResumoMensal({ despesaMes }: ResumoMensalProps) {
+export default function ResumoMensal() {
   const [receitaMes, setReceitaMes] = useState<number>(0);
+  const [despesaMes, setDespesaMes] = useState<number>(0);
 
   useEffect(() => {
     async function fetchReceita() {
       const receita = await getTotalEntrada();
       setReceitaMes(receita || 0);
     }
+
+    async function fetchDespesa() {
+      const despesa = await getTotalDespesa();
+      setDespesaMes(despesa || 0)
+    }
     fetchReceita();
+    fetchDespesa();
   }, []);
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-2 gap-4 my-6">
       <div className="bg-[var(--color-bg-card)] rounded-lg shadow p-4 flex flex-col items-center">
         <span className="text-[var(--color-text-secondary)]">Receita do mês</span>
-        <span className="text-xl font-bold text-[var(--color-success)]">R$ {receitaMes}</span>
+        <span className="text-xl font-bold text-[var(--color-success)]">  R$ {receitaMes.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
       </div>
       <div className="bg-[var(--color-bg-card)] rounded-lg shadow p-4 flex flex-col items-center">
         <span className="text-[var(--color-text-secondary)]">Despesa do mês</span>
-        <span className="text-xl font-bold text-[var(--color-error)]">R$ {despesaMes}</span>
+        <span className="text-xl font-bold text-[var(--color-error)]"> R$ {despesaMes.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
       </div>
     </div>
   );
