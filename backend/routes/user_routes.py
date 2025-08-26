@@ -1,34 +1,9 @@
 from flask import Blueprint, jsonify, request, current_app
 from models.user import User
 from conn import db
-import jwt
-from datetime import datetime, timedelta
-from functools import wraps
+from auth import token_required, generate_jwt_token
 
 user_bp = Blueprint('user_bp', __name__)
-SECRET_KEY = 'Ch4v34l34t0r14'
-
-def token_required(f):
-    @wraps(f)
-    def decorated(*args, **kwargs):
-        token = request.headers.get('Authorization')
-        if not token:
-            return jsonify({'message': 'Token ausente!'}), 401
-        try:
-            data = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
-            current_user = User.query.get(data['user_id'])
-        except Exception as e:
-            return jsonify({'message': 'Token inválido!'}), 401
-        return f(current_user, *args, **kwargs)
-    return decorated
-
-def generate_jwt_token(user_id):
-    payload = {
-        'user_id': user_id,
-        'exp': datetime.utcnow() + timedelta(hours=1)
-    }
-    token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
-    return token
 
 @user_bp.route('/login', methods=['POST'])
 def login():
@@ -64,6 +39,7 @@ def get_users():
 
 
 @user_bp.route("/create-user", methods=["POST"])
+@token_required
 def create_user():
     try:
         data = request.get_json()
@@ -84,6 +60,7 @@ def create_user():
 
 
 @user_bp.route("/delete-user/<int:user_id>", methods=["DELETE"])
+@token_required
 def delete_users(user_id):
     try:
 
