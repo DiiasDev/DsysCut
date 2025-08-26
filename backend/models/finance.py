@@ -6,4 +6,4 @@ class Finance(db.Model):
     tipo = db.Column(db.Enum('Receita', 'Despesas'), nullable=False)
     descricao = db.Column(db.String(255), nullable=False)
     valor = db.Column(db.Numeric(10,2), nullable=False)
-    data = db.Column(db.Date, nullable=False)
+    categoria = db.Column(db.String(255), nullable=False)
