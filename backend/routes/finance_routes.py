@@ -45,3 +45,10 @@ def get_registers():
         return jsonify({"status": "Sucess", "message": result, })
     except Exception as e:
         return jsonify({"status": "Error", "message": str(e)})
+
+@finance_bp.route('/total_entrada', methods=["GET"])
+def total_entrada():
+    from services.finance_service import Fservice 
+    service = Fservice()
+    total = service.calculate_entrada()
+    return jsonify({"total_entrada": total})

@@ -51,7 +51,7 @@ export default function FinanceiroPage() {
         Financeiro
       </h1>
       <AcoesRapidas />
-      <ResumoMensal resumoMensal={resumoMensal} />
+      <ResumoMensal despesaMes={resumoMensal.despesaMes} />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         <div className="flex flex-col gap-6">
           <TabelaTransacoes transacoes={transacoes} />

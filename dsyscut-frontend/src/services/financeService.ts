@@ -16,3 +16,12 @@ export async function RegisterFinance(valor: number, descricao: string, tipo: st
         throw error
     }
 }
+
+export async function getTotalEntrada(){
+    try{
+        const response = await api.get('/total_entrada');
+        return response.data.total_entrada;
+    } catch(error){
+        console.error("Erro:", error)
+    }
+}
