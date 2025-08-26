@@ -9,6 +9,8 @@ export default function SessionTimeout(){
 
     const logout = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("isLogged");
+        window.location.reload();
         navigate('/login')
     }
 

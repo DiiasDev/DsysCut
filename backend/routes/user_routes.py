@@ -40,7 +40,6 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user and user.password == password:
             token = generate_jwt_token(user.id)
-            print(f"\n\n\n\n\n\n\n token: {token}")
             return jsonify({"status": "Sucess", "message": "sucesso ao logar","token": token})
         else:
             return jsonify({"status": "Error", "message": "Usuário ou senha inválidos"}), 401
