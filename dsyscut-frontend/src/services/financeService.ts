@@ -20,18 +20,20 @@ export async function RegisterFinance(valor: number, descricao: string, tipo: st
 export async function getTotalEntrada(){
     try{
         const response = await api.get('/total_entrada');
-        return response.data.total_entrada;
+        return response.data?.total_entrada ?? 0;
     } catch(error){
         console.error("Erro:", error)
+        return 0;
     }
 }
 
 export async function getTotalDespesa(){
     try{
         const response = await api.get("/total_despesa")
-        console.log("RESPOSTA Get total despesa: ", response)
-        return response.data.total_despesa
+        console.log("RESPOSTA Get total despesa: ", response.data)
+        return response.data?.total_despesa ?? 0;
     }catch(error){
         console.error("Erro", error)
+        return 0;
     }
 }

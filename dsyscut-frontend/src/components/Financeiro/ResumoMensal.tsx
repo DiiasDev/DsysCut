@@ -9,12 +9,14 @@ export default function ResumoMensal() {
   useEffect(() => {
     async function fetchReceita() {
       const receita = await getTotalEntrada();
-      setReceitaMes(receita || 0);
+      console.log("Receita do mês:", receita);
+      setReceitaMes(receita);
     }
 
     async function fetchDespesa() {
       const despesa = await getTotalDespesa();
-      setDespesaMes(despesa || 0)
+      console.log("Despesa do mês:", despesa);
+      setDespesaMes(despesa);
     }
     fetchReceita();
     fetchDespesa();

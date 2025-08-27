@@ -17,12 +17,15 @@ def register_tipes():
         data = request.get_json()
 
         # 2. criando variavel para receber os dados armazenados do request
+        tipo_valor = data.get("tipo")[0] if isinstance(
+            data.get("tipo"), list) else data.get("tipo")
+        if tipo_valor.lower().startswith("desp"):
+            tipo_valor = "Despesas"
         registers = Finance(
             valor=data.get("valor"),
             descricao=data.get("descricao"),
             categoria=data.get("categoria"),
-            tipo=",".join(data.get("tipo")) if isinstance(
-                data.get("tipo"), list) else data.get("tipo")
+            tipo=tipo_valor
         )
 
         # 3. Adicionando dados da variavel e salvando no banco.
