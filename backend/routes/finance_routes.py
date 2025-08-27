@@ -10,7 +10,6 @@ service = Fservice()
 
 
 @finance_bp.route('/registers', methods=["POST"])
-# @token_required
 def register_tipes():
     try:
         # 1. capturando dados do request
@@ -66,4 +65,14 @@ def total_despesa():
         return jsonify({"total_despesa": total})
     except Exception as e:
         print(f"\n\n\n\n\n\n\n\n\n\n\n\n\n\nErro: {str(e)}")
+        return str(e)
+
+
+@finance_bp.route('/total_somado', methods=['GET'])
+def total_somado():
+    try:
+        total_somado = service.calculate_total()
+        return jsonify({"total_somado": total_somado})
+    except Exception as e:
+        print(f"\n\n\n\n\n\n\n\n\n\n\n\n\n\nErro route: {str(e)}")
         return str(e)

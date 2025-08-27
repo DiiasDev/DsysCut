@@ -8,7 +8,6 @@ export async function RegisterFinance(valor: number, descricao: string, tipo: st
     try{
         const response = await api.post('/registers', {valor,descricao,tipo,categoria})
         const message = response.data
-        console.log("Sucesso ao cadastrar registro financeiro") 
 
         return message
     }catch(error){
@@ -30,10 +29,19 @@ export async function getTotalEntrada(){
 export async function getTotalDespesa(){
     try{
         const response = await api.get("/total_despesa")
-        console.log("RESPOSTA Get total despesa: ", response.data)
         return response.data?.total_despesa ?? 0;
     }catch(error){
         console.error("Erro", error)
         return 0;
+    }
+}
+
+export async function getTotalSomado(){
+    try{
+        const response = await api.get('total_somado')
+        return response.data?.total_somado ?? 0; 
+    } catch(error){
+        console.log("Erro", error)
+        return
     }
 }
