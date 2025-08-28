@@ -21,11 +21,7 @@ export default function FinanceiroPage() {
     despesaMes: 400,
   };
 
-  const transacoes = [
-    { id: 1, tipo: 'Receita', descricao: 'Corte de cabelo', valor: 50, data: '2024-06-01' },
-    { id: 2, tipo: 'Despesa', descricao: 'Compra de produtos', valor: -200, data: '2024-06-02' },
-    // ...mais transações
-  ];
+
 
   const categorias = [
     { nome: 'Produtos', valor: 500 },
@@ -54,7 +50,7 @@ export default function FinanceiroPage() {
       <ResumoMensal/>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         <div className="flex flex-col gap-6">
-          <TabelaTransacoes transacoes={transacoes} />
+          <TabelaTransacoes/>
           <CategoriasDespesas categorias={categorias} />
           <ProximosRecebimentos recebimentos={recebimentos} />
         </div>

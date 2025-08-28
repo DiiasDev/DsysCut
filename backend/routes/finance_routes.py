@@ -19,7 +19,7 @@ def register_tipes():
         tipo_valor = data.get("tipo")[0] if isinstance(
             data.get("tipo"), list) else data.get("tipo")
         if tipo_valor.lower().startswith("desp"):
-            tipo_valor = "Despesas"
+            tipo_valor = "Despesa"  # Corrigido para singular
         registers = Finance(
             valor=data.get("valor"),
             descricao=data.get("descricao"),

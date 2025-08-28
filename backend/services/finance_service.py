@@ -12,7 +12,7 @@ class Fservice():
         return total_entradas
 
     def calculate_despesa(self):
-        despesas = Finance.query.filter(Finance.tipo.like("%Despesas%")).all()
+        despesas = Finance.query.filter(Finance.tipo == "Despesa").all()
         total_despesas = sum([d.valor for d in despesas])
         return total_despesas
 
@@ -20,12 +20,21 @@ class Fservice():
         try:
             entradas = Finance.query.filter(Finance.tipo == "Receita").all()
             total_entradas = sum([e.valor for e in entradas])
-            despesas = Finance.query.filter(
-                Finance.tipo.like("%Despesas%")).all()
+            despesas = Finance.query.filter(Finance.tipo == "Despesa").all()
             total_despesas = sum([d.valor for d in despesas])
             total_somado = total_entradas - total_despesas
 
             return total_somado
         except Exception as e:
             print(f'\n\n\n\n\n\n\n\n\nErro service: ', e)
+            return str(e)
+
+    def transacoes_recentes(self):
+        try:
+            entradas = Finance.query.filter(Finance.tipo == "Receita").all()
+            despesas = Finance.query.filter(Finance.tipo == "Despesa").all()
+            descricao = Finance.query.get('descricao')
+            return
+        except Exception as e:
+            print('Erro transações recentes: ', str(e))
             return str(e)

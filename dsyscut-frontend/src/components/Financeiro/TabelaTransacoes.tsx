@@ -1,18 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { getRegisters } from '../../services/financeService';
 
-type Transacao = {
-  id: number;
-  tipo: string;
-  descricao: string;
-  valor: number;
-  data: string;
-};
+export default  function TabelaTransacoes() {
+  const [transacoes, setTransacoes] = useState<any[]>([])
 
-type TabelaProps = {
-  transacoes: Transacao[];
-};
-
-export default function TabelaTransacoes({ transacoes }: TabelaProps) {
+  useEffect(() => {
+    async function fetchData(){
+      const data = await getRegisters();
+      setTransacoes(data || [])
+    }
+    fetchData();
+  }, []);
+  
   return (
     <div className="bg-[var(--color-bg-card)] rounded-lg shadow p-4 overflow-x-auto">
       <h2 className="text-xl font-semibold text-[var(--color-primary)] mb-4">Transações Recentes</h2>

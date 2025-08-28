@@ -15,7 +15,7 @@ export default function FormRegistrarReceitaDespesa({ onClose }: { onClose: () =
             await RegisterFinance(
                 Number(valor),
                 descricao,
-                [tipo],
+                tipo, // tipo deve ser 'Receita' ou 'Despesa'
                 categoria
             )
             alert("Registro cadastrado com sucesso!")
@@ -63,13 +63,12 @@ export default function FormRegistrarReceitaDespesa({ onClose }: { onClose: () =
                         <label htmlFor="tipo" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">Tipo</label>
                         <select
                             value={tipo}
-                            onChange={e => setTipo(e.target.value as 'Receita'| 'Despesa')}
+                            onChange={e => setTipo(e.target.value as 'Receita' | 'Despesa')}
                             name="tipo"
                             id="tipo"
-                            className="w-full border border-[var(--color-border)] bg-[var(--color-bg-card)] text-[var(--color-text)] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] transition"
                         >
-                            <option value="Receita" className="bg-[var(--color-bg-card)] text-[var(--color-text)]">Receita</option>
-                            <option value="Despesa" className="bg-[var(--color-bg-card)] text-[var(--color-text)]">Despesa</option>
+                            <option value="Receita">Receita</option>
+                            <option value="Despesa">Despesa</option>
                         </select>
                     </div>
                     <button

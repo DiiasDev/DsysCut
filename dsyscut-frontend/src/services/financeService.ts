@@ -4,7 +4,7 @@ const api = axios.create({
     baseURL: "http://localhost:3005/api/finance"
 })
 
-export async function RegisterFinance(valor: number, descricao: string, tipo: string[], categoria: string){
+export async function RegisterFinance(valor: number, descricao: string, tipo: string, categoria: string){
     try{
         const response = await api.post('/registers', {valor,descricao,tipo,categoria})
         const message = response.data
@@ -38,10 +38,21 @@ export async function getTotalDespesa(){
 
 export async function getTotalSomado(){
     try{
-        const response = await api.get('total_somado')
+        const response = await api.get('/total_somado')
         return response.data?.total_somado ?? 0; 
     } catch(error){
         console.log("Erro", error)
+        return
+    }
+}
+
+export async function getRegisters(){
+    try{
+        const response = await api.get('/get_registers')
+        console.log('Movimentações realizadas: ', response.data)
+        return response.data?.message ?? [];
+    } catch(error){
+        console.error('Erro no getRegisters: ', error)
         return
     }
 }
