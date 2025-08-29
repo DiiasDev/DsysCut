@@ -19,7 +19,7 @@ export default function FormRegistrarReceitaDespesa({ onClose }: { onClose: () =
         }
         try {
             await RegisterFinance(
-                Number(valor),
+                Number(valorFormatado),
                 descricao,
                 tipo, // tipo deve ser 'Receita' ou 'Despesa'
                 categoria,
