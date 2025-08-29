@@ -35,19 +35,19 @@ export default function ResumoMensal() {
       <div className="bg-[var(--color-bg-card)] rounded-lg shadow p-4 flex flex-col items-center">
         <span className="text-[var(--color-text-secondary)]">Receita do mês</span>
         <span className="text-xl font-bold text-[var(--color-success)]">
-          R$ {receitaMes.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+          R$ {(receitaMes ?? 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
         </span>
       </div>
       <div className="bg-[var(--color-bg-card)] rounded-lg shadow p-4 flex flex-col items-center">
         <span className="text-[var(--color-text-secondary)]">Despesa do mês</span>
         <span className="text-xl font-bold text-[var(--color-error)]">
-          R$ {despesaMes.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+          R$ {(despesaMes ?? 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
         </span>
       </div>
       <div className="bg-[var(--color-bg-card)] rounded-lg shadow p-4 flex flex-col items-center sm:col-span-2 lg:col-span-1">
         <span className="text-[var(--color-text-secondary)]">Valor total</span>
         <span className={`text-xl font-bold ${totalColor}`}>
-          R$ {totalSomado.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+          R$ {(totalSomado ?? 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
         </span>
       </div>
     </div>

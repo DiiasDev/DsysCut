@@ -7,16 +7,23 @@ export default function FormRegistrarReceitaDespesa({ onClose }: { onClose: () =
     const [descricao, setDescricao] = useState('');
     const [tipo, setTipo] = useState<'Receita' | 'Despesa'>('Receita');
     const [categoria, setCategoria] = useState('')
+    const [dateMovimentacao, setDateMovimentacao] = useState('');
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault()
         console.log("Entrou no formulário financeiro")
+        const valorFormatado = valor.replace(',', '.');
+        if (!valorFormatado || isNaN(Number(valorFormatado)) || Number(valorFormatado) <= 0) {
+            alert("Informe um valor válido!");
+            return;
+        }
         try {
             await RegisterFinance(
                 Number(valor),
                 descricao,
                 tipo, // tipo deve ser 'Receita' ou 'Despesa'
-                categoria
+                categoria,
+                new Date(dateMovimentacao)
             )
             alert("Registro cadastrado com sucesso!")
             setDescricao('')
@@ -43,7 +50,16 @@ export default function FormRegistrarReceitaDespesa({ onClose }: { onClose: () =
                 <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="valor" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">Valor:</label>
-                        <input type="text" id="valor" placeholder="R$" value={valor} onChange={e => setValor(e.target.value)}
+                        <input
+                            type="text"
+                            id="valor"
+                            placeholder="R$"
+                            value={valor}
+                            onChange={e => {
+                                // Permite apenas números, vírgula e ponto
+                                const val = e.target.value.replace(/[^0-9.,]/g, '');
+                                setValor(val);
+                            }}
                             className="w-full border border-[var(--color-border)] bg-transparent text-[var(--color-text)] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] transition"
                         />
                     </div>
@@ -56,6 +72,12 @@ export default function FormRegistrarReceitaDespesa({ onClose }: { onClose: () =
                     <div>
                         <label htmlFor="categoria" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">Categoria:</label>
                         <input type="text" id="categoria" placeholder="Contas..." value={categoria} onChange={e => setCategoria(e.target.value)}
+                            className="w-full border border-[var(--color-border)] bg-transparent text-[var(--color-text)] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] transition"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="date" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">Data de movimentação:</label>
+                        <input type="date" id="date" placeholder="25/08" value={dateMovimentacao} onChange={e => setDateMovimentacao(e.target.value)}
                             className="w-full border border-[var(--color-border)] bg-transparent text-[var(--color-text)] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] transition"
                         />
                     </div>

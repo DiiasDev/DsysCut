@@ -16,15 +16,18 @@ def register_tipes():
         data = request.get_json()
 
         # 2. criando variavel para receber os dados armazenados do request
-        tipo_valor = data.get("tipo")[0] if isinstance(
-            data.get("tipo"), list) else data.get("tipo")
-        if tipo_valor.lower().startswith("desp"):
-            tipo_valor = "Despesa"  # Corrigido para singular
+        tipo_valor = data.get("tipo")
+        if isinstance(tipo_valor, list):
+            tipo_valor = tipo_valor[0]
+        tipo_valor = "Despesa" if str(
+            tipo_valor).lower().startswith("desp") else "Receita"
+        print("Tipo recebido:", tipo_valor)
         registers = Finance(
             valor=data.get("valor"),
             descricao=data.get("descricao"),
             categoria=data.get("categoria"),
-            tipo=tipo_valor
+            tipo=tipo_valor,
+            data_movimentacao=data.get("data_movimentacao")  # Corrigido aqui
         )
 
         # 3. Adicionando dados da variavel e salvando no banco.
@@ -45,7 +48,8 @@ def get_registers():
             "valor": r.valor,
             "descricao": r.descricao,
             "tipo": r.tipo,
-            "categoria": r.categoria
+            "categoria": r.categoria,
+            'data_movimentacao': r.data_movimentacao
         } for r in registers]
         return jsonify({"status": "Sucess", "message": result, })
     except Exception as e:

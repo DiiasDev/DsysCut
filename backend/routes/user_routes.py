@@ -5,6 +5,7 @@ from auth import token_required, generate_jwt_token
 
 user_bp = Blueprint('user_bp', __name__)
 
+
 @user_bp.route('/login', methods=['POST'])
 def login():
     try:
@@ -15,7 +16,7 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user and user.password == password:
             token = generate_jwt_token(user.id)
-            return jsonify({"status": "Sucess", "message": "sucesso ao logar","token": token})
+            return jsonify({"status": "Sucess", "message": "sucesso ao logar", "token": token})
         else:
             return jsonify({"status": "Error", "message": "Usuário ou senha inválidos"}), 401
     except Exception as e:
@@ -39,7 +40,7 @@ def get_users():
 
 
 @user_bp.route("/create-user", methods=["POST"])
-@token_required
+# @token_required
 def create_user():
     try:
         data = request.get_json()

@@ -8,3 +8,4 @@ class Finance(db.Model):
     descricao = db.Column(db.String(255), nullable=False)
     valor = db.Column(db.Numeric(10, 2), nullable=False)
     categoria = db.Column(db.String(255), nullable=False)
+    data_movimentacao = db.Column(db.Date(), nullable=False)
