@@ -31,7 +31,39 @@ export default function SecaoGraficos() {
     fetchDataReceita()
     fetchDespesasCategoria()
   }, [])
-   return (
+
+  // Função para formatar valores em reais
+  const formatBRL = (value: number) =>
+    value?.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+  // Tooltip customizado para BarChart
+  const CustomBarTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-white p-2 rounded shadow text-black">
+          <div>{label}</div>
+          <div>receita : {formatBRL(payload[0].value)}</div>
+        </div>
+      );
+    }
+    return null;
+  };
+
+  // Tooltip customizado para PieChart
+  const CustomPieTooltip = ({ active, payload }: any) => {
+    if (active && payload && payload.length) {
+      const { categoria, valor } = payload[0].payload;
+      return (
+        <div className="bg-white p-2 rounded shadow text-black">
+          <div>{categoria}</div>
+          <div>{formatBRL(valor)}</div>
+        </div>
+      );
+    }
+    return null;
+  };
+
+  return (
     <div className="bg-[var(--color-bg-card)] rounded-lg shadow p-4 h-full flex flex-col gap-6 min-h-[500px]">
       <div className="flex-1 flex flex-col">
         <h2 className="text-xl font-semibold text-[var(--color-primary)] mb-2">Gráfico de Receita Mensal</h2>
@@ -40,7 +72,7 @@ export default function SecaoGraficos() {
             <BarChart data={receitaMensalData} barSize={40}>
               <XAxis dataKey="periodo" />
               <YAxis />
-              <Tooltip />
+              <Tooltip content={<CustomBarTooltip />} />
               <Bar dataKey="receita" fill="#8884d8" />
             </BarChart>
           </ResponsiveContainer>
@@ -58,14 +90,14 @@ export default function SecaoGraficos() {
                 cx="50%"
                 cy="50%"
                 outerRadius={60}
-                label
+                label={({ value }) => formatBRL(value ?? 0)}
               >
                 {despesasCategoriaData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
               <Legend />
-              <Tooltip />
+              <Tooltip content={<CustomPieTooltip />} />
             </PieChart>
           </ResponsiveContainer>
         </div>
