@@ -78,3 +78,30 @@ def total_somado(current_cliente):
     except Exception as e:
         print(f"\n\n\n\n\n\n\n\n\n\n\n\n\n\nErro route: {str(e)}")
         return str(e)
+
+@finance_bp.route("/dados_receita", methods=["GET"])
+@token_required 
+def get_data_receita_mensal(current_cliente):
+    try:
+        data = service.get_data_receita_mensal(current_cliente.id)
+        return jsonify({"data": data})
+    except Exception as e:
+        return str(e)
+    
+@finance_bp.route("/dados_despesa", methods=["GET"])
+@token_required 
+def get_data_despesa_mensal(current_cliente):
+    try:
+        data = service.get_data_despesa_mensal(current_cliente.id)
+        return jsonify({"data": data})
+    except Exception as e:
+        return str(e)
+
+@finance_bp.route("/despesas_categoria", methods=["GET"])
+@token_required
+def get_despesas_categoria(current_cliente):
+    try:
+        data = service.get_despesas_por_categoria(current_cliente.id)
+        return jsonify({"data": data})
+    except Exception as e:
+        return str(e)

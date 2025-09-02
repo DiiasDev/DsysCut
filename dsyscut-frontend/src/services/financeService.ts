@@ -75,3 +75,41 @@ export async function getTotalSomado() {
         return { total_somado: 0 };
     }
 }
+
+export async function getDataMensal(){
+    try{
+        const token = localStorage.getItem("token"); 
+        const response = await api.get("/dados_receita", {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+        console.log("Resposta para o grafico:",response)
+        return response.data
+    }catch(error){
+        console.error("Erro", error)
+    }
+}
+
+export async function getDataDespesas(){
+    try{
+        const token = localStorage.getItem("token"); 
+        const response = await api.get("/dados_despesa", {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+        console.log("Resposta para o grafico:",response)
+        return response.data
+    }catch(error){
+        console.error("Erro", error)
+    }
+}
+
+export async function getDespesasPorCategoria() {
+    try {
+        const token = localStorage.getItem("token");
+        const response = await api.get("/despesas_categoria", {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Erro", error);
+    }
+}
