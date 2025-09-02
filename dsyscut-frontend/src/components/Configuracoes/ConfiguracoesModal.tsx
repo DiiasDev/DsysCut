@@ -2,6 +2,7 @@ import React from "react";
 import ThemeToggleButton from "./ThemeToggleButton";
 import UsuarioButton from "./UsuarioButton";
 import BarbeariaButton from "./BarbeariaButton";
+import LoggoutButton from "./LoggoutButton";
 import { useTheme } from "../../ThemeContext";
 
 interface ConfiguracoesModalProps {
@@ -52,6 +53,7 @@ export default function ConfiguracoesModal({ open, onClose }: ConfiguracoesModal
                     <ThemeToggleButton />
                     <UsuarioButton />
                     <BarbeariaButton />
+                    <LoggoutButton/>
                 </div>
             </div>
         </div>
