@@ -1,22 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import {getRegisters} from "../../services/financeService"
 
-type Categoria = {
-  nome: string;
-  valor: number;
-};
+export default function CategoriasDespesas() {
+  const [categorias, setCategorias] = useState<any[]>([])
 
-type CategoriasProps = {
-  categorias: Categoria[];
-};
+  useEffect(() => {
+    async function fetchData (){
+      const data = await getRegisters();
+      console.log("DADOS CHEGANDO: ",data)
+      setCategorias(data || [])
+    }
+    fetchData()
+  }, [])
 
-export default function CategoriasDespesas({ categorias }: CategoriasProps) {
   return (
     <div className="bg-[var(--color-bg-card)] rounded-lg shadow p-4">
       <h2 className="text-xl font-semibold text-[var(--color-primary)] mb-4">Categorias de Despesas</h2>
       <ul>
-        {categorias.map((cat, idx) => (
+        {categorias.filter(cat => cat.tipo === "Despesa").map((cat, idx) => (
           <li key={idx} className="flex justify-between py-2 border-b border-[var(--color-border)] last:border-none">
-            <span className="text-[var(--color-text-secondary)]">{cat.nome}</span>
+            <span className="text-[var(--color-text-secondary)]">{cat.categoria}</span>
             <span className="text-[var(--color-error)] font-semibold">R$ {cat.valor}</span>
           </li>
         ))}

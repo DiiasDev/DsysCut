@@ -21,15 +21,6 @@ export default function FinanceiroPage() {
     despesaMes: 400,
   };
 
-
-
-  const categorias = [
-    { nome: 'Produtos', valor: 500 },
-    { nome: 'Aluguel', valor: 400 },
-    { nome: 'Energia', valor: 200 },
-    // ...mais categorias
-  ];
-
   const recebimentos = [
     { id: 1, cliente: 'João', valor: 50, data: '2024-06-22' },
     { id: 2, cliente: 'Maria', valor: 70, data: '2024-06-23' },
@@ -51,7 +42,7 @@ export default function FinanceiroPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         <div className="flex flex-col gap-6">
           <TabelaTransacoes/>
-          <CategoriasDespesas categorias={categorias} />
+          <CategoriasDespesas/>
           <ProximosRecebimentos recebimentos={recebimentos} />
         </div>
         <SecaoGraficos />
