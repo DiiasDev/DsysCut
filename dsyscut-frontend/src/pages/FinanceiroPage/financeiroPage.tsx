@@ -3,7 +3,6 @@ import SecaoGraficos from '../../components/Financeiro/SecaoGraficos';
 import AcoesRapidas from '../../components/Financeiro/AcoesRapidas';
 import ResumoMensal from '../../components/Financeiro/ResumoMensal';
 import CategoriasDespesas from '../../components/Financeiro/CategoriasDespesas';
-import ProximosRecebimentos from '../../components/Financeiro/ProximosRecebimentos';
 import { useTheme } from '../../ThemeContext';
 
 export default function FinanceiroPage() {
@@ -21,11 +20,11 @@ export default function FinanceiroPage() {
     despesaMes: 400,
   };
 
-  const recebimentos = [
-    { id: 1, cliente: 'João', valor: 50, data: '2024-06-22' },
-    { id: 2, cliente: 'Maria', valor: 70, data: '2024-06-23' },
-    // ...mais recebimentos
-  ];
+  const clientesResumo = {
+    total: 150,
+    ativos: 120,
+    inativos: 30,
+  };
 
   return (
     <div className="min-h-screen bg-[var(--color-bg)] p-6">
@@ -43,7 +42,6 @@ export default function FinanceiroPage() {
         <div className="flex flex-col gap-6">
           <TabelaTransacoes/>
           <CategoriasDespesas/>
-          <ProximosRecebimentos recebimentos={recebimentos} />
         </div>
         <SecaoGraficos />
       </div>
