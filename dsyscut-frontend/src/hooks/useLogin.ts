@@ -7,11 +7,11 @@ export function useLogin() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    async function handleLogin(email: string, password: string) {
+    async function handleLogin(usuario: string, password: string) {
         setLoading(true);
         setError(null);
         try {
-            const user = await login(email, password);
+            const user = await login(usuario, password);
             if (user && user.status === "Sucess") {
                 return user;
             } else {

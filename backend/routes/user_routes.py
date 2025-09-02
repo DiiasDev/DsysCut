@@ -10,10 +10,10 @@ user_bp = Blueprint('user_bp', __name__)
 def login():
     try:
         data = request.get_json()
-        email = data.get("email")
+        usuario = data.get("usuario")
         password = data.get("password")
 
-        user = User.query.filter_by(email=email).first()
+        user = User.query.filter_by(usuario=usuario).first()
         if user and user.password == password:
             token = generate_jwt_token(user.id)
             return jsonify({"status": "Sucess", "message": "sucesso ao logar", "token": token})
@@ -49,6 +49,7 @@ def create_user():
             name=data.get("name"),
             email=data.get("email"),
             telefone=data.get("telefone"),
+            usuario=data.get("usuario"),
             password=data.get("password")
         )
 

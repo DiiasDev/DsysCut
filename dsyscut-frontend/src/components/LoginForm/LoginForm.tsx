@@ -13,7 +13,7 @@ export interface LoginFormProps {
 
 export default function LoginForm({ onShowCadastro, onLogin }: LoginFormProps) {
     const { handleLogin, loading, error } = useLogin();
-    const [email, setEmail] = React.useState('');
+    const [usuario, setUsuario] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [showAlert, setShowAlert] = React.useState(false);
     const [alertType, setAlertType] = React.useState<"success" | "error">("success");
@@ -21,7 +21,7 @@ export default function LoginForm({ onShowCadastro, onLogin }: LoginFormProps) {
 
     async function onSubmit(e: React.FormEvent) {
         e.preventDefault();
-        const user = await handleLogin(email, password);
+        const user = await handleLogin(usuario, password);
         if (user && user.status === "Sucess") {
             setAlertType("success");
             setAlertMsg("Fazendo Login...");
@@ -75,8 +75,8 @@ export default function LoginForm({ onShowCadastro, onLogin }: LoginFormProps) {
                                 type="text"
                                 placeholder="Usuário"
                                 className="bg-[#181818] text-white px-4 py-3 rounded-md border border-gray-600 focus:border-blue-500 outline-none transition duration-200"
-                                value={email}
-                                onChange={e => setEmail(e.target.value)}
+                                value={usuario}
+                                onChange={e => setUsuario(e.target.value)}
                                 disabled={loading}
                             />
                             <div className="relative">
