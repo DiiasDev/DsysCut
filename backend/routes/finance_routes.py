@@ -10,48 +10,43 @@ service = Fservice()
 
 
 @finance_bp.route('/registers', methods=["POST"])
-def register_tipes():
+@token_required
+def register_tipes(current_cliente):
     try:
-        # 1. capturando dados do request
         data = request.get_json()
-
-        # 2. criando variavel para receber os dados armazenados do request
         tipo_valor = data.get("tipo")
         if isinstance(tipo_valor, list):
             tipo_valor = tipo_valor[0]
-        tipo_valor = "Despesa" if str(
-            tipo_valor).lower().startswith("desp") else "Receita"
-        print("Tipo recebido:", tipo_valor)
+        tipo_valor = "Despesa" if str(tipo_valor).lower().startswith("desp") else "Receita"
         registers = Finance(
+            cliente_id=current_cliente.id,  # Vincula ao cliente logado!
             valor=data.get("valor"),
             descricao=data.get("descricao"),
             categoria=data.get("categoria"),
             tipo=tipo_valor,
-            data_movimentacao=data.get("data_movimentacao")  # Corrigido aqui
+            data_movimentacao=data.get("data_movimentacao")
         )
-
-        # 3. Adicionando dados da variavel e salvando no banco.
         db.session.add(registers)
         db.session.commit()
-
-        return jsonify({"status": "Sucess", "message": "Sucesso ao registrar tipos"})
+        return jsonify({"status": "Success", "message": "Sucesso ao registrar tipos"})
     except Exception as e:
         return jsonify({"status": "Error", "message": f"Erro ao Registrar entrada {e}"})
 
 
 @finance_bp.route('/get_registers', methods=["GET"])
-def get_registers():
+@token_required
+def get_registers(current_cliente):
     try:
-        registers = Finance.query.all()
+        registers = Finance.query.filter_by(cliente_id=current_cliente.id).all()
         result = [{
             "id": r.id,
-            "valor": r.valor,
+            "valor": float(r.valor),
             "descricao": r.descricao,
             "tipo": r.tipo,
             "categoria": r.categoria,
-            'data_movimentacao': r.data_movimentacao
+            'data_movimentacao': str(r.data_movimentacao)
         } for r in registers]
-        return jsonify({"status": "Sucess", "message": result, })
+        return jsonify({"status": "Success", "message": result})
     except Exception as e:
         return jsonify({"status": "Error", "message": str(e)})
 

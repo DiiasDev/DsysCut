@@ -6,17 +6,34 @@ const api = axios.create({
 
 export async function RegisterFinance(valor: number, descricao: string, tipo: string, categoria: string, dataMovimentacao: Date) {
     try {
+        const token = localStorage.getItem("token");
         const dateStr = dataMovimentacao instanceof Date
             ? dataMovimentacao.toISOString().slice(0, 10)
-            : dataMovimentacao; // já está string
-        const response = await api.post('/registers', { valor, descricao, tipo, categoria, data_movimentacao: dateStr })
-        const message = response.data
-        console.log(message)
+            : dataMovimentacao;
+        const response = await api.post(
+            '/registers',
+            { valor, descricao, tipo, categoria, data_movimentacao: dateStr },
+            { headers: { Authorization: `Bearer ${token}` } }
+        );
+        const message = response.data;
 
-        return message
+        return message;
     } catch (error) {
-        console.warn("ERRO: ", error)
-        throw error
+        console.warn("ERRO: ", error);
+        throw error;
+    }
+}
+
+export async function getRegisters() {
+    try {
+        const token = localStorage.getItem("token");
+        const response = await api.get('/get_registers', {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return response.data?.message ?? [];
+    } catch (error) {
+        console.error('Erro no getRegisters: ', error);
+        return;
     }
 }
 
@@ -46,17 +63,6 @@ export async function getTotalSomado() {
         return response.data?.total_somado ?? 0;
     } catch (error) {
         console.log("Erro", error)
-        return
-    }
-}
-
-export async function getRegisters() {
-    try {
-        const response = await api.get('/get_registers')
-        console.log('Movimentações realizadas: ', response.data)
-        return response.data?.message ?? [];
-    } catch (error) {
-        console.error('Erro no getRegisters: ', error)
         return
     }
 }
