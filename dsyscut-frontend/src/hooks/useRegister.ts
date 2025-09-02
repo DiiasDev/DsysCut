@@ -4,10 +4,10 @@ import { register } from "../services/authService";
 export function useRegister() {
     const [loading, setloading] = useState(false);
 
-    async function handleRegister(name: string, email: string, password: string, telefone: string) {
+    async function handleRegister(name: string, email: string, password: string, usuario:string, telefone: string) {
         setloading(true);
         try {
-            const user = await register(name, email, password, telefone);
+            const user = await register(name, email, password, usuario, telefone);
             if (user && user.status === "Sucess") {
                 return user;
             } else {

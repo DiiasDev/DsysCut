@@ -1,4 +1,7 @@
+import { safeDateFormat } from "react-datepicker/dist/date_utils";
 import style from "./style.module.css"
+import { useState } from "react";
+import {register} from "../../services/authService"
 
 export interface CadastroFormProps {
     onShowLogin: () => void;
@@ -6,10 +9,20 @@ export interface CadastroFormProps {
 }
 
 export default function CadastroForm({ onShowLogin, onLogin }: CadastroFormProps) {
+    const [nome, setNome] = useState('');
+    const [email, setEmail] = useState('');
+    const [telefone, setTelefone] = useState('')
+    const [usuario, setUsuario] = useState('');
+    const [senha, setSenha] = useState('');
+
     const handleCadastro = async () => {
-        // ...código de cadastro...
-        // Se cadastro for bem-sucedido:
-        // Exemplo: substitua 'cadastroOk' por sua lógica real de verificação
+        const user = await register(nome, email, senha, usuario, telefone)
+
+        if(!user){
+            console.error("Erro ao criar user")
+        }
+
+
         const cadastroOk = true; // Altere para sua condição real
         if (cadastroOk) {
             if (onLogin) onLogin();
@@ -38,25 +51,40 @@ export default function CadastroForm({ onShowLogin, onLogin }: CadastroFormProps
                                 Já tem uma conta? <button type="button" className="text-blue-400 hover:underline" onClick={onShowLogin}>Entrar</button>
                             </p>
                         </div>
-                        <form className="w-full max-w-md flex flex-col gap-4">
+                        <form className="w-full max-w-md flex flex-col gap-4"  onSubmit={e => { e.preventDefault(); handleCadastro(); }}>
                             <input
                                 type="text"
                                 placeholder="Nome completo"
+                                value={nome}
+                                onChange={(e) => setNome(e.target.value)}
                                 className="bg-[#181818] text-white px-4 py-3 rounded-md border border-gray-600 focus:border-blue-500 outline-none transition duration-200"
                             />
                             <input
                                 type="email"
                                 placeholder="Email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 className="bg-[#181818] text-white px-4 py-3 rounded-md border border-gray-600 focus:border-blue-500 outline-none transition duration-200"
                             />
                             <input
                                 type="text"
                                 placeholder="Usuário"
+                                value={usuario}
+                                onChange={(e) => setUsuario(e.target.value)}
+                                className="bg-[#181818] text-white px-4 py-3 rounded-md border border-gray-600 focus:border-blue-500 outline-none transition duration-200"
+                            />
+                              <input
+                                type="text"
+                                placeholder="Telefone"
+                                value={telefone}
+                                onChange={(e) => setTelefone(e.target.value)}
                                 className="bg-[#181818] text-white px-4 py-3 rounded-md border border-gray-600 focus:border-blue-500 outline-none transition duration-200"
                             />
                             <input
                                 type="password"
                                 placeholder="Senha"
+                                value={senha}
+                                onChange={(e) => setSenha(e.target.value)}
                                 className="bg-[#181818] text-white px-4 py-3 rounded-md border border-gray-600 focus:border-blue-500 outline-none transition duration-200"
                             />
                             <button

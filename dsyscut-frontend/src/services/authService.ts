@@ -18,10 +18,9 @@ export async function login(email: string, password: string) {
     }
 }
 
-// FIXME ajustar lógica para criar cadastro de usuário;
-export async function register(name: string, email: string, password: string, telefone: string) {
+export async function register(name: string, email: string, password: string, usuario: string, telefone: string) {
     try {
-        const response = await api.post('/create-user', { name, email, password, telefone })
+        const response = await api.post('/create-user', { name, email, password, usuario, telefone })
         console.log('Sucesso ao cadastrar usuário')
         return response.data
     } catch (error) {
