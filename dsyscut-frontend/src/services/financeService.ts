@@ -39,30 +39,39 @@ export async function getRegisters() {
 
 export async function getTotalEntrada() {
     try {
-        const response = await api.get('/total_entrada');
-        return response.data?.total_entrada ?? 0;
+        const token = localStorage.getItem("token");
+        const response = await api.get('/total_entrada', {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return response.data;
     } catch (error) {
         console.error("Erro:", error)
-        return 0;
+        return { total_entrada: 0 };
     }
 }
 
 export async function getTotalDespesa() {
     try {
-        const response = await api.get("/total_despesa")
-        return response.data?.total_despesa ?? 0;
+        const token = localStorage.getItem("token");
+        const response = await api.get("/total_despesa", {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return response.data;
     } catch (error) {
         console.error("Erro", error)
-        return 0;
+        return { total_despesa: 0 };
     }
 }
 
 export async function getTotalSomado() {
     try {
-        const response = await api.get('/total_somado')
-        return response.data?.total_somado ?? 0;
+        const token = localStorage.getItem("token");
+        const response = await api.get('/total_somado', {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return response.data;
     } catch (error) {
         console.log("Erro", error)
-        return
+        return { total_somado: 0 };
     }
 }

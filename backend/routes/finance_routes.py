@@ -52,15 +52,17 @@ def get_registers(current_cliente):
 
 
 @finance_bp.route('/total_entrada', methods=["GET"])
-def total_entrada():
-    total = service.calculate_entrada()
+@token_required
+def total_entrada(current_cliente):
+    total = service.calculate_entrada(current_cliente.id)
     return jsonify({"total_entrada": total})
 
 
 @finance_bp.route('/total_despesa', methods=["GET"])
-def total_despesa():
+@token_required
+def total_despesa(current_cliente):
     try:
-        total = service.calculate_despesa()
+        total = service.calculate_despesa(current_cliente.id)
         return jsonify({"total_despesa": total})
     except Exception as e:
         print(f"\n\n\n\n\n\n\n\n\n\n\n\n\n\nErro: {str(e)}")
@@ -68,9 +70,10 @@ def total_despesa():
 
 
 @finance_bp.route('/total_somado', methods=['GET'])
-def total_somado():
+@token_required
+def total_somado(current_cliente):
     try:
-        total_somado = service.calculate_total()
+        total_somado = service.calculate_total(current_cliente.id)
         return jsonify({"total_somado": total_somado})
     except Exception as e:
         print(f"\n\n\n\n\n\n\n\n\n\n\n\n\n\nErro route: {str(e)}")
