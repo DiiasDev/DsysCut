@@ -4,6 +4,7 @@ from conn import db
 from config import Config
 from flask_cors import CORS
 from routes.finance_routes import finance_bp
+from routes.client_routes import client_bp
 
 
 def create_app():
@@ -15,6 +16,7 @@ def create_app():
         db.create_all()  # <-- CRIA AS TABELAS!
     app.register_blueprint(user_bp, url_prefix='/api')
     app.register_blueprint(finance_bp, url_prefix='/api/finance')
+    app.register_blueprint(client_bp, url_prefix='/api/client')
     return app
 
 
