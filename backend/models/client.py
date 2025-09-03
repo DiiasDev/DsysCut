@@ -9,5 +9,6 @@ class Client(db.Model):
     mensalista = db.Column(db.Boolean, default=False)
     quantidade_cortes = db.Column(db.Integer, nullable=True)
     instagram = db.Column(db.String(100), nullable=True, unique=True)
+    imagem = db.Column(db.String(255))
     cliente_id = db.Column(db.Integer, db.ForeignKey(
         'usuarios.id'), nullable=False)

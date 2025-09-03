@@ -4,12 +4,17 @@ const api = axios.create({
     baseURL: "http://localhost:3005/api/client"
 })
 
-export async function registerClient(nome: string, telefone: string, mensalista: boolean, quantidade_cortes: number, instagram: string) {
+export async function registerClient(formData: FormData) {
     try {
         const token = localStorage.getItem("token");
         const response = await api.post('/register_client',
-            { nome, telefone, mensalista, quantidade_cortes, instagram },
-            { headers: { Authorization: `Bearer ${token}` } }
+            formData,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
         );
         const message = response.data
         return message

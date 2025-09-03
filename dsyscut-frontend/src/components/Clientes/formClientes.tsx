@@ -7,22 +7,38 @@ export default function FormClientes({ onClose }: { onClose: () => void }) {
     const [telefone, setTelefone] = useState('')
     const [instagram, setInstagram] = useState('')
     const [mensalista, setMensalista] = useState('não')
+    const [imagem, setImagem] = useState('');
+    const [imagemFile, setImagemFile] = useState<File | null>(null);
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         try {
-            await registerClient(
-                nome,
-                telefone,
-                mensalista === "sim",
-                0,
-                instagram
-            );
+            const formData = new FormData();
+            formData.append('nome', nome);
+            formData.append('telefone', telefone);
+            formData.append('mensalista', mensalista === "sim" ? "true" : "false");
+            formData.append('quantidade_cortes', "0");
+            formData.append('instagram', instagram);
+            if (imagemFile) {
+                formData.append('imagem', imagemFile);
+            }
+
+            await registerClient(formData);
             alert('Cliente cadastrado...')
         } catch (error) {
             return error
         }
 
+    }
+
+    function handleImagemChange(e: React.ChangeEvent<HTMLInputElement>) {
+        if (e.target.files && e.target.files[0]) {
+            setImagem(e.target.files[0].name);
+            setImagemFile(e.target.files[0]);
+        } else {
+            setImagem('');
+            setImagemFile(null);
+        }
     }
 
     return (
@@ -75,6 +91,16 @@ export default function FormClientes({ onClose }: { onClose: () => void }) {
                             <option value="sim">Sim</option>
                             <option value="não">Não</option>
                         </select>
+                    </div>
+                    <div>
+                        <label htmlFor="imagem" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">Imagem:</label>
+                        <input
+                            type="file"
+                            id="imagem"
+                            accept="image/*"
+                            onChange={handleImagemChange}
+                            className="w-full border border-[var(--color-border)] bg-transparent text-[var(--color-text)] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] transition"
+                        />
                     </div>
                     <button
                         type="submit"
