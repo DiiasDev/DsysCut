@@ -29,7 +29,9 @@ export async function getClient() {
         const response = await api.get('/get_client', {
             headers: { Authorization: `Bearer ${token}` }
         });
-        return response.data?.message ?? [];
+        console.log('Clientes capturados:', response)
+        // Retorne o objeto correto
+        return response.data ?? {};
     } catch (error) {
         return error
     }

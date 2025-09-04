@@ -86,11 +86,7 @@ export default function ClientePage() {
             >
                 Clientes
             </h1>
-            <ClienteStats
-                totalClientes={clientesMensais.length + clientesAvulsos.length}
-                clientesMensais={clientesMensais.length}
-                clientesAvulsos={clientesAvulsos.length}
-            />
+            <ClienteStats/>
             <div className="flex justify-between items-center mt-8 mb-4">
                 <h2
                     className="text-xl font-semibold"
