@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getClient } from "../../services/clientService"
+import { getClient, updateMensalistaStatus } from "../../services/clientService"
 
 function getInitials(nome: string) {
     const parts = nome.split(' ')
@@ -32,25 +32,28 @@ function formatPhone(phone: string) {
 export default function ClientCardsNew() {
     const [mensalistas, setMensalistas] = useState<any[]>([])
     const [avulsos, setAvulsos] = useState<any[]>([])
+    const [loading, setLoading] = useState(false)
+
+    async function fetchData() {
+        const response = await getClient();
+        const clientes = response?.clientes || []
+        setMensalistas(clientes.filter((c: any) => c.mensalista))
+        setAvulsos(clientes.filter((c: any) => !c.mensalista))
+    }
 
     useEffect(() => {
-        async function fetchData() {
-            const response = await getClient();
-            const clientes = response?.clientes || []
-            setMensalistas(clientes.filter((c: any) => c.mensalista))
-            setAvulsos(clientes.filter((c: any) => !c.mensalista))
-        }
         fetchData()
     }, [])
 
-    function handleToggleMensalista(cliente: any, isMensalista: boolean) {
-        if (isMensalista) {
-            setMensalistas(mensalistas => mensalistas.filter(c => c.id !== cliente.id))
-            setAvulsos(avulsos => [...avulsos, { ...cliente, mensalista: false }])
-        } else {
-            setAvulsos(avulsos => avulsos.filter(c => c.id !== cliente.id))
-            setMensalistas(mensalistas => [...mensalistas, { ...cliente, mensalista: true }])
+    async function handleToggleMensalista(cliente: any, isMensalista: boolean) {
+        setLoading(true)
+        // Chama o backend para atualizar o status
+        const result = await updateMensalistaStatus(cliente.id, !isMensalista)
+        if (result?.status === "sucess") {
+            // Atualiza o estado local
+            fetchData()
         }
+        setLoading(false)
     }
 
     function renderCard(cliente: any, isMensalista: boolean) {
@@ -98,6 +101,12 @@ export default function ClientCardsNew() {
                         >
                             Mensal {isMensalista ? 'Ativo' : 'Inativo'}
                         </span>
+                        {/* Mostra quantidade de cortes se mensalista ativo */}
+                        {isMensalista && (
+                            <div className="mt-1 text-xs font-semibold" style={{ color: "var(--color-primary)" }}>
+                                Cortes realizados: {cliente.quantidade_cortes}
+                            </div>
+                        )}
                     </div>
                 </div>
                 <button
@@ -107,6 +116,7 @@ export default function ClientCardsNew() {
                         color: "var(--color-bg-card)"
                     }}
                     onClick={() => handleToggleMensalista(cliente, isMensalista)}
+                    disabled={loading}
                 >
                     {isMensalista ? 'Tornar Inativo' : 'Tornar Ativo'}
                 </button>

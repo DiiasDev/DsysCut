@@ -79,3 +79,20 @@ def get_client(current_cliente):
         return jsonify({'status': 'sucess', 'clientes': result})
     except Exception as e:
         return str(e)
+
+
+@client_bp.route('/update_mensalista/<int:client_id>', methods=['PUT'])
+@token_required
+def update_mensalista(current_cliente, client_id):
+    try:
+        data = request.get_json()
+        mensalista = data.get('mensalista')
+        client = Client.query.filter_by(
+            id=client_id, cliente_id=current_cliente.id).first()
+        if not client:
+            return jsonify({'status': 'error', 'message': 'Cliente não encontrado'}), 404
+        client.mensalista = mensalista
+        db.session.commit()
+        return jsonify({'status': 'sucess', 'mensalista': client.mensalista})
+    except Exception as e:
+        return str(e)

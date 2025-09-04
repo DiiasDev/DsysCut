@@ -36,3 +36,15 @@ export async function getClient() {
         return error
     }
 }
+
+export async function updateMensalistaStatus(clientId: number, mensalista: boolean) {
+    try {
+        const token = localStorage.getItem("token");
+        const response = await api.put(`/update_mensalista/${clientId}`, { mensalista }, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return response.data;
+    } catch (error) {
+        return error;
+    }
+}
