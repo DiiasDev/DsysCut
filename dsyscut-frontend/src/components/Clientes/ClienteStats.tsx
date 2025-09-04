@@ -7,7 +7,6 @@ export default function ClienteStats() {
     useEffect(() => {
         async function fetchData() {
             const response = await getClient();
-            console.log('data clientes:', response)
             setClientes(response?.clientes || [])
         }
         fetchData()
