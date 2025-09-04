@@ -1,10 +1,11 @@
-from flask import Flask
+from flask import Flask, send_from_directory
 from routes.user_routes import user_bp
 from conn import db
 from config import Config
 from flask_cors import CORS
 from routes.finance_routes import finance_bp
 from routes.client_routes import client_bp
+import os
 
 
 def create_app():
@@ -17,6 +18,11 @@ def create_app():
     app.register_blueprint(user_bp, url_prefix='/api')
     app.register_blueprint(finance_bp, url_prefix='/api/finance')
     app.register_blueprint(client_bp, url_prefix='/api/client')
+
+    @app.route('/uploads/<path:filename>')
+    def uploaded_file(filename):
+        return send_from_directory(os.path.join(os.getcwd(), 'uploads'), filename)
+
     return app
 
 

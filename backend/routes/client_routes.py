@@ -28,11 +28,12 @@ def register_client(current_cliente):
         print("DEBUG imagem_file:", imagem_file)  # Adicione este print
 
         if imagem_file and imagem_file.filename:
-            filename = imagem_file.filename
-            imagem_path = os.path.join('uploads', filename)
-            imagem_file.save(os.path.join(UPLOAD_FOLDER, filename))
-            # Adicione este print
+            filename = imagem_file.filename.replace(" ", "_")
+            imagem_path = os.path.join('uploads', filename).replace("\\", "/")
+            full_path = os.path.join(UPLOAD_FOLDER, filename)
+            imagem_file.save(full_path)
             print("DEBUG imagem_path salvo:", imagem_path)
+            print("DEBUG arquivo físico existe:", os.path.exists(full_path))
 
         clients = Client(
             cliente_id=current_cliente.id,

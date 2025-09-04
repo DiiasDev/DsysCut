@@ -10,13 +10,16 @@ function getInitials(nome: string) {
 
 function formatImagePath(imagem: string) {
     if (!imagem) return ""
-    // Remove barra inicial se houver e monta URL correta
-    const cleanPath = imagem.replace(/^\\|^\//, "").replace(/\\/g, "/")
-    return `${process.env.REACT_APP_API_URL}/${cleanPath}`
+    // Remove espaços e corrige barras
+    const cleanPath = imagem.trim().replace(/\\/g, "/").replace(/^\/|^\\/, "")
+    // Garante que a URL seja absoluta
+    const baseUrl = process.env.REACT_APP_API_URL?.replace(/\/$/, "") || "http://localhost:3005"
+    const url = `${baseUrl}/${cleanPath}`
+    console.log("URL da imagem:", url)
+    return url
 }
 
 function formatPhone(phone: string) {
-    // Remove tudo que não é número
     const digits = phone.replace(/\D/g, "")
     if (digits.length === 11) {
         return `(${digits.slice(0,2)}) ${digits.slice(2,7)}-${digits.slice(7)}`
