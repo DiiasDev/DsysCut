@@ -5,6 +5,7 @@ from config import Config
 from flask_cors import CORS
 from routes.finance_routes import finance_bp
 from routes.client_routes import client_bp
+from routes.agendamento_routes import agendamento_bp
 import os
 
 
@@ -18,6 +19,7 @@ def create_app():
     app.register_blueprint(user_bp, url_prefix='/api')
     app.register_blueprint(finance_bp, url_prefix='/api/finance')
     app.register_blueprint(client_bp, url_prefix='/api/client')
+    app.register_blueprint(agendamento_bp, url_prefix='/api/agendamento')
 
     @app.route('/uploads/<path:filename>')
     def uploaded_file(filename):
