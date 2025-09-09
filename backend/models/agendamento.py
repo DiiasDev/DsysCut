@@ -10,6 +10,8 @@ class Agendamento(db.Model):
         'usuarios.id'), nullable=False)
     barbeiro_id = db.Column(db.Integer, db.ForeignKey(
         'usuarios.id'), nullable=False)
+    servico_nome = db.Column(db.String(100), nullable=False)
+    data_agendamento = db.Column(db.Date, nullable=False)
     data_agendamento = db.Column(db.Date, nullable=False)
     hora_agendamento = db.Column(db.Time, nullable=False)
     status = db.Column(db.String(30), default='pendente')

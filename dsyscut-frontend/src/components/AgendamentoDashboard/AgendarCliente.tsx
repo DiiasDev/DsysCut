@@ -5,6 +5,22 @@ const barbeiros = [
     { id: 2, nome: 'Pedro Lima' },
 ];
 
+const clientes = [
+    { id: 1, nome: 'João Silva' },
+    { id: 2, nome: 'Maria Souza' },
+    { id: 3, nome: 'Ana Paula' },
+];
+
+const servicos = [
+    { id: 1, nome: 'Corte de cabelo' },
+    { id: 7, nome: 'Barba' },
+    { id: 4, nome: 'Sobrancelha' },
+    { id: 2, nome: 'Corte + Barba' },
+    { id: 3, nome: 'Corte + Sobrancelha' },
+    { id: 5, nome: 'Corte + Barba + Sobrancelha' },
+    { id: 6, nome: 'Barba + Sobrancelha' },
+];
+
 const horariosDisponiveis: { [key: string]: string[] } = {
     '1': ['08:00', '09:30', '11:00', '14:00', '16:00'],
     '2': ['09:00', '10:00', '13:00', '15:00'],
@@ -12,6 +28,8 @@ const horariosDisponiveis: { [key: string]: string[] } = {
 
 export default function AgendarCliente() {
     const [barbeiroId, setBarbeiroId] = useState(barbeiros[0].id);
+    const [clienteId, setClienteId] = useState(clientes[0].id);
+    const [servicoId, setServicoId] = useState(servicos[0].id);
     const [data, setData] = useState('');
     const [horario, setHorario] = useState('');
 
@@ -27,6 +45,40 @@ export default function AgendarCliente() {
                 Agendar Cliente
             </h2>
             <form className="flex flex-col gap-4">
+                <div>
+                    <label className="block mb-1" style={{ color: 'var(--color-text-secondary)' }}>Cliente</label>
+                    <select
+                        className="w-full rounded px-3 py-2"
+                        style={{
+                            border: '1px solid var(--color-border)',
+                            color: 'var(--color-text)',
+                            background: 'var(--color-bg-card)'
+                        }}
+                        value={clienteId}
+                        onChange={e => setClienteId(Number(e.target.value))}
+                    >
+                        {clientes.map(c => (
+                            <option key={c.id} value={c.id}>{c.nome}</option>
+                        ))}
+                    </select>
+                </div>
+                <div>
+                    <label className="block mb-1" style={{ color: 'var(--color-text-secondary)' }}>Serviço</label>
+                    <select
+                        className="w-full rounded px-3 py-2"
+                        style={{
+                            border: '1px solid var(--color-border)',
+                            color: 'var(--color-text)',
+                            background: 'var(--color-bg-card)'
+                        }}
+                        value={servicoId}
+                        onChange={e => setServicoId(Number(e.target.value))}
+                    >
+                        {servicos.map(s => (
+                            <option key={s.id} value={s.id}>{s.nome}</option>
+                        ))}
+                    </select>
+                </div>
                 <div>
                     <label className="block mb-1" style={{ color: 'var(--color-text-secondary)' }}>Barbeiro</label>
                     <select
